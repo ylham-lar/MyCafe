@@ -1,0 +1,12 @@
+composer require geoip2/geoip2:^3.2 // geoip2 gurmak ucin
+composer require intervention/image:^3.11 // imagelar has gowy bolar yaly
+composer require jenssegers/agent:^2.6 //  useragent ucin ulanylyar
+
+
+
+
+
+
+Laracoffee – “An e-commerce website for coffee shops …” 
+Laravel CoffeeShop – Coffee shop web application using Laravel.
+Laravel Restaurant – Restaurant / café website with menu, orders, etc., built in Laravel. 
