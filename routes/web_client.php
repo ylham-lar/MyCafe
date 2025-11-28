@@ -27,13 +27,3 @@ Route::controller(ProductController::class)
         Route::get('', 'index')->name('index');
         Route::get('{id}', 'show')->name('show');
     });
-
-Route::controller(CartController::class)
-    ->prefix('cart')
-    ->name('cart.')
-    ->group(function () {
-        Route::get('', 'index')->name('index');
-        Route::get('add/{product}', 'add')->name('add');
-        Route::delete('remove/{cartItem}', 'remove')->name('remove');
-        Route::delete('clear', 'clear')->name('clear');
-    });

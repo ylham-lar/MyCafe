@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Admin\LoginController;
 use App\Http\Controllers\Web\Admin\DashboardController;
+use App\Http\Controllers\Web\Admin\CategoryController;
 
 Route::middleware('guest')
     ->group(function () {
@@ -11,13 +12,25 @@ Route::middleware('guest')
     });
 
 Route::middleware('auth')
+    ->prefix('admin')
+    ->name('admin.')
     ->group(function () {
-        Route::prefix('admin')
-            ->name('admin.')
+        Route::get('', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::controller(CategoryController::class)
+            ->prefix('categories')
+            ->name('categories.')
             ->group(function () {
-                Route::get('', [DashboardController::class, 'index'])->name('dashboard');
+                Route::get('', 'index')->name('index');
+                Route::get('create', 'create')->name('create');
+                Route::post('', 'store')->name('store');
+                Route::get('{id}/edit', 'edit')->name('edit')->where(['id' => '[0-9]+']);
+                Route::put('{id}', 'update')->name('update')->where('id', '[0-9]+');
+                Route::delete('{id}', 'destroy')->name('destroy')->where('id', '[0-9]+');
             });
     });
+
+
 Route::middleware('auth')
     ->group(function () {
         Route::post('logout', [LoginController::class, 'destroy'])->name('logout');
