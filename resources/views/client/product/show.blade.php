@@ -8,7 +8,6 @@
 <div class="bg-dark text-light py-5">
     <div class="container py-4">
 
-        <!-- Header -->
         <div class="text-center mb-5 fade-in">
             <h1 class="fw-bold display-5">
                 <span class="header-gold">{{ $product->name }}</span>
@@ -20,7 +19,6 @@
 
         <div class="row g-4 justify-content-center align-items-center">
 
-            <!-- Product Image -->
             <div class="col-md-4 col-lg-3 fade-up">
                 <div class="product-image-wrapper position-relative text-center">
                     <a data-fancybox="gallery" href="{{ asset('img/Pizza.jpg') }}">
@@ -34,7 +32,6 @@
                 </div>
             </div>
 
-            <!-- Product Info -->
             <div class="col-md-4 col-lg-3 d-flex flex-column justify-content-center text-center fade-up">
                 <h2 class="fw-bold text-warning product-title">{{ $product->name }}</h2>
                 <p class="text-gold-fade product-category">{{ $product->category->name ?? 'Uncategorized' }}</p>
@@ -62,7 +59,6 @@
                 <p class="mt-4 text-gold-fade h5 fw-bold product-description">{{ $product->description }}</p>
             </div>
 
-            <!-- Quantity & Add to Cart -->
             <div class="col-md-4 col-lg-3 fade-up">
                 <div class="mt-4 text-center">
                     <form action="" method="GET" class="d-inline-block">
@@ -88,7 +84,6 @@
 </div>
 
 <style>
-    /* Product Image */
     .product-image-wrapper {
         padding: 12px;
         background: linear-gradient(180deg, #1a1a1a, #222, #2a2a2a);
@@ -110,7 +105,6 @@
         margin: 0 auto;
     }
 
-    /* Titles & Text */
     .product-title {
         color: #ffd95a;
         text-shadow: 0 0 12px rgba(255, 215, 90, 0.8);
@@ -130,12 +124,10 @@
         text-shadow: 0 0 6px rgba(255, 0, 0, 0.5);
     }
 
-    /* Discount Badge */
     .product-badge-glow {
         box-shadow: 0 0 8px rgba(255, 215, 90, 0.7);
     }
 
-    /* Buttons */
     .btn-glow {
         background: #ffd95a;
         color: #1a1a1a;
@@ -152,7 +144,6 @@
         color: #1a1a1a;
     }
 
-    /* Quantity Buttons */
     .quantity-btn {
         padding: 0.5rem 0.8rem;
         background-color: #333 !important;
@@ -181,7 +172,6 @@
         background-color: #2c2c2c !important;
     }
 
-    /* Fade Animations */
     .fade-up,
     .fade-in {
         opacity: 0;
@@ -209,7 +199,6 @@
             });
         }
 
-        // Fade-in animations
         const elements = document.querySelectorAll(".fade-up, .fade-in");
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {

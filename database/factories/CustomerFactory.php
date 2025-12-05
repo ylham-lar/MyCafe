@@ -14,7 +14,7 @@ class CustomerFactory extends Factory
         return [
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
-            'phone_number' => fake()->optional()->phoneNumber(),
+            'phone_number' => fake()->unique()->numberBetween(99360000000, 99365999999),
         ];
     }
 }

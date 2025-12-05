@@ -7,7 +7,6 @@
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-5">
 
-            <!-- Breadcrumb -->
             <div class="h4 mb-4 text-dark">
                 <a href="{{ route('admin.categories.index') }}" class="text-decoration-none text-warning">
                     Categories
@@ -15,14 +14,12 @@
                 <span class="text-muted">/ Edit</span>
             </div>
 
-            <!-- Success message -->
             @if(session('success'))
             <div class="alert alert-success border-0 shadow-sm rounded-3 bg-warning text-dark">
                 {{ session('success') }}
             </div>
             @endif
 
-            <!-- Validation errors -->
             @if($errors->any())
             <div class="alert alert-danger border-0 shadow-sm rounded-3">
                 <ul class="mb-0 ps-3">
@@ -33,7 +30,6 @@
             </div>
             @endif
 
-            <!-- Edit Form -->
             <form action="{{ route('admin.categories.update', $obj->id) }}" method="POST" class="bg-white p-4 rounded-4 shadow-sm">
                 @csrf
                 @method('PUT')

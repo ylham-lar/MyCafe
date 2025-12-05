@@ -1,12 +1,12 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Categories')
+@section('title', 'Customers')
 
 @section('content')
 <div class="row align-items-center mb-3">
-    <div class="col-auto h3 ps-5 ms-5">Categories</div>
+    <div class="col-auto h3 ps-5 ms-5">Customers</div>
     <div class="col text-end p-3 me-5">
-        <a href="{{ route('admin.categories.create') }}" class="btn btn-warning">
+        <a href="{{ route('admin.customers.create') }}" class="btn btn-warning">
             <i class="bi bi-plus-lg"></i>
         </a>
     </div>
@@ -17,7 +17,8 @@
         <thead class="table-dark text-light">
             <tr>
                 <th style="width:5%;">ID</th>
-                <th style="width:50%;">Name</th>
+                <th style="width:25%;">Name</th>
+                <th style="width:25%;">Phone Number</th>
                 <th style="width:25%;">Created At</th>
                 <th style="width:20%;">Settings</th>
             </tr>
@@ -27,10 +28,11 @@
             @forelse($objs as $obj)
             <tr class="table-row-hover">
                 <td>{{ $obj->id }}</td>
-                <td>{{ $obj->name }}</td>
+                <td>{{ $obj->first_name }} {{ $obj->last_name }}</td>
+                <td>+{{ $obj->phone_number }}</td>
                 <td>{{ $obj->created_at->format('H:i:s d.m.Y') }}</td>
                 <td>
-                    <a href="{{ route('admin.categories.edit', $obj->id) }}"
+                    <a href="{{ route('admin.customers.edit', $obj->id) }}"
                         class="btn btn-sm btn-outline-dark btn-warning">
                         <i class="bi bi-pencil"></i>
                     </a>
@@ -57,7 +59,7 @@
                                 </div>
 
                                 <div class="modal-footer justify-content-center border-0 mb-3">
-                                    <form method="POST" action="{{ route('admin.categories.destroy', $obj->id) }}" class="d-flex gap-2">
+                                    <form method="POST" action="{{ route('admin.customers.destroy', $obj->id) }}" class="d-flex gap-2">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" class="btn btn-outline-secondary px-4 fw-bold" data-bs-dismiss="modal">
@@ -125,7 +127,6 @@
         background: #e9ecef;
     }
 
-    /* Modal Buttons Hover */
     .btn-outline-secondary:hover {
         background-color: #6c757d;
         color: #fff;

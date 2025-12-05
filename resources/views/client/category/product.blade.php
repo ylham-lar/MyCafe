@@ -8,7 +8,6 @@
 <div class="bg-dark text-light py-5">
     <div class="container py-4">
 
-        <!-- Header -->
         <div class="text-center mb-5 fade-in">
             <h1 class="fw-bold display-5">
                 <span class="header-gold">{{ $categories->name }}</span> Items
@@ -18,7 +17,6 @@
             </p>
         </div>
 
-        <!-- Product Grid -->
         <div class="row g-4">
             @foreach($categories->products as $product)
             <div class="col-12 col-sm-6 col-md-3 fade-up">
@@ -39,7 +37,6 @@
 </div>
 
 <style>
-    /* Premium Card */
     .premium-card {
         background: linear-gradient(180deg, #1a1a1a, #222, #2a2a2a);
         color: #f8f9fa;
@@ -94,7 +91,6 @@
         padding: 1.5rem 1rem;
     }
 
-    /* Header */
     .header-gold {
         color: #ffd95a;
         text-shadow: 0 0 12px rgba(255, 215, 90, 0.8);
@@ -104,7 +100,6 @@
         color: #d7deea;
     }
 
-    /* Fade Animations */
     .fade-up,
     .fade-in {
         opacity: 0;

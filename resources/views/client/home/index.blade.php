@@ -8,7 +8,6 @@ Home
 <div class="bg-dark text-light py-5">
     <div class="container py-4">
 
-        <!-- Header -->
         <div class="text-center mb-5 fade-in">
             <h1 class="fw-bold display-5">
                 <span class="header-gold">Our</span> <span class="header-white">Menu</span>
@@ -18,7 +17,6 @@ Home
             </p>
         </div>
 
-        <!-- Categories Grid -->
         <div class="row g-4">
             @foreach($categories as $category)
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 fade-up">
@@ -39,7 +37,6 @@ Home
     </div>
 </div>
 <style>
-    /* Premium Navbar Style */
     .premium-navbar {
         background: linear-gradient(180deg, #111, #1a1a1a, #222);
         border-bottom: 1px solid rgba(255, 215, 90, 0.25);
@@ -65,7 +62,6 @@ Home
         text-shadow: 0 0 12px rgba(255, 215, 90, 0.9);
     }
 
-    /* Category Cards */
     .premium-category-card {
         background: linear-gradient(180deg, #1a1a1a, #222, #2a2a2a);
         border-radius: 14px;
@@ -102,7 +98,6 @@ Home
         text-shadow: 0 0 6px rgba(255, 215, 90, 0.8);
     }
 
-    /* Header Text */
     .header-gold {
         color: #ffd95a;
         text-shadow: 0 0 12px rgba(255, 215, 90, 0.8);
@@ -116,7 +111,6 @@ Home
         color: #d7deea;
     }
 
-    /* Footer */
     .footer-premium {
         background: linear-gradient(180deg, #111, #1a1a1a, #222);
         color: #ececec;
@@ -161,7 +155,6 @@ Home
         text-shadow: 0 0 18px rgba(255, 193, 7, .9);
     }
 
-    /* Fade animations */
     .fade-up,
     .fade-in {
         opacity: 0;
