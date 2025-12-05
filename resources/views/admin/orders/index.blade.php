@@ -3,6 +3,7 @@
 @section('title', 'Orders')
 
 @section('content')
+
 <div class="row align-items-center mb-3">
     <div class="col-auto h3 ps-5 ms-5">Orders</div>
     <div class="col text-end p-3 me-5">
@@ -28,6 +29,7 @@
         <tbody class="bg-light text-dark">
             @forelse($objs as $obj)
             <tr class="table-row-hover">
+
                 <td>{{ $obj->id }}</td>
 
                 <td>{{ $obj->customer->first_name }} {{ $obj->customer->last_name }}</td>
@@ -48,16 +50,19 @@
 
                 <td>
                     <a href="{{ route('admin.orders.edit', $obj->id) }}"
-                        class="btn btn-sm btn-outline-dark btn-warning">
+                        class="btn btn-sm btn-warning">
                         <i class="bi bi-pencil"></i>
                     </a>
 
-                    <button type="button" class="btn btn-dark btn-sm"
+                    <!-- Delete Button -->
+                    <button type="button"
+                        class="btn btn-dark btn-sm"
                         data-bs-toggle="modal"
                         data-bs-target="#deleteModal-{{ $obj->id }}">
                         <i class="bi bi-trash-fill"></i>
                     </button>
 
+                    <!-- Modal -->
                     <div class="modal fade" id="deleteModal-{{ $obj->id }}" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content border-0 shadow-lg rounded-4 bg-dark text-light">
@@ -76,7 +81,7 @@
                                 </div>
 
                                 <div class="modal-footer justify-content-center border-0 mb-3">
-                                    <form method="POST" action="{{ route('admin.orders.index', $obj->id) }}" class="d-flex gap-2">
+                                    <form method="POST" action="{{ route('admin.orders.destroy', $obj->id) }}" class="d-flex gap-2">
                                         @csrf
                                         @method('DELETE')
 
@@ -93,7 +98,9 @@
                             </div>
                         </div>
                     </div>
+
                 </td>
+
             </tr>
             @empty
             <tr>
@@ -117,15 +124,9 @@
         overflow: hidden;
     }
 
-    .table th,
-    .table td {
-        border-color: #dee2e6;
-        vertical-align: middle;
-    }
-
     .table-row-hover:hover {
         background-color: #ffeeba;
-        transition: background-color 0.2s;
+        transition: 0.2s;
     }
 
     .table-responsive {
@@ -138,24 +139,13 @@
     }
 
     .table-responsive::-webkit-scrollbar-thumb {
-        background-color: #adb5bd;
+        background: #adb5bd;
         border-radius: 3px;
     }
 
     .table-responsive::-webkit-scrollbar-track {
         background: #e9ecef;
     }
-
-    .btn-outline-secondary:hover {
-        background-color: #6c757d;
-        color: #fff;
-        border-color: #6c757d;
-    }
-
-    .btn-danger:hover {
-        background-color: #b02a37;
-        border-color: #b02a37;
-        color: #fff;
-    }
 </style>
+
 @endsection
