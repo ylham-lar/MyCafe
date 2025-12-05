@@ -16,8 +16,6 @@ class FavoriteSeeder extends Seeder
 
         foreach ($customers as $customer) {
             $favoriteProducts = $products->random(min(5, $products->count()));
-
-
             foreach ($favoriteProducts as $product) {
                 Favorite::firstOrCreate([
                     'customer_id' => $customer->id,

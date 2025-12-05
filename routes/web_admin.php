@@ -5,6 +5,7 @@ use App\Http\Controllers\Web\Admin\LoginController;
 use App\Http\Controllers\Web\Admin\DashboardController;
 use App\Http\Controllers\Web\Admin\CategoryController;
 use App\Http\Controllers\Web\Admin\CustomerController;
+use App\Http\Controllers\Web\Admin\FavoriteController;
 use App\Http\Controllers\Web\Admin\OrderController;
 use App\Http\Controllers\Web\Admin\ProductController;
 
@@ -65,6 +66,14 @@ Route::middleware('auth')
                 Route::post('', 'store')->name('store');
                 Route::get('{id}/edit', 'edit')->name('edit')->where(['id' => '[0-9]+']);
                 Route::put('{id}', 'update')->name('update')->where('id', '[0-9]+');
+                Route::delete('{id}', 'destroy')->name('destroy')->where('id', '[0-9]+');
+            });
+
+        Route::controller(FavoriteController::class)
+            ->prefix('favorites')
+            ->name('favorites.')
+            ->group(function () {
+                Route::get('', 'index')->name('index');
                 Route::delete('{id}', 'destroy')->name('destroy')->where('id', '[0-9]+');
             });
     });
