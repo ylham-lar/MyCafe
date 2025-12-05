@@ -12,7 +12,7 @@
                     <a class="nav-link text-warning fs-5" href="{{ route('admin.categories.index') }}">Categories</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-warning fs-5" href="">Products</a>
+                    <a class="nav-link text-warning fs-5" href="{{ route('admin.products.index') }}">Products</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-warning fs-5" href="{{ route('admin.customers.index') }}">Customers</a>

@@ -74,8 +74,12 @@
 
 
                 <div class="text-center d-flex justify-content-center gap-3">
-                    <a href="{{ route('admin.orders.index') }}" class="btn btn-outline-warning px-4">Back</a>
-                    <button class="btn btn-warning px-4 text-dark fw-semibold">Save</button>
+                    <a href="{{ route('admin.orders.index') }}" class="btn btn-outline-warning px-4 py-2">
+                        <i class="bi bi-arrow-left-circle me-1"></i> Back
+                    </a>
+                    <button type="submit" class="btn btn-warning px-4 py-2 text-dark">
+                        <i class="bi bi-plus-circle me-1"></i> Add
+                    </button>
                 </div>
 
             </form>

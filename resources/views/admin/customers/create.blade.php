@@ -70,11 +70,11 @@
                 </div>
 
                 <div class="text-center d-flex justify-content-center gap-3">
-                    <a href="{{ route('admin.customers.index') }}" class="btn btn-outline-warning px-4">
-                        Back
+                    <a href="{{ route('admin.customers.index') }}" class="btn btn-outline-warning px-4 py-2">
+                        <i class="bi bi-arrow-left-circle me-1"></i> Back
                     </a>
-                    <button type="submit" class="btn btn-warning px-4 text-dark fw-semibold">
-                        Create
+                    <button type="submit" class="btn btn-warning px-4 py-2 text-dark">
+                        <i class="bi bi-plus-circle me-1"></i> Add
                     </button>
                 </div>
 
