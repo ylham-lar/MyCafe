@@ -1,8 +1,6 @@
 @extends('client.layouts.app')
 
-@section('title')
-{{ $product->name }}
-@endsection
+@section('title', $product->name)
 
 @section('content')
 <div class="bg-dark text-light py-5">
@@ -12,9 +10,7 @@
             <h1 class="fw-bold display-5">
                 <span class="header-gold">{{ $product->name }}</span>
             </h1>
-            <p class="header-subtitle fs-5">
-                Check out the details and customize your order.
-            </p>
+            <p class="header-subtitle fs-5">Check out the details and customize your order.</p>
         </div>
 
         <div class="row g-4 justify-content-center align-items-center">
@@ -46,10 +42,8 @@
                 <h4 class="mt-3 product-price-section">
                     @if($discountPercent > 0)
                     <span class="h6 text-danger price-label">Original:</span>
-                    <span class="text-danger text-decoration-line-through h6">${{ number_format($originalPrice,2) }}</span>
-                    <br>
-                    <span class="text-danger h6 fw-bold discount-text">Discount: {{ $discountPercent }}%</span>
-                    <br>
+                    <span class="text-danger text-decoration-line-through h6">${{ number_format($originalPrice,2) }}</span><br>
+                    <span class="text-danger h6 fw-bold discount-text">Discount: {{ $discountPercent }}%</span><br>
                     <span class="text-warning h4 fw-bold final-price-text">${{ number_format($finalPrice,2) }}</span>
                     @else
                     <span class="text-warning h4 fw-bold">${{ number_format($originalPrice,2) }}</span>
@@ -61,7 +55,7 @@
 
             <div class="col-md-4 col-lg-3 fade-up">
                 <div class="mt-4 text-center">
-                    <form action="" method="GET" class="d-inline-block">
+                    <form action="{{ route('client.cart.add', $product->id) }}" method="POST" class="d-inline-block">
                         @csrf
                         <div class="d-flex justify-content-center align-items-center mb-4 quantity-control">
                             <span class="text-gold-fade h6 fw-bold me-3">Quantity:</span>
@@ -71,10 +65,7 @@
                                 <button type="button" class="btn quantity-btn plus-btn border-warning">+</button>
                             </div>
                         </div>
-
-                        <button type="submit" class="btn btn-warning fw-bold btn-lg btn-glow add-to-cart-btn">
-                            <i class="fas fa-shopping-cart me-2"></i> Add to Cart
-                        </button>
+                        <button type="submit" class="btn btn-glow"><i class="fas fa-shopping-cart me-2"></i> Add to Cart</button>
                     </form>
                 </div>
             </div>
@@ -145,7 +136,7 @@
     }
 
     .quantity-btn {
-        padding: 0.5rem 0.8rem;
+        padding: .5rem .8rem;
         background-color: #333 !important;
         color: #ffd95a !important;
         border: 1px solid #ffd95a !important;
@@ -192,7 +183,6 @@
                 let value = parseInt(quantityInput.value);
                 if (value > 1) quantityInput.value = value - 1;
             });
-
             plusBtn.addEventListener("click", () => {
                 let value = parseInt(quantityInput.value);
                 quantityInput.value = value + 1;

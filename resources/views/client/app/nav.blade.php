@@ -16,6 +16,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#contact">Contacts</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('client.cart.index') }}">Basket</a>
+                </li>
             </ul>
         </div>
     </div>

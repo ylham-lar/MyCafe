@@ -27,3 +27,9 @@ Route::controller(ProductController::class)
         Route::get('', 'index')->name('index');
         Route::get('{id}', 'show')->name('show');
     });
+
+Route::prefix('client')->name('client.')->group(function () {
+    Route::get('cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
+    Route::post('cart/destroy/{product}', [CartController::class, 'destroy'])->name('cart.delete');
+});
