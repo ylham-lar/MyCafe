@@ -5,6 +5,7 @@ use App\Http\Controllers\Web\Admin\LoginController;
 use App\Http\Controllers\Web\Admin\DashboardController;
 use App\Http\Controllers\Web\Admin\CategoryController;
 use App\Http\Controllers\Web\Admin\CustomerController;
+use App\Http\Controllers\Web\Admin\OrderController;
 
 Route::middleware('guest')
     ->group(function () {
@@ -33,6 +34,18 @@ Route::middleware('auth')
         Route::controller(CustomerController::class)
             ->prefix('customers')
             ->name('customers.')
+            ->group(function () {
+                Route::get('', 'index')->name('index');
+                Route::get('create', 'create')->name('create');
+                Route::post('', 'store')->name('store');
+                Route::get('{id}/edit', 'edit')->name('edit')->where(['id' => '[0-9]+']);
+                Route::put('{id}', 'update')->name('update')->where('id', '[0-9]+');
+                Route::delete('{id}', 'destroy')->name('destroy')->where('id', '[0-9]+');
+            });
+
+        Route::controller(OrderController::class)
+            ->prefix('orders')
+            ->name('orders.')
             ->group(function () {
                 Route::get('', 'index')->name('index');
                 Route::get('create', 'create')->name('create');

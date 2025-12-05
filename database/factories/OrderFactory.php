@@ -12,14 +12,10 @@ class OrderFactory extends Factory
 
     public function definition(): array
     {
-        $subtotal = fake()->numberBetween(1000, 50000);
-        $discount = fake()->numberBetween(0, 5000);
-
         return [
-            'customer_id' => Customer::inRandomOrder()->first()->id,
-            'subtotal' => $subtotal,
-            'total_price' => $subtotal - $discount,
-            'status' => fake()->numberBetween(0, 2),
+            'customer_id' => Customer::inRandomOrder()->value('id') ?? 1,
+            'price'       => $this->faker->numberBetween(10, 300),
+            'status'      => $this->faker->randomElement(['pending', 'paid', 'canceled']),
         ];
     }
 }

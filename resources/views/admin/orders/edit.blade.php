@@ -1,0 +1,84 @@
+@extends('admin.layouts.app')
+
+@section('title', 'Edit Order')
+
+@section('content')
+<div class="container-sm py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+
+            <h4 class="mb-4 text-dark">
+                <a href="{{ route('admin.orders.index') }}" class="text-warning text-decoration-none">
+                    Orders
+                </a>
+                <span class="text-muted">/ Edit</span>
+            </h4>
+
+            @if($errors->any())
+            <div class="alert alert-danger rounded-3 shadow-sm">
+                <ul class="mb-0 ps-3">
+                    @foreach($errors->all() as $err)
+                    <li>{{ $err }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
+            <form action="{{ route('admin.orders.update', $obj->id) }}"
+                method="POST"
+                class="bg-white p-4 rounded-4 shadow-sm">
+
+                @csrf
+                @method('PUT')
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Customer *</label>
+                    <select name="customer_id"
+                        class="form-select @error('customer_id') is-invalid @enderror">
+                        @foreach($customers as $c)
+                        <option value="{{ $c->id }}"
+                            {{ $obj->customer_id == $c->id ? 'selected' : '' }}>
+                            {{ $c->first_name }} {{ $c->last_name }}
+                        </option>
+                        @endforeach
+                    </select>
+                    @error('customer_id')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Price *</label>
+                    <input type="number"
+                        name="price"
+                        value="{{ old('price', $obj->price) }}"
+                        class="form-control @error('price') is-invalid @enderror">
+                    @error('price')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-semibold">Status *</label>
+                    <select name="status"
+                        class="form-select @error('status') is-invalid @enderror">
+                        <option value="pending" {{ $obj->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                        <option value="paid" {{ $obj->status == 'paid' ? 'selected' : '' }}>Paid</option>
+                        <option value="canceled" {{ $obj->status == 'canceled' ? 'selected' : '' }}>Canceled</option>
+                    </select>
+                    @error('status')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="text-center d-flex justify-content-center gap-3">
+                    <a href="{{ route('admin.orders.index') }}" class="btn btn-outline-warning px-4">Back</a>
+                    <button class="btn btn-warning px-4 text-dark fw-semibold">Update</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+@endsection

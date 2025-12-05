@@ -18,7 +18,7 @@
                     <a class="nav-link text-warning fs-5" href="{{ route('admin.customers.index') }}">Customers</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-warning fs-5" href="">Orders</a>
+                    <a class="nav-link text-warning fs-5" href="{{ route('admin.orders.index') }}">Orders</a>
                 </li>
                 <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST" class="d-inline">
