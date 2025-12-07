@@ -43,12 +43,15 @@
         border-radius: 14px;
         transition: 0.3s ease;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+        border: 1px solid rgba(255, 215, 90, 0.1);
     }
 
     .premium-card:hover {
-        transform: translateY(-10px) scale(1.03);
-        box-shadow: 0 12px 28px rgba(255, 215, 90, 0.45);
-        border-color: rgba(255, 215, 90, 0.5);
+        transform: translateY(-12px);
+        box-shadow:
+            0 20px 40px rgba(255, 215, 90, 0.3),
+            0 0 80px rgba(255, 215, 90, 0.1);
+        border-color: rgba(255, 215, 90, 0.6);
     }
 
     .premium-card .card-title {

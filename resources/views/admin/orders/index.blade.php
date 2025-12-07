@@ -34,7 +34,7 @@
 
                 <td>{{ $obj->customer->first_name }} {{ $obj->customer->last_name }}</td>
 
-                <td>{{ number_format($obj->price) }} TMT</td>
+                <td>{{ number_format($obj->price) }} $</td>
 
                 <td>
                     @if($obj->status == 'pending')
@@ -54,7 +54,6 @@
                         <i class="bi bi-pencil"></i>
                     </a>
 
-                    <!-- Delete Button -->
                     <button type="button"
                         class="btn btn-dark btn-sm"
                         data-bs-toggle="modal"
@@ -62,7 +61,6 @@
                         <i class="bi bi-trash-fill"></i>
                     </button>
 
-                    <!-- Modal -->
                     <div class="modal fade" id="deleteModal-{{ $obj->id }}" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content border-0 shadow-lg rounded-4 bg-dark text-light">

@@ -10,7 +10,6 @@ class CartController extends Controller
 {
     public function index()
     {
-        // Cart session: [product_id => quantity]
         $cart = session('cart', []);
 
         if (empty($cart)) {
@@ -34,12 +33,10 @@ class CartController extends Controller
         $cart = session('cart', []);
         $quantity = $request->input('quantity', 1);
 
-        // Eger öňden bar bolsa, täze mukdary goýýarys (goşmaýarys)
         $cart[$product->id] = $quantity;
 
         session(['cart' => $cart]);
 
-        // AJAX request bolsa JSON return edýäris
         if ($request->ajax() || $request->wantsJson()) {
             return response()->json([
                 'success' => true,
@@ -59,8 +56,13 @@ class CartController extends Controller
 
         return back()->with('success', 'Product removed from cart');
     }
+    public function clearCart()
+    {
+        session()->forget('cart');
 
-    // Cart-yň umumy mukdaryny almak (navbar üçin)
+        return redirect()->route('client.cart.index')->with('success', 'Cart Clened');
+    }
+
     public function getCartCount()
     {
         $cart = session('cart', []);

@@ -7,182 +7,444 @@
     <div class="container py-4">
 
         <div class="text-center mb-5 fade-in">
-            <h1 class="fw-bold display-5">
+            <h1 class="fw-bold display-4">
                 <span class="header-gold">{{ $product->name }}</span>
             </h1>
-            <p class="header-subtitle fs-5">Check out the details and customize your order.</p>
+            <p class="header-subtitle fs-5">Check out the details and customize your order</p>
         </div>
 
-        <div class="row g-4 justify-content-center align-items-center">
-
-            <div class="col-md-4 col-lg-3 fade-up">
-                <div class="product-image-wrapper position-relative text-center">
-                    <a data-fancybox="gallery" href="{{ asset('img/Pizza.jpg') }}">
-                        <img src="{{ asset('img/Pizza.jpg') }}" class="img-fluid product-image" alt="{{ $product->name }}">
-                    </a>
+        <div class="row g-4 align-items-stretch">
+            <!-- Product Image -->
+            <div class="col-lg-5 fade-up">
+                <div class="product-card">
                     @if($product->discount_percent > 0)
-                    <div class="position-absolute top-0 end-0 m-3 badge bg-warning text-dark fw-bold product-badge-glow">
-                        -{{ $product->discount_percent }}%
+                    <div class="discount-badge">-{{ $product->discount_percent }}%</div>
+                    @endif
+
+                    <div class="product-image-wrapper">
+                        <a data-fancybox="gallery" href="{{ asset('storage/'.$product->image) }}">
+                            @if($product->image)
+                            <img src="{{ asset('storage/'.$product->image) }}" class="product-image" alt="{{ $product->name }}">
+                            @else
+                            <div class="product-image-placeholder">
+                                <i class="fas fa-box-open"></i>
+                            </div>
+                            @endif
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Details -->
+            <div class="col-lg-7 fade-up">
+                <div class="product-details-card">
+                    <div class="product-header mb-4">
+                        <h2 class="product-title mb-2">{{ $product->name }}</h2>
+                        <p class="product-category">
+                            <i class="fas fa-tag me-2"></i>{{ $product->category->name ?? 'Uncategorized' }}
+                        </p>
+                    </div>
+
+                    @php
+                    $originalPrice = $product->price;
+                    $discountPercent = $product->discount_percent ?? 0;
+                    $discountAmount = ($originalPrice * $discountPercent) / 100;
+                    $finalPrice = $originalPrice - $discountAmount;
+                    @endphp
+
+                    <!-- Price Section -->
+                    <div class="price-section mb-4">
+                        @if($discountPercent > 0)
+                        <div class="price-row mb-2">
+                            <span class="price-label">Original Price:</span>
+                            <span class="original-price">${{ number_format($originalPrice, 2) }}</span>
+                        </div>
+                        <div class="price-row mb-2">
+                            <span class="price-label">Discount:</span>
+                            <span class="discount-amount">{{ $discountPercent }}% OFF</span>
+                        </div>
+                        <div class="price-divider"></div>
+                        <div class="price-row final-price-row">
+                            <span class="price-label">Final Price:</span>
+                            <span class="final-price">${{ number_format($finalPrice, 2) }}</span>
+                        </div>
+                        <div class="savings-badge">
+                            You save: ${{ number_format($discountAmount, 2) }}
+                        </div>
+                        @else
+                        <div class="price-row final-price-row">
+                            <span class="price-label">Price:</span>
+                            <span class="final-price">${{ number_format($originalPrice, 2) }}</span>
+                        </div>
+                        @endif
+                    </div>
+
+                    <!-- Description -->
+                    @if($product->description)
+                    <div class="product-description mb-4">
+                        <h5 class="description-title">
+                            <i class="fas fa-info-circle me-2"></i>Description
+                        </h5>
+                        <p class="description-text">{{ $product->description }}</p>
                     </div>
                     @endif
-                </div>
-            </div>
 
-            <div class="col-md-4 col-lg-3 d-flex flex-column justify-content-center text-center fade-up">
-                <h2 class="fw-bold text-warning product-title">{{ $product->name }}</h2>
-                <p class="text-gold-fade product-category">{{ $product->category->name ?? 'Uncategorized' }}</p>
-
-                @php
-                $originalPrice = $product->price;
-                $discountPercent = $product->discount_percent ?? 0;
-                $discountAmount = ($originalPrice * $discountPercent) / 100;
-                $finalPrice = $originalPrice - $discountAmount;
-                @endphp
-
-                <h4 class="mt-3 product-price-section">
-                    @if($discountPercent > 0)
-                    <span class="h6 text-danger price-label">Original:</span>
-                    <span class="text-danger text-decoration-line-through h6">${{ number_format($originalPrice,2) }}</span><br>
-                    <span class="text-danger h6 fw-bold discount-text">Discount: {{ $discountPercent }}%</span><br>
-                    <span class="text-warning h4 fw-bold final-price-text">${{ number_format($finalPrice,2) }}</span>
-                    @else
-                    <span class="text-warning h4 fw-bold">${{ number_format($originalPrice,2) }}</span>
-                    @endif
-                </h4>
-
-                <p class="mt-4 text-gold-fade h5 fw-bold product-description">{{ $product->description }}</p>
-            </div>
-
-            <div class="col-md-4 col-lg-3 fade-up">
-                <div class="mt-4 text-center">
-                    <form action="{{ route('client.cart.add', $product->id) }}" method="POST" class="d-inline-block">
-                        @csrf
-                        <div class="d-flex justify-content-center align-items-center mb-4 quantity-control">
-                            <span class="text-gold-fade h6 fw-bold me-3">Quantity:</span>
-                            <div class="input-group quantity-modifier" style="width: 130px;">
-                                <button type="button" class="btn quantity-btn minus-btn border-warning">-</button>
-                                <input type="number" name="quantity" value="1" min="1" class="form-control text-center quantity-input">
-                                <button type="button" class="btn quantity-btn plus-btn border-warning">+</button>
+                    <!-- Quantity & Add to Cart -->
+                    <div class="add-to-cart-section">
+                        <form action="{{ route('client.cart.add', $product->id) }}" method="POST">
+                            @csrf
+                            <div class="quantity-wrapper mb-4">
+                                <label class="quantity-label">Quantity:</label>
+                                <div class="quantity-control">
+                                    <button type="button" class="qty-btn minus-btn">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" name="quantity" value="1" min="1" class="qty-input">
+                                    <button type="button" class="qty-btn plus-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <button type="submit" class="btn btn-glow"><i class="fas fa-shopping-cart me-2"></i> Add to Cart</button>
-                    </form>
+                            <button type="submit" class="btn-add-to-cart">
+                                <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
-
         </div>
+
     </div>
 </div>
 
 <style>
-    .product-image-wrapper {
-        padding: 12px;
-        background: linear-gradient(180deg, #1a1a1a, #222, #2a2a2a);
-        border-radius: 16px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
-        transition: all 0.3s ease;
+    body {
+        background: #0a0a0a;
     }
 
-    .product-image-wrapper:hover {
-        transform: translateY(-5px) scale(1.02);
-        box-shadow: 0 0 20px rgba(255, 215, 90, 0.45);
+    .product-card {
+        background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 215, 90, 0.1);
+        position: relative;
+        height: 100%;
+    }
+
+    .discount-badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #ff4757, #ff6348);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 25px;
+        font-size: 1rem;
+        font-weight: bold;
+        z-index: 10;
+        box-shadow: 0 4px 15px rgba(255, 71, 87, 0.5);
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+        0%,
+        100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.05);
+        }
+    }
+
+    .product-image-wrapper {
+        padding: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 400px;
     }
 
     .product-image {
-        max-height: 300px;
+        max-width: 100%;
+        max-height: 400px;
         object-fit: contain;
-        border-radius: 50%;
-        display: block;
-        margin: 0 auto;
+        border-radius: 15px;
+        transition: transform 0.5s ease;
+    }
+
+    .product-image:hover {
+        transform: scale(1.05);
+    }
+
+    .product-image-placeholder {
+        width: 300px;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 5rem;
+        color: rgba(255, 215, 90, 0.2);
+    }
+
+    .product-details-card {
+        background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 215, 90, 0.1);
+        padding: 2.5rem;
+        height: 100%;
+    }
+
+    .product-header {
+        border-bottom: 1px solid rgba(255, 215, 90, 0.2);
+        padding-bottom: 1.5rem;
     }
 
     .product-title {
         color: #ffd95a;
-        text-shadow: 0 0 12px rgba(255, 215, 90, 0.8);
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0;
+        text-shadow: 0 0 20px rgba(255, 215, 90, 0.6);
     }
 
-    .text-gold-fade {
-        color: rgba(255, 215, 90, 0.75);
-        transition: color 0.3s ease, text-shadow 0.3s ease;
+    .product-category {
+        color: rgba(255, 215, 90, 0.7);
+        font-size: 1.1rem;
+        margin: 0;
     }
 
-    .final-price-text {
-        color: #fff7c2;
-        text-shadow: 0 0 10px rgba(255, 215, 90, 0.7);
+    .price-section {
+        background: rgba(255, 215, 90, 0.05);
+        border: 1px solid rgba(255, 215, 90, 0.2);
+        border-radius: 15px;
+        padding: 1.5rem;
     }
 
-    .text-danger {
-        text-shadow: 0 0 6px rgba(255, 0, 0, 0.5);
+    .price-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
     }
 
-    .product-badge-glow {
-        box-shadow: 0 0 8px rgba(255, 215, 90, 0.7);
+    .price-label {
+        color: rgba(255, 215, 90, 0.7);
+        font-size: 1rem;
+        font-weight: 600;
     }
 
-    .btn-glow {
-        background: #ffd95a;
-        color: #1a1a1a;
-        transition: all 0.3s ease;
-        box-shadow: 0 0 12px rgba(255, 215, 90, 0.6);
-        padding: 12px 40px;
-        border-radius: 8px;
+    .original-price {
+        color: rgba(255, 215, 90, 0.6);
+        text-decoration: line-through;
+        font-size: 1.1rem;
+    }
+
+    .discount-amount {
+        color: #ff4757;
+        font-size: 1.1rem;
         font-weight: 700;
     }
 
-    .btn-glow:hover {
-        box-shadow: 0 0 25px rgba(255, 215, 90, 0.85);
-        transform: translateY(-2px) scale(1.02);
-        color: #1a1a1a;
+    .price-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 215, 90, 0.3), transparent);
+        margin: 1rem 0;
     }
 
-    .quantity-btn {
-        padding: .5rem .8rem;
-        background-color: #333 !important;
-        color: #ffd95a !important;
-        border: 1px solid #ffd95a !important;
+    .final-price-row {
+        margin-bottom: 0;
+    }
+
+    .final-price {
+        color: #ffd95a;
+        font-size: 2rem;
+        font-weight: 700;
+        text-shadow: 0 0 15px rgba(255, 215, 90, 0.6);
+    }
+
+    .savings-badge {
+        background: linear-gradient(135deg, #4ade80, #22c55e);
+        color: white;
+        text-align: center;
+        padding: 0.75rem;
+        border-radius: 10px;
+        margin-top: 1rem;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3);
+    }
+
+    .product-description {
+        background: rgba(255, 215, 90, 0.03);
+        border-left: 3px solid #ffd95a;
+        padding: 1.5rem;
+        border-radius: 10px;
+    }
+
+    .description-title {
+        color: #ffd95a;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .description-text {
+        color: rgba(255, 215, 90, 0.8);
+        line-height: 1.8;
+        margin: 0;
+    }
+
+    .add-to-cart-section {
+        border-top: 1px solid rgba(255, 215, 90, 0.2);
+        padding-top: 1.5rem;
+    }
+
+    .quantity-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .quantity-label {
+        color: rgba(255, 215, 90, 0.8);
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .quantity-control {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(255, 215, 90, 0.05);
+        padding: 0.5rem;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 215, 90, 0.2);
+    }
+
+    .qty-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+        border: 1px solid rgba(255, 215, 90, 0.3);
+        color: #ffd95a;
+        cursor: pointer;
         transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    .quantity-btn:hover {
-        background-color: #ffd95a !important;
-        color: #1a1a1a !important;
+    .qty-btn:hover {
+        background: linear-gradient(135deg, #ffd95a, #ffed4e);
+        color: #111;
+        transform: scale(1.1);
+        box-shadow: 0 4px 15px rgba(255, 215, 90, 0.4);
     }
 
-    .quantity-input {
-        background-color: #1b1c1f !important;
-        color: #fff !important;
-        border-top: 1px solid #ffd95a !important;
-        border-bottom: 1px solid #ffd95a !important;
-        border-left: none !important;
-        border-right: none !important;
+    .qty-input {
+        width: 70px;
+        height: 40px;
+        background: #0f0f0f;
+        border: 1px solid rgba(255, 215, 90, 0.3);
+        border-radius: 8px;
+        color: #ffd95a;
+        text-align: center;
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+
+    .qty-input:focus {
+        outline: none;
+        border-color: #ffd95a;
+        box-shadow: 0 0 10px rgba(255, 215, 90, 0.3);
+    }
+
+    .btn-add-to-cart {
+        width: 100%;
+        padding: 1.2rem 2rem;
+        background: linear-gradient(135deg, #ffd95a, #ffed4e);
+        border: none;
+        border-radius: 12px;
+        color: #111;
+        font-weight: 700;
+        font-size: 1.2rem;
+        cursor: pointer;
         transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255, 215, 90, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
     }
 
-    .quantity-input:focus {
-        box-shadow: 0 0 8px rgba(255, 215, 90, 0.6) !important;
-        background-color: #2c2c2c !important;
+    .btn-add-to-cart:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(255, 215, 90, 0.6);
+        background: linear-gradient(135deg, #ffed4e, #ffd95a);
+    }
+
+    .header-gold {
+        color: #ffd95a;
+        text-shadow: 0 0 30px rgba(255, 215, 90, 0.6);
+    }
+
+    .header-subtitle {
+        color: rgba(255, 215, 90, 0.7);
+        font-size: 1.1rem;
     }
 
     .fade-up,
     .fade-in {
         opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.8s ease, transform 0.8s ease;
+        transform: translateY(30px);
+        animation: fadeUp 0.8s ease forwards;
+    }
+
+    @keyframes fadeUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .fade-up:nth-child(1) {
+        animation-delay: 0.1s;
+    }
+
+    .fade-up:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    @media (max-width: 991px) {
+        .product-details-card {
+            margin-top: 2rem;
+        }
+
+        .product-title {
+            font-size: 1.6rem;
+        }
+
+        .final-price {
+            font-size: 1.6rem;
+        }
     }
 </style>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const quantityControl = document.querySelector(".quantity-control");
-        if (quantityControl) {
-            const minusBtn = quantityControl.querySelector(".minus-btn");
-            const plusBtn = quantityControl.querySelector(".plus-btn");
-            const quantityInput = quantityControl.querySelector(".quantity-input");
+        const minusBtn = document.querySelector(".minus-btn");
+        const plusBtn = document.querySelector(".plus-btn");
+        const quantityInput = document.querySelector(".qty-input");
 
+        if (minusBtn && plusBtn && quantityInput) {
             minusBtn.addEventListener("click", () => {
                 let value = parseInt(quantityInput.value);
                 if (value > 1) quantityInput.value = value - 1;
             });
+
             plusBtn.addEventListener("click", () => {
                 let value = parseInt(quantityInput.value);
                 quantityInput.value = value + 1;

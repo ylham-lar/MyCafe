@@ -30,7 +30,6 @@
 
                 @csrf
 
-                <!-- First Name -->
                 <div class="mb-3">
                     <label class="form-label fw-semibold">First Name *</label>
                     <input type="text"
@@ -43,7 +42,6 @@
                     @enderror
                 </div>
 
-                <!-- Last Name -->
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Last Name *</label>
                     <input type="text"
@@ -56,7 +54,6 @@
                     @enderror
                 </div>
 
-                <!-- Phone Number -->
                 <div class="mb-4">
                     <label class="form-label fw-semibold">Phone Number *</label>
                     <input type="text"

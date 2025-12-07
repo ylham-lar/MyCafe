@@ -49,7 +49,6 @@
 </nav>
 
 <style>
-    /* Navbar Dark Theme */
     .navbar-dark {
         background: #000000 !important;
         border-bottom: 2px solid #ffc107;
@@ -65,7 +64,6 @@
         transform: translateY(-2px);
     }
 
-    /* Navigation Links */
     .nav-link {
         position: relative;
         transition: all 0.3s ease;
@@ -94,7 +92,6 @@
         width: 80%;
     }
 
-    /* Logout Button */
     .logout-btn {
         transition: all 0.3s ease;
         border-radius: 8px;
@@ -108,7 +105,6 @@
         box-shadow: 0 4px 8px rgba(220, 53, 69, 0.4);
     }
 
-    /* Navbar Toggler */
     .navbar-toggler {
         border: 2px solid #ffc107;
         transition: all 0.3s ease;
@@ -123,7 +119,7 @@
         background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,193,7,1)' stroke-width='2.5' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
     }
 
-    /* Responsive Adjustments */
+
     @media (max-width: 991px) {
         .nav-link {
             margin: 0.25rem 0;
@@ -136,12 +132,10 @@
         }
     }
 
-    /* Shadow and Depth */
     .shadow-lg {
         box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.6) !important;
     }
 
-    /* Transition Helper Class */
     .transition-all {
         transition: all 0.3s ease;
     }

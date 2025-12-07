@@ -19,14 +19,12 @@ Home
 
         <div class="row g-4">
             @foreach($categories as $category)
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 fade-up">
+            <div class="col-12 col-sm-6 col-md-3 fade-up">
                 <a href="{{ route('client.categories.products', $category->id) }}" class="text-decoration-none">
-                    <div class="card premium-category-card shadow-lg border-0 h-100">
+                    <div class="card premium-card shadow-lg border-0 h-100">
                         <div class="card-body text-center">
-                            <h5 class="category-title h5 text-gold-fade">{{ $category->name }}</h5>
-                            <p class="category-count text-gold-fade fw-semibold mt-2 h6">
-                                {{ $category->products->count() }} Products
-                            </p>
+                            <h5 class="card-title fw-bold">{{ $category->name }}</h5>
+                            <p class="price-tag mb-1">{{ $category->products->count() }} Products</p>
                         </div>
                     </div>
                 </a>
@@ -36,66 +34,63 @@ Home
 
     </div>
 </div>
+
 <style>
-    .premium-navbar {
-        background: linear-gradient(180deg, #111, #1a1a1a, #222);
-        border-bottom: 1px solid rgba(255, 215, 90, 0.25);
-        box-shadow: 0 6px 28px rgba(0, 0, 0, 0.55);
-        font-family: 'Poppins', sans-serif;
+    .premium-card {
+        background: linear-gradient(180deg, #1a1a1a, #222, #2a2a2a);
+        color: #f8f9fa;
+        border-radius: 14px;
+        transition: 0.3s ease;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+        border: 1px solid rgba(255, 215, 90, 0.1);
     }
 
-    .premium-navbar .navbar-brand {
+    .premium-card:hover {
+        transform: translateY(-12px);
+        box-shadow:
+            0 20px 40px rgba(255, 215, 90, 0.3),
+            0 0 80px rgba(255, 215, 90, 0.1);
+        border-color: rgba(255, 215, 90, 0.6);
+    }
+
+    .premium-card .card-title {
+        color: #ffd95a;
+        transition: 0.3s ease;
+    }
+
+    .premium-card:hover .card-title {
+        color: #fff7c2;
+        text-shadow: 0 0 12px rgba(255, 215, 90, 1);
+    }
+
+    .price-tag {
         color: #ffd95a;
         font-weight: 700;
-        font-size: 1.55rem;
-        text-shadow: 0 0 10px rgba(255, 215, 90, 0.8);
+        font-size: 1.1rem;
+        transition: 0.3s ease, text-shadow 0.3s ease;
     }
 
-    .premium-navbar .nav-link {
-        color: #ffd95a;
-        font-weight: 600;
-        transition: all 0.3s ease;
-    }
-
-    .premium-navbar .nav-link:hover {
+    .premium-card:hover .price-tag {
         color: #fff7c2;
-        text-shadow: 0 0 12px rgba(255, 215, 90, 0.9);
+        text-shadow: 0 0 8px rgba(255, 215, 90, 1);
     }
 
-    .premium-category-card {
-        background: linear-gradient(180deg, #1a1a1a, #222, #2a2a2a);
-        border-radius: 14px;
-        border: 1px solid rgba(255, 215, 90, 0.12);
-        padding: 12px;
-        transition: all 0.35s ease;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-        color: #f1f1f1;
-    }
-
-    .premium-category-card:hover {
-        transform: translateY(-8px) scale(1.03);
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), 0 0 25px rgba(255, 215, 90, 0.6);
-        border-color: rgba(255, 215, 90, 0.5);
-    }
-
-    .category-title {
-        color: #ffd95a;
+    .text-gold-fade {
+        color: rgba(255, 215, 90, 0.75) !important;
         transition: color 0.3s ease, text-shadow 0.3s ease;
     }
 
-    .premium-category-card:hover .category-title {
-        color: #fff7c2;
-        text-shadow: 0 0 8px rgba(255, 215, 90, 0.85);
-    }
-
-    .category-count {
-        color: rgba(255, 215, 90, 0.75);
-        transition: color 0.3s ease, text-shadow 0.3s ease;
-    }
-
-    .premium-category-card:hover .category-count {
+    .premium-card:hover .text-gold-fade {
         color: #fff7c2;
         text-shadow: 0 0 6px rgba(255, 215, 90, 0.8);
+    }
+
+    .premium-card small {
+        font-size: 0.85rem;
+    }
+
+    .premium-card .card-body {
+        padding: 1.5rem 1rem;
     }
 
     .header-gold {
@@ -111,50 +106,6 @@ Home
         color: #d7deea;
     }
 
-    .footer-premium {
-        background: linear-gradient(180deg, #111, #1a1a1a, #222);
-        color: #ececec;
-        padding: 50px 0 30px;
-        border-top: 1px solid rgba(255, 193, 7, 0.18);
-    }
-
-    .footer-title {
-        color: #ffd95a;
-        text-shadow: 0 0 10px rgba(255, 193, 7, .6);
-        font-size: 1.3rem;
-        font-weight: 700;
-    }
-
-    .footer-text,
-    .footer-copy {
-        color: #d5d7dd;
-    }
-
-    .footer-link {
-        color: #e5e5e5;
-        text-decoration: none;
-        transition: 0.3s ease;
-    }
-
-    .footer-link:hover {
-        color: #ffd95a;
-        text-shadow: 0 0 10px rgba(255, 193, 7, .8);
-        padding-left: 4px;
-    }
-
-    .footer-social {
-        color: #dcdcdc;
-        font-size: 1.35rem;
-        margin-left: 12px;
-        transition: .3s ease;
-    }
-
-    .footer-social:hover {
-        color: #ffd95a;
-        transform: translateY(-5px) scale(1.15);
-        text-shadow: 0 0 18px rgba(255, 193, 7, .9);
-    }
-
     .fade-up,
     .fade-in {
         opacity: 0;
@@ -162,6 +113,7 @@ Home
         transition: opacity 0.8s ease, transform 0.8s ease;
     }
 </style>
+
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         const elements = document.querySelectorAll(".fade-up, .fade-in");
