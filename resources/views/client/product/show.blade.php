@@ -14,12 +14,19 @@
         </div>
 
         <div class="row g-4 align-items-stretch">
-            <!-- Product Image -->
             <div class="col-lg-5 fade-up">
                 <div class="product-card">
                     @if($product->discount_percent > 0)
                     <div class="discount-badge">-{{ $product->discount_percent }}%</div>
                     @endif
+
+                    <button
+                        class="favorite-btn"
+                        data-id="{{ $product->id }}"
+                        title="@if($product->is_favorite) Remove from Favorites @else Add to Favorites @endif"
+                        aria-label="@if($product->is_favorite) Remove product from favorites @else Add product to favorites @endif">
+                        <i class="fas fa-heart @if($product->is_favorite) text-danger @else text-secondary @endif"></i>
+                    </button>
 
                     <div class="product-image-wrapper">
                         <a data-fancybox="gallery" href="{{ asset('storage/'.$product->image) }}">
@@ -35,7 +42,6 @@
                 </div>
             </div>
 
-            <!-- Product Details -->
             <div class="col-lg-7 fade-up">
                 <div class="product-details-card">
                     <div class="product-header mb-4">
@@ -45,6 +51,7 @@
                         </p>
                     </div>
 
+                    {{-- **THIS IS THE CORRECTED SECTION (LINE 54 IS HERE)** --}}
                     @php
                     $originalPrice = $product->price;
                     $discountPercent = $product->discount_percent ?? 0;
@@ -52,7 +59,6 @@
                     $finalPrice = $originalPrice - $discountAmount;
                     @endphp
 
-                    <!-- Price Section -->
                     <div class="price-section mb-4">
                         @if($discountPercent > 0)
                         <div class="price-row mb-2">
@@ -79,7 +85,6 @@
                         @endif
                     </div>
 
-                    <!-- Description -->
                     @if($product->description)
                     <div class="product-description mb-4">
                         <h5 class="description-title">
@@ -89,7 +94,6 @@
                     </div>
                     @endif
 
-                    <!-- Quantity & Add to Cart -->
                     <div class="add-to-cart-section">
                         <form action="{{ route('client.cart.add', $product->id) }}" method="POST">
                             @csrf
@@ -120,6 +124,43 @@
 <style>
     body {
         background: #0a0a0a;
+    }
+
+    .favorite-btn {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        z-index: 10;
+        background: rgba(26, 26, 26, 0.9);
+        border: 2px solid rgba(255, 215, 90, 0.4);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .favorite-btn:hover {
+        background: rgba(255, 215, 90, 0.1);
+        border-color: #ffd95a;
+        transform: scale(1.1);
+    }
+
+    .favorite-btn i {
+        font-size: 1.5rem;
+        transition: color 0.3s ease;
+    }
+
+    .text-danger {
+        color: #ff4757;
+    }
+
+    .text-secondary {
+        color: rgba(255, 215, 90, 0.5);
     }
 
     .product-card {
@@ -451,6 +492,7 @@
             });
         }
 
+        // Intersection Observer for fade-in animations
         const elements = document.querySelectorAll(".fade-up, .fade-in");
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
@@ -465,4 +507,35 @@
         elements.forEach(el => observer.observe(el));
     });
 </script>
+<script>
+    document.querySelector('.favorite-btn').addEventListener('click', function() {
+        let button = this;
+        let id = button.dataset.id;
+
+        fetch("/favorite/toggle/" + id, {
+                method: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+
+                let icon = button.querySelector('i');
+
+                if (data.status === 'added') {
+                    icon.classList.remove('text-secondary');
+                    icon.classList.add('text-danger');
+                    button.setAttribute('title', 'Remove from Favorites');
+                    button.setAttribute('aria-label', 'Remove product from favorites');
+                } else {
+                    icon.classList.remove('text-danger');
+                    icon.classList.add('text-secondary');
+                    button.setAttribute('title', 'Add to Favorites');
+                    button.setAttribute('aria-label', 'Add product to favorites');
+                }
+            });
+    });
+</script>
+
 @endsection

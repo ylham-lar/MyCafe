@@ -1,10 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Client\CartController;
-use App\Http\Controllers\Web\Client\CategoryController;
 use App\Http\Controllers\Web\Client\HomeController;
 use App\Http\Controllers\Web\Client\ProductController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Web\Client\CategoryController;
+use App\Http\Controllers\Web\Client\FavoriteController;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
@@ -38,4 +39,15 @@ Route::prefix('cart')
         Route::post('/add/{product}', 'add')->name('add');
         Route::post('/delete/{product}', 'remove')->name('delete');
         Route::post('/clear', 'clearCart')->name('clear');
+    });
+
+
+Route::controller(FavoriteController::class)
+    ->prefix('favorites')
+    ->name('client.favorites.')
+    ->group(function () {
+        Route::get('', 'index')->name('index');
+        Route::post('/toggle/{product}', 'toggle')->name('toggle');
+        Route::post('/delete/{id}', 'destroy')->name('destroy');
+        Route::post('/remove-all', 'destroyAll')->name('destroyAll');
     });

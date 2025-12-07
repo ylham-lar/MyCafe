@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Customer;
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Product;
-use App\Models\User;
+use App\Models\Customer;
+use App\Models\Favorite;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -35,8 +36,8 @@ class DatabaseSeeder extends Seeder
             ->count(20)
             ->create();
 
-        $this->call([
-            FavoriteSeeder::class,
-        ]);
+        Favorite::factory()
+            ->count(10)
+            ->create();
     }
 }
