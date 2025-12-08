@@ -3,6 +3,11 @@
 @section('title', $product->name)
 
 @section('content')
+@php
+$favorites = session('favorites', []);
+$isFavorite = in_array($product->id, $favorites);
+@endphp
+
 <div class="bg-dark text-light py-5">
     <div class="container py-4">
 
@@ -20,13 +25,20 @@
                     <div class="discount-badge">-{{ $product->discount_percent }}%</div>
                     @endif
 
-                    <button
-                        class="favorite-btn"
-                        data-id="{{ $product->id }}"
-                        title="@if($product->is_favorite) Remove from Favorites @else Add to Favorites @endif"
-                        aria-label="@if($product->is_favorite) Remove product from favorites @else Add product to favorites @endif">
-                        <i class="fas fa-heart @if($product->is_favorite) text-danger @else text-secondary @endif"></i>
-                    </button>
+                    <form action="{{ route('client.favorites.toggle', $product->id) }}" method="POST" class="favorite-form">
+                        @csrf
+                        <button
+                            type="submit"
+                            class="favorite-btn"
+                            title="@if($isFavorite) Remove from Favorites @else Add to Favorites @endif"
+                            aria-label="@if($isFavorite) Remove product from favorites @else Add product to favorites @endif">
+                            @if($isFavorite)
+                            <i class="fas fa-heart" style="color: #ff4757;"></i>
+                            @else
+                            <i class="far fa-heart" style="color: #ffffff;"></i>
+                            @endif
+                        </button>
+                    </form>
 
                     <div class="product-image-wrapper">
                         <a data-fancybox="gallery" href="{{ asset('storage/'.$product->image) }}">
@@ -51,7 +63,6 @@
                         </p>
                     </div>
 
-                    {{-- **THIS IS THE CORRECTED SECTION (LINE 54 IS HERE)** --}}
                     @php
                     $originalPrice = $product->price;
                     $discountPercent = $product->discount_percent ?? 0;
@@ -126,11 +137,14 @@
         background: #0a0a0a;
     }
 
-    .favorite-btn {
+    .favorite-form {
         position: absolute;
         top: 20px;
         left: 20px;
         z-index: 10;
+    }
+
+    .favorite-btn {
         background: rgba(26, 26, 26, 0.9);
         border: 2px solid rgba(255, 215, 90, 0.4);
         border-radius: 50%;
@@ -153,14 +167,6 @@
     .favorite-btn i {
         font-size: 1.5rem;
         transition: color 0.3s ease;
-    }
-
-    .text-danger {
-        color: #ff4757;
-    }
-
-    .text-secondary {
-        color: rgba(255, 215, 90, 0.5);
     }
 
     .product-card {
@@ -492,7 +498,6 @@
             });
         }
 
-        // Intersection Observer for fade-in animations
         const elements = document.querySelectorAll(".fade-up, .fade-in");
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
@@ -505,36 +510,6 @@
             threshold: 0.2
         });
         elements.forEach(el => observer.observe(el));
-    });
-</script>
-<script>
-    document.querySelector('.favorite-btn').addEventListener('click', function() {
-        let button = this;
-        let id = button.dataset.id;
-
-        fetch("/favorite/toggle/" + id, {
-                method: "POST",
-                headers: {
-                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                }
-            })
-            .then(res => res.json())
-            .then(data => {
-
-                let icon = button.querySelector('i');
-
-                if (data.status === 'added') {
-                    icon.classList.remove('text-secondary');
-                    icon.classList.add('text-danger');
-                    button.setAttribute('title', 'Remove from Favorites');
-                    button.setAttribute('aria-label', 'Remove product from favorites');
-                } else {
-                    icon.classList.remove('text-danger');
-                    icon.classList.add('text-secondary');
-                    button.setAttribute('title', 'Add to Favorites');
-                    button.setAttribute('aria-label', 'Add product to favorites');
-                }
-            });
     });
 </script>
 

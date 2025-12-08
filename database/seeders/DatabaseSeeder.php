@@ -35,9 +35,5 @@ class DatabaseSeeder extends Seeder
         Order::factory()
             ->count(20)
             ->create();
-
-        Favorite::factory()
-            ->count(10)
-            ->create();
     }
 }

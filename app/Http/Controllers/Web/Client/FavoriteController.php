@@ -6,58 +6,52 @@ use App\Models\Product;
 use App\Models\Favorite;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class FavoriteController extends Controller
 {
     public function index()
     {
-        $favorites = Favorite::with('product')
-            ->get();
+        // Hemme favoritler
+        $favorites = Favorite::with('product')->get();
 
         return view('client.favorites.index', compact('favorites'));
     }
 
-    public function toggle($product_id)
+    public function toggle(Product $product)
     {
-        $favorite = Favorite::where('product_id', $product_id)
+        // Fake user ID — sebäbi tablisa talap edýär!
+        $customerId = 1;
+
+        $favorite = Favorite::where('customer_id', $customerId)
+            ->where('product_id', $product->id)
             ->first();
 
         if ($favorite) {
             $favorite->delete();
-
-            return redirect()->back()
-                ->with('success', 'Removed from favorites');
+            return back()->with('success', 'Removed');
         }
 
         Favorite::create([
-            'product_id' => $product_id
+            'customer_id' => $customerId,
+            'product_id' => $product->id,
         ]);
 
-        return redirect()->back()
-            ->with('success', 'Added to favorites');
+        return back()->with('success', 'Added');
     }
+
+
 
     public function destroy($id)
     {
-        $favorite = Favorite::where('id', $id)
-            ->first();
+        Favorite::destroy($id);
 
-        if ($favorite) {
-            $favorite->delete();
-            return redirect()->back()
-                ->with('success', 'Removed from favorites');
-        }
-
-        return redirect()->back()
-            ->with('error', 'Favorite not found');
+        return back()->with('success', 'Removed');
     }
 
     public function destroyAll()
     {
         Favorite::query()->delete();
 
-        return redirect()->back()
-            ->with('success', 'All favorites cleared');
+        return back()->with('success', 'All removed');
     }
 }

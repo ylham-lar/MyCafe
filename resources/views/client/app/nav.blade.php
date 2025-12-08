@@ -21,6 +21,11 @@
                         <i class="fas fa-phone-alt me-1"></i>Contacts
                     </a>
                 </li>
+                <li class="nav-item pe-2">
+                    <a class="nav-link px-2 basket-link" href="{{ route('client.favorites.index') }}">
+                        <i class="fas fa-heart me-1"></i>Favorites
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link px-2 basket-link" href="{{ route('client.cart.index') }}">
                         <i class="fas fa-shopping-basket me-1"></i>Basket

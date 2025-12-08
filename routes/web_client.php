@@ -48,6 +48,6 @@ Route::controller(FavoriteController::class)
     ->group(function () {
         Route::get('', 'index')->name('index');
         Route::post('/toggle/{product}', 'toggle')->name('toggle');
-        Route::post('/delete/{id}', 'destroy')->name('destroy');
-        Route::post('/remove-all', 'destroyAll')->name('destroyAll');
+        Route::delete('/delete/{id}', 'destroy')->name('destroy');
+        Route::delete('/remove-all', 'destroyAll')->name('destroyAll');
     });

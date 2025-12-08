@@ -50,6 +50,10 @@
             </div>
             <div class="col-md-6 text-center text-md-end">
                 <div class="social-links">
+                    {{-- TIKTOK düwmesi goşuldy --}}
+                    <a href="#" class="footer-social" aria-label="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
                     <a href="#" class="footer-social" aria-label="Facebook">
                         <i class="fab fa-facebook-f"></i>
                     </a>
@@ -69,6 +73,7 @@
 </footer>
 
 <style>
+    /* CSS kodunyň hemmesi üýtgedilmezden galdy */
     .footer-premium {
         background: linear-gradient(180deg, rgba(17, 17, 17, 0.98), rgba(26, 26, 26, 0.98), rgba(34, 34, 34, 0.98));
         color: #ececec;

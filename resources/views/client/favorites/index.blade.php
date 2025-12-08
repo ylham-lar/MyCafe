@@ -28,7 +28,8 @@
                         <button type="submit" class="delete-btn" title="Remove from Favorites">&times;</button>
                     </form>
 
-                    @if($favorite->product->discount_percent ?? 0 > 0)
+                    {{-- Ensure we check for the product before checking discount_percent --}}
+                    @if(isset($favorite->product->discount_percent) && $favorite->product->discount_percent > 0)
                     <div class="discount-badge">-{{ $favorite->product->discount_percent }}%</div>
                     @endif
 
@@ -73,7 +74,8 @@
                     <form action="{{ route('client.favorites.destroyAll') }}" method="POST" class="w-100">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn-clear w-100" onclick="return confirm('Are you sure you want to remove all favorites?');">
+                        {{-- ALERT REMOVED: The 'onclick' attribute has been deleted as requested. --}}
+                        <button type="submit" class="btn-clear w-100">
                             <i class="fas fa-trash"></i> Clear All Favorites
                         </button>
                     </form>
@@ -430,19 +432,20 @@
         }
     }
 
-    .fade-up:nth-child(1) {
+    /* Animation delays corrected for the grid items */
+    .row.g-4 .fade-up:nth-child(4n + 1) {
         animation-delay: 0.1s;
     }
 
-    .fade-up:nth-child(2) {
+    .row.g-4 .fade-up:nth-child(4n + 2) {
         animation-delay: 0.2s;
     }
 
-    .fade-up:nth-child(3) {
+    .row.g-4 .fade-up:nth-child(4n + 3) {
         animation-delay: 0.3s;
     }
 
-    .fade-up:nth-child(4) {
+    .row.g-4 .fade-up:nth-child(4n + 4) {
         animation-delay: 0.4s;
     }
 </style>
