@@ -1,19 +1,30 @@
 @extends('client.layouts.app')
 
-@section('title')
-{{ $categories->name }}
-@endsection
 
 @section('content')
+
+@php
+$locale = app()->getLocale();
+$nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
+@endphp
+
+@php
+$descField = ($locale === 'en') ? 'description' : 'description_' . $locale;
+@endphp
+@section('title')
+{{ $categories->{$nameField} ?? $categories->name }}
+@endsection
+
 <div class="bg-dark text-light py-5">
     <div class="container py-4">
 
         <div class="text-center mb-5 fade-in">
             <h1 class="fw-bold display-5">
-                <span class="header-gold">{{ $categories->name }}</span> Items
+                <span class="header-gold">{{ $categories->{$nameField} ?? $categories->name }}</span>
+                {{ __('app.items') }}
             </h1>
             <p class="header-subtitle fs-5">
-                Explore the best items from this category.
+                {{ __('app.exploreItems') }}
             </p>
         </div>
 
@@ -23,9 +34,9 @@
                 <a href="{{ route('client.products.show', $product->id) }}" class="text-decoration-none">
                     <div class="card premium-card shadow-lg border-0 h-100">
                         <div class="card-body text-center">
-                            <h5 class="card-title fw-bold">{{ $product->name }}</h5>
+                            <h5 class="card-title fw-bold">{{ $product->{$nameField} ?? $product->name }}</h5>
                             <p class="price-tag mb-1">${{ number_format($product->price, 2) }}</p>
-                            <small class="text-gold-fade">{{ $product->description }}</small>
+                            <small class="text-gold-fade">{{ $product->{$descField} ?? $product->description }}</small>
                         </div>
                     </div>
                 </a>
@@ -41,73 +52,71 @@
         background: linear-gradient(180deg, #1a1a1a, #222, #2a2a2a);
         color: #f8f9fa;
         border-radius: 14px;
-        transition: 0.3s ease;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
-        border: 1px solid rgba(255, 215, 90, 0.1);
+        transition: .3s ease;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, .45);
+        border: 1px solid rgba(255, 215, 90, .1)
     }
 
     .premium-card:hover {
         transform: translateY(-12px);
-        box-shadow:
-            0 20px 40px rgba(255, 215, 90, 0.3),
-            0 0 80px rgba(255, 215, 90, 0.1);
-        border-color: rgba(255, 215, 90, 0.6);
+        box-shadow: 0 20px 40px rgba(255, 215, 90, .3), 0 0 80px rgba(255, 215, 90, .1);
+        border-color: rgba(255, 215, 90, .6)
     }
 
     .premium-card .card-title {
         color: #ffd95a;
-        transition: 0.3s ease;
+        transition: .3s ease
     }
 
     .premium-card:hover .card-title {
         color: #fff7c2;
-        text-shadow: 0 0 12px rgba(255, 215, 90, 1);
+        text-shadow: 0 0 12px rgba(255, 215, 90, 1)
     }
 
     .price-tag {
         color: #ffd95a;
         font-weight: 700;
         font-size: 1.1rem;
-        transition: 0.3s ease, text-shadow 0.3s ease;
+        transition: .3s ease, text-shadow .3s ease
     }
 
     .premium-card:hover .price-tag {
         color: #fff7c2;
-        text-shadow: 0 0 8px rgba(255, 215, 90, 1);
+        text-shadow: 0 0 8px rgba(255, 215, 90, 1)
     }
 
     .text-gold-fade {
-        color: rgba(255, 215, 90, 0.75) !important;
-        transition: color 0.3s ease, text-shadow 0.3s ease;
+        color: rgba(255, 215, 90, .75) !important;
+        transition: color .3s ease, text-shadow .3s ease
     }
 
     .premium-card:hover .text-gold-fade {
         color: #fff7c2;
-        text-shadow: 0 0 6px rgba(255, 215, 90, 0.8);
+        text-shadow: 0 0 6px rgba(255, 215, 90, .8)
     }
 
     .premium-card small {
-        font-size: 0.85rem;
+        font-size: .85rem
     }
 
     .premium-card .card-body {
-        padding: 1.5rem 1rem;
+        padding: 1.5rem 1rem
     }
 
     .header-gold {
         color: #ffd95a;
-        text-shadow: 0 0 12px rgba(255, 215, 90, 0.8);
+        text-shadow: 0 0 12px rgba(255, 215, 90, .8)
     }
 
     .header-subtitle {
-        color: #d7deea;
+        color: #d7deea
     }
 
     .fade-up,
     .fade-in {
         opacity: 0;
         transform: translateY(20px);
-        transition: opacity 0.8s ease, transform 0.8s ease;
+        transition: opacity .8s ease, transform .8s ease
     }
 </style>
 
@@ -122,9 +131,10 @@
                 }
             });
         }, {
-            threshold: 0.2
+            threshold: .2
         });
         elements.forEach(el => observer.observe(el));
     });
 </script>
+
 @endsection

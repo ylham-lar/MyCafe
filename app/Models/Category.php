@@ -16,6 +16,8 @@ class Category extends Model
 
     protected $fillable = [
         'name',
+        'name_ru',
+        'name_tm',
     ];
 
     public function products(): HasMany
@@ -25,6 +27,13 @@ class Category extends Model
 
     public function getName()
     {
+        $locale = app()->getLocale();
+
+        if ($locale == 'tm') {
+            return $this->name_tm ?: $this->name;
+        } else if ($locale == 'ru') {
+            return $this->name_ru ?: $this->name;
+        }
         return $this->name;
     }
 }

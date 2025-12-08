@@ -7,6 +7,9 @@ use App\Http\Controllers\Web\Client\ProductController;
 use App\Http\Controllers\Web\Client\CategoryController;
 use App\Http\Controllers\Web\Client\FavoriteController;
 
+Route::get('locale/{locale}', [HomeController::class, 'locale'])->name('locale')->where('locale', '[a-z]+');
+
+
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/card', 'card')->name('card');

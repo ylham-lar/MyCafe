@@ -20,13 +20,18 @@ class Product extends Model
     protected $fillable = [
         'category_id',
         'name',
-        'price',
-        'code',
+        'name_ru',
+        'name_tm',
         'description',
-        'image',
+        'description_ru',
+        'description_tm',
+        'price',
         'discount_percent',
         'weight',
+        'code',
+        'image',
     ];
+
 
     public function category(): BelongsTo
     {
@@ -35,5 +40,27 @@ class Product extends Model
     public function favorites(): BelongsToMany
     {
         return $this->belongsToMany(Favorite::class, 'favorites');
+    }
+    public function getName()
+    {
+        $locale = app()->getLocale();
+
+        if ($locale == 'tm') {
+            return $this->name_tm ?: $this->name;
+        } else if ($locale == 'ru') {
+            return $this->name_ru ?: $this->name;
+        }
+        return $this->name;
+    }
+    public function getDescription()
+    {
+        $locale = app()->getLocale();
+
+        if ($locale == 'tm') {
+            return $this->description_tm ?: $this->description;
+        } else if ($locale == 'ru') {
+            return $this->description_ru ?: $this->description;
+        }
+        return $this->description;
     }
 }

@@ -15,9 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('cascade');
             $table->string('name');
+            $table->string('name_ru')->nullable();
+            $table->string('name_tm')->nullable();
             $table->unsignedInteger('price')->default(0);
             $table->string('code');
-            $table->text('description');
+            $table->text('description')->nullable();
+            $table->text('description_ru')->nullable();
+            $table->text('description_tm');
             $table->string('image')->nullable();
             $table->integer('discount_percent')->default(0);
             $table->float('weight')->default(0);

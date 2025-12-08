@@ -1,30 +1,44 @@
 @extends('client.layouts.app')
 
 @section('title')
-Home
+{{ __('app.home') }}
 @endsection
 
 @section('content')
+
+@php
+$locale = app()->getLocale();
+$nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
+@endphp
+
 <div class="bg-dark text-light py-5">
     <div class="container py-4">
 
+        {{-- Başlyk --}}
         <div class="text-center mb-5 fade-in">
             <h1 class="fw-bold display-5">
-                <span class="header-gold">Our</span> <span class="header-white">Menu</span>
+                <span class="header-gold">{{ __('app.our') }}</span>
+                <span class="header-white">{{ __('app.menu') }}</span>
             </h1>
             <p class="header-subtitle fs-5">
-                Choose your favorite category and explore our café specialties.
+                {{ __('app.chooseCategorySubtitle') }}
             </p>
         </div>
 
+        {{-- Kategoriýalar --}}
         <div class="row g-4">
             @foreach($categories as $category)
             <div class="col-12 col-sm-6 col-md-3 fade-up">
                 <a href="{{ route('client.categories.products', $category->id) }}" class="text-decoration-none">
                     <div class="card premium-card shadow-lg border-0 h-100">
                         <div class="card-body text-center">
-                            <h5 class="card-title fw-bold">{{ $category->name }}</h5>
-                            <p class="price-tag mb-1">{{ $category->products->count() }} Products</p>
+                            <h5 class="card-title fw-bold">
+                                {{ $category->{$nameField} ?? $category->name }}
+                            </h5>
+                            <p class="price-tag mb-1">
+                                {{ $category->products->count() }} {{ __('app.productsCount') }}
+                            </p>
+
                         </div>
                     </div>
                 </a>
@@ -35,7 +49,9 @@ Home
     </div>
 </div>
 
+{{-- Stil we skriptler üýtgemeýär --}}
 <style>
+    /* ... Siziň berlen stil kody ... */
     .premium-card {
         background: linear-gradient(180deg, #1a1a1a, #222, #2a2a2a);
         color: #f8f9fa;
@@ -47,9 +63,7 @@ Home
 
     .premium-card:hover {
         transform: translateY(-12px);
-        box-shadow:
-            0 20px 40px rgba(255, 215, 90, 0.3),
-            0 0 80px rgba(255, 215, 90, 0.1);
+        box-shadow: 0 20px 40px rgba(255, 215, 90, 0.3), 0 0 80px rgba(255, 215, 90, 0.1);
         border-color: rgba(255, 215, 90, 0.6);
     }
 
@@ -130,4 +144,5 @@ Home
         elements.forEach(el => observer.observe(el));
     });
 </script>
+
 @endsection

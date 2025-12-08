@@ -6,25 +6,27 @@
                     <h5 class="footer-title mb-3">
                         <i class="fas fa-coffee me-2"></i>MyCafe
                     </h5>
-                    <p class="footer-text">Experience the best food and drinks in a cozy, premium café atmosphere.</p>
+                    <p class="footer-text">{{ __('app.experienceText') }}</p>
                 </div>
             </div>
+
             <div class="col-md-4">
                 <div class="footer-section">
-                    <h5 class="footer-title mb-3">Quick Links</h5>
+                    <h5 class="footer-title mb-3">{{ __('app.quickLinks') }}</h5>
                     <div class="d-flex flex-column gap-2">
                         <a href="{{ route('home') }}" class="footer-link">
-                            <i class="fas fa-chevron-right me-2"></i>Home
+                            <i class="fas fa-chevron-right me-2"></i>{{ __('app.home') }}
                         </a>
                         <a href="#contact" class="footer-link">
-                            <i class="fas fa-chevron-right me-2"></i>Contact
+                            <i class="fas fa-chevron-right me-2"></i>{{ __('app.contact') }}
                         </a>
                     </div>
                 </div>
             </div>
+
             <div class="col-md-4">
                 <div class="footer-section">
-                    <h5 class="footer-title mb-3">Contact Info</h5>
+                    <h5 class="footer-title mb-3">{{ __('app.contactInfo') }}</h5>
                     <div class="d-flex flex-column gap-2">
                         <p class="footer-text mb-0">
                             <i class="fas fa-map-marker-alt me-2"></i> 123 Café Street, City
@@ -50,7 +52,6 @@
             </div>
             <div class="col-md-6 text-center text-md-end">
                 <div class="social-links">
-                    {{-- TIKTOK düwmesi goşuldy --}}
                     <a href="#" class="footer-social" aria-label="TikTok">
                         <i class="fab fa-tiktok"></i>
                     </a>
