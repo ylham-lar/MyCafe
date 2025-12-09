@@ -3,6 +3,10 @@
 @section('title', __('app.yourFavorites'))
 
 @section('content')
+@php
+$locale = app()->getLocale();
+$nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
+@endphp
 <div class="bg-dark text-light py-5">
     <div class="container py-4">
 
@@ -25,7 +29,7 @@
                     <form action="{{ route('client.favorites.destroy', $favorite->id) }}" method="POST" class="delete-btn-wrapper">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="delete-btn" title="@lang('app.removeFromFavorites')">&times;</button>
+                        <button type="submit" class="delete-btn" title="@lang('app.removeFromFavorites')"><i class="bi bi-x-circle"></i></button>
                     </form>
 
                     @if(isset($favorite->product->discount_percent) && $favorite->product->discount_percent > 0)
@@ -43,7 +47,7 @@
                     </div>
 
                     <div class="card-content">
-                        <h5 class="product-title text-center">{{ $favorite->product->name ?? __('app.productNotFound') }}</h5>
+                        <h5 class="product-title text-center">{{ $favorite->product->{$nameField} ?? $product->name ?? __('app.productNotFound') }}</h5>
 
                         <div class="price-section mb-3">
                             @php

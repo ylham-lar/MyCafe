@@ -3,6 +3,11 @@
 @section('title', __('app.yourShoppingCart'))
 
 @section('content')
+@php
+$locale = app()->getLocale();
+$nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
+@endphp
+
 <div class="bg-dark text-light py-5">
     <div class="container py-4">
 
@@ -27,7 +32,7 @@
                 <div class="premium-card shadow-lg">
                     <form action="{{ route('client.cart.delete', $product->id) }}" method="POST" class="delete-btn-wrapper">
                         @csrf
-                        <button type="submit" class="delete-btn">@lang('app.remove')</button>
+                        <button type="submit" class="delete-btn"><i class="bi bi-x-circle"></i></button>
                     </form>
 
                     @if($product->discount_percent > 0)
@@ -45,7 +50,7 @@
                     </div>
 
                     <div class="card-content">
-                        <h5 class="product-title">{{ $product->name }}</h5>
+                        <h5 class="product-title">{{ $product->{$nameField} ?? $product->name }}</h5>
                         <div class="price-section mb-3">
                             @if($product->discount_percent > 0)
                             <p class="original-price">${{ number_format($product->price, 2) }}</p>

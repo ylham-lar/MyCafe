@@ -1,7 +1,7 @@
 @extends('client.layouts.app')
 
 @section('title')
-@lang('app.home')
+{{ __('app.home') }}
 @endsection
 
 @section('content')
@@ -12,14 +12,25 @@ $nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
 @endphp
 
 <div class="bg-dark text-light py-5">
-    <div class="container py-4">
-        <div class="text-center h1">
-            Hello World
+    <div class="container">
+        <div class="banner-wrapper text-center">
+            <canvas id="banner" width="1200" height="400"></canvas>
         </div>
     </div>
 </div>
 
 <style>
+    .banner-wrapper {
+        margin: 2rem 0;
+    }
+
+    #banner {
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        max-width: 100%;
+        height: auto;
+    }
+
     .premium-card {
         background: linear-gradient(180deg, #1a1a1a, #222, #2a2a2a);
         color: #f8f9fa;
@@ -57,6 +68,24 @@ $nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
         text-shadow: 0 0 8px rgba(255, 215, 90, 1);
     }
 
+    .text-gold-fade {
+        color: rgba(255, 215, 90, 0.75) !important;
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .premium-card:hover .text-gold-fade {
+        color: #fff7c2;
+        text-shadow: 0 0 6px rgba(255, 215, 90, 0.8);
+    }
+
+    .premium-card small {
+        font-size: 0.85rem;
+    }
+
+    .premium-card .card-body {
+        padding: 1.5rem 1rem;
+    }
+
     .header-gold {
         color: #ffd95a;
         text-shadow: 0 0 12px rgba(255, 215, 90, 0.8);
@@ -80,6 +109,40 @@ $nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById('banner');
+        const ctx = canvas.getContext('2d');
+
+        // Gradient fon
+        const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        gradient.addColorStop(0, '#1a1a1a'); // Dark start
+        gradient.addColorStop(0.5, '#2a2a2a'); // Middle
+        gradient.addColorStop(1, '#111111'); // Dark end
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Uly hat "MyCafe"
+        ctx.shadowColor = 'rgba(255, 217, 90, 0.5)';
+        ctx.shadowBlur = 50;
+        ctx.fillStyle = '#ffd95a';
+        ctx.font = 'bold 120px "Georgia", serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('MyCafe', canvas.width / 2, canvas.height / 2 - 40);
+
+        // Kiçijik subtitle
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = '#f4a261';
+        ctx.font = '32px "Georgia", serif';
+        ctx.fillText('Restaurant & Coffee', canvas.width / 2, canvas.height / 2 + 40);
+
+
+        ctx.strokeStyle = '#ffd95a';
+        ctx.lineWidth = 4;
+        ctx.globalAlpha = 0.25;
+        ctx.shadowBlur = 20;
+        ctx.strokeRect(30, 30, canvas.width - 60, canvas.height - 60);
+
+        // Fade effektleri
         const elements = document.querySelectorAll(".fade-up, .fade-in");
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
