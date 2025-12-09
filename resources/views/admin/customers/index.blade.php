@@ -17,7 +17,7 @@
         <thead class="table-dark text-light">
             <tr>
                 <th style="width:5%;">ID</th>
-                <th style="width:25%;">Name</th>
+                <th style="width:25%;">Address  </th>
                 <th style="width:25%;">Phone Number</th>
                 <th style="width:25%;">Created At</th>
                 <th style="width:20%;">Settings</th>
@@ -28,7 +28,7 @@
             @forelse($objs as $obj)
             <tr class="table-row-hover">
                 <td>{{ $obj->id }}</td>
-                <td>{{ $obj->first_name }} {{ $obj->last_name }}</td>
+                <td>{{ $obj->address }}</td>
                 <td>+{{ $obj->phone_number }}</td>
                 <td>{{ $obj->created_at->format('H:i:s d.m.Y') }}</td>
                 <td>

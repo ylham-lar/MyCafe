@@ -18,7 +18,7 @@
         <thead class="table-dark text-light">
             <tr>
                 <th style="width:5%;">ID</th>
-                <th style="width:25%;">Customer</th>
+                <th style="width:25%;">Customers Address</th>
                 <th style="width:20%;">Price</th>
                 <th style="width:20%;">Status</th>
                 <th style="width:20%;">Created At</th>
@@ -32,7 +32,7 @@
 
                 <td>{{ $obj->id }}</td>
 
-                <td>{{ $obj->customer->first_name }} {{ $obj->customer->last_name }}</td>
+                <td>{{ $obj->customer->address }}</td>
 
                 <td>{{ number_format($obj->price) }} $</td>
 

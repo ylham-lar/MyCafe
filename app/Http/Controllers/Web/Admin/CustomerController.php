@@ -51,15 +51,13 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'first_name'   => 'required|string|max:255',
-            'last_name'    => 'required|string|max:255',
+            'address'   => 'required|string|max:255',
             'phone_number' => 'required|string|max:20',
         ]);
 
         $obj = Customer::findOrFail($id);
 
-        $obj->first_name   = $request->first_name;
-        $obj->last_name    = $request->last_name;
+        $obj->address   = $request->address;
         $obj->phone_number = $request->phone_number;
 
         $obj->save();

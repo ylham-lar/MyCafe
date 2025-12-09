@@ -37,7 +37,7 @@
                         <option value="">Choose customer</option>
                         @foreach($customers as $c)
                         <option value="{{ $c->id }}" {{ old('customer_id') == $c->id ? 'selected' : '' }}>
-                            {{ $c->first_name }} {{ $c->last_name }}
+                            {{ $c->address }} 
                         </option>
                         @endforeach
                     </select>

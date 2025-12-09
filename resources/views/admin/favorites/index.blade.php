@@ -23,7 +23,7 @@
             @forelse($objs as $obj)
             <tr class="table-row-hover">
                 <td>{{ $obj->id }}</td>
-                <td>{{ $obj->customer->first_name }} {{ $obj->customer->last_name }}</td>
+                <td>{{ $obj->customer->address }}</td>
                 <td>{{ $obj->product->category->name ?? '-' }}</td>
                 <td>{{ $obj->product->name ?? '-' }}</td>
                 <td>
