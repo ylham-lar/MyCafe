@@ -6,14 +6,21 @@ use App\Http\Controllers\Web\Client\HomeController;
 use App\Http\Controllers\Web\Client\ProductController;
 use App\Http\Controllers\Web\Client\CategoryController;
 use App\Http\Controllers\Web\Client\FavoriteController;
+use App\Http\Controllers\Web\Client\MenuController;
 
 Route::get('locale/{locale}', [HomeController::class, 'locale'])->name('locale')->where('locale', '[a-z]+');
 
 
-Route::controller(HomeController::class)->group(function () {
-    Route::get('/', 'index')->name('home');
-    Route::get('/card', 'card')->name('card');
-});
+Route::controller(HomeController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('home');
+        Route::get('/card', 'card')->name('card');
+    });
+
+Route::controller(MenuController::class)
+    ->group(function () {
+        Route::get('/menu', 'index')->name('menu');
+    });
 
 
 Route::controller(CategoryController::class)

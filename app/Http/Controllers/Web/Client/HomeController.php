@@ -10,15 +10,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $categories = Category::orderBy('id', 'desc')
-            ->with('products')
-            ->get();
-        $products = Product::orderBy('id', 'desc')->get();
 
-        return view('client.home.index', [
-            'categories' => $categories,
-            'products' => $products
-        ]);
+        return view('client.home.index');
     }
     public function locale($locale)
     {

@@ -1,7 +1,7 @@
 @extends('client.layouts.app')
 
 @section('title')
-@lang('app.home')
+{{ __('app.home') }}
 @endsection
 
 @section('content')
@@ -13,11 +13,40 @@ $nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
 
 <div class="bg-dark text-light py-5">
     <div class="container py-4">
-        <div class="text-center h1">
-            Hello World
+
+        <div class="text-center mb-5 fade-in">
+            <h1 class="fw-bold display-5">
+                <span class="header-gold">{{ __('app.our') }}</span>
+                <span class="header-white">{{ __('app.menu') }}</span>
+            </h1>
+            <p class="header-subtitle fs-5">
+                {{ __('app.chooseCategorySubtitle') }}
+            </p>
         </div>
+
+        <div class="row g-4">
+            @foreach($categories as $category)
+            <div class="col-12 col-sm-6 col-md-3 fade-up">
+                <a href="{{ route('client.categories.products', $category->id) }}" class="text-decoration-none">
+                    <div class="card premium-card shadow-lg border-0 h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title fw-bold">
+                                {{ $category->{$nameField} ?? $category->name }}
+                            </h5>
+                            <p class="price-tag mb-1">
+                                {{ $category->products->count() }} {{ __('app.productsCount') }}
+                            </p>
+
+                        </div>
+                    </div>
+                </a>
+            </div>
+            @endforeach
+        </div>
+
     </div>
 </div>
+
 
 <style>
     .premium-card {
@@ -55,6 +84,24 @@ $nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
     .premium-card:hover .price-tag {
         color: #fff7c2;
         text-shadow: 0 0 8px rgba(255, 215, 90, 1);
+    }
+
+    .text-gold-fade {
+        color: rgba(255, 215, 90, 0.75) !important;
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .premium-card:hover .text-gold-fade {
+        color: #fff7c2;
+        text-shadow: 0 0 6px rgba(255, 215, 90, 0.8);
+    }
+
+    .premium-card small {
+        font-size: 0.85rem;
+    }
+
+    .premium-card .card-body {
+        padding: 1.5rem 1rem;
     }
 
     .header-gold {

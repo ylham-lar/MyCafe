@@ -1,5 +1,6 @@
 @php
 $locale = app()->getLocale();
+$nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
 $langEmoji = ['tm' => '🇹🇲', 'ru' => '🇷🇺', 'en' => '🇬🇧'];
 @endphp
 
@@ -7,25 +8,26 @@ $langEmoji = ['tm' => '🇹🇲', 'ru' => '🇷🇺', 'en' => '🇬🇧'];
     <div class="container">
         <a class="navbar-brand d-flex align-items-center gap-2" href="{{ route('home') }}">
             <i class="fas fa-coffee"></i>
-            <span>@lang('app.appName')</span>
+            <span>{{ __('app.appName') }}</span>
         </a>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto align-items-lg-center">
-                <li class="nav-item"><a class="nav-link px-2" href="#contact"><i class="fas fa-phone-alt me-1"></i>@lang('app.contact')</a></li>
-                <li class="nav-item pe-2"><a class="nav-link px-2 basket-link" href="{{ route('client.favorites.index') }}"><i class="fas fa-heart me-1"></i>@lang('app.favorites')</a></li>
-                <li class="nav-item"><a class="nav-link px-2 basket-link" href="{{ route('client.cart.index') }}"><i class="fas fa-shopping-basket me-1"></i>@lang('app.basket')</a></li>
+                <li class="nav-item"><a class="nav-link px-2" href="{{ route('menu') }}"><i class="fas fa-phone-alt me-1"></i>{{ __('app.menu') }}</a></li>
+                <li class="nav-item pe-1"><a class="nav-link px-2" href="#contact"><i class="fas fa-phone-alt me-1"></i>{{ __('app.contact') }}</a></li>
+                <li class="nav-item pe-2"><a class="nav-link px-2 basket-link" href="{{ route('client.favorites.index') }}"><i class="fas fa-heart me-1"></i>{{ __('app.favorites') }}</a></li>
+                <li class="nav-item"><a class="nav-link px-2 basket-link" href="{{ route('client.cart.index') }}"><i class="fas fa-shopping-basket me-1"></i>{{ __('app.basket') }}</a></li>
                 <li class="nav-item d-flex align-items-center ms-lg-2 mt-2 mt-lg-0">
                     <div class="dropdown language-switcher">
                         <button class="btn btn-outline-light dropdown-toggle text-uppercase fw-bold shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ strtoupper($locale) }} {{ $langEmoji[$locale] ?? '' }}
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end bg-dark border-secondary shadow-lg">
-                            <li><a class="dropdown-item text-light" href="{{ route('locale', 'tm') }}">TM {{ $langEmoji['tm'] }}</a></li>
-                            <li><a class="dropdown-item text-light" href="{{ route('locale', 'ru') }}">RU {{ $langEmoji['ru'] }}</a></li>
-                            <li><a class="dropdown-item text-light" href="{{ route('locale', 'en') }}">EN {{ $langEmoji['en'] }}</a></li>
+                            <li><a class="dropdown-item text-light" href="{{ route('locale', 'tm') }}">TM {{ $langEmoji['tm'] }} </a></li>
+                            <li><a class="dropdown-item text-light" href="{{ route('locale', 'ru') }}">RU {{ $langEmoji['ru'] }} </a></li>
+                            <li><a class="dropdown-item text-light" href="{{ route('locale', 'en') }}">EN {{ $langEmoji['en'] }} </a></li>
                         </ul>
                     </div>
                 </li>
@@ -33,7 +35,6 @@ $langEmoji = ['tm' => '🇹🇲', 'ru' => '🇷🇺', 'en' => '🇬🇧'];
         </div>
     </div>
 </nav>
-
 
 <style>
     .premium-navbar {

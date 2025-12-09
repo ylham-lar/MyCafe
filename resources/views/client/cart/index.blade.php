@@ -106,7 +106,7 @@
             </div>
             <h3 class="empty-title">@lang('app.emptyCartTitle')</h3>
             <p class="empty-text">@lang('app.emptyCartText')</p>
-            <a href="{{ route('home') }}" class="btn-start-shopping">
+            <a href="{{ route('menu') }}" class="btn-start-shopping">
                 <i class="fas fa-store"></i> @lang('app.startShopping')
             </a>
         </div>
