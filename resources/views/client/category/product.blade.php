@@ -1,16 +1,13 @@
 @extends('client.layouts.app')
 
-
 @section('content')
 
 @php
 $locale = app()->getLocale();
 $nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
-@endphp
-
-@php
 $descField = ($locale === 'en') ? 'description' : 'description_' . $locale;
 @endphp
+
 @section('title')
 {{ $categories->{$nameField} ?? $categories->name }}
 @endsection
@@ -21,10 +18,10 @@ $descField = ($locale === 'en') ? 'description' : 'description_' . $locale;
         <div class="text-center mb-5 fade-in">
             <h1 class="fw-bold display-5">
                 <span class="header-gold">{{ $categories->{$nameField} ?? $categories->name }}</span>
-                {{ __('app.items') }}
+                @lang('app.items')
             </h1>
             <p class="header-subtitle fs-5">
-                {{ __('app.exploreItems') }}
+                @lang('app.exploreItems')
             </p>
         </div>
 

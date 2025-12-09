@@ -3,18 +3,15 @@
 @php
 $locale = app()->getLocale();
 $nameField = $locale === 'en' ? 'name' : 'name_'.$locale;
+$descField = $locale === 'en' ? 'description' : 'description_'.$locale;
 @endphp
 
 @section('title', $product->{$nameField} ?? $product->name)
-
 
 @section('content')
 @php
 $favorites = session('favorites', []);
 $isFavorite = in_array($product->id, $favorites);
-
-$nameField = $locale === 'en' ? 'name' : 'name_'.$locale;
-$descField = $locale === 'en' ? 'description' : 'description_'.$locale;
 @endphp
 
 <div class="bg-dark text-light py-5">
@@ -40,7 +37,7 @@ $descField = $locale === 'en' ? 'description' : 'description_'.$locale;
                         <button
                             type="submit"
                             class="favorite-btn"
-                            title="@if($isFavorite) {{ __('app.removeFavorite') }} @else {{ __('app.addFavorite') }} @endif">
+                            title="{{ $isFavorite ? __('app.removeFavorite') : __('app.addFavorite') }}">
                             @if($isFavorite)
                             <i class="fas fa-heart" style="color: #ff4757;"></i>
                             @else
@@ -130,14 +127,15 @@ $descField = $locale === 'en' ? 'description' : 'description_'.$locale;
                             </button>
                         </form>
                     </div>
+
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
 <style>
+    /* Styl kodlary şol bir görnüşde, öňki bilen meňzeýär */
     body {
         background: #0a0a0a
     }
@@ -486,31 +484,25 @@ $descField = $locale === 'en' ? 'description' : 'description_'.$locale;
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const minusBtn = document.querySelector(".minus-btn");
-        const plusBtn = document.querySelector(".plus-btn");
-        const quantityInput = document.querySelector(".qty-input");
-        if (minusBtn && plusBtn && quantityInput) {
-            minusBtn.addEventListener("click", () => {
-                let value = parseInt(quantityInput.value);
-                if (value > 1) quantityInput.value = value - 1
+        const e = document.querySelector(".minus-btn"),
+            t = document.querySelector(".plus-btn"),
+            n = document.querySelector(".qty-input");
+        e && t && n && (e.addEventListener("click", () => {
+            let e = parseInt(n.value);
+            e > 1 && (n.value = e - 1)
+        }), t.addEventListener("click", () => {
+            let e = parseInt(n.value);
+            n.value = e + 1
+        }));
+        const a = document.querySelectorAll(".fade-up,.fade-in"),
+            s = new IntersectionObserver(e => {
+                e.forEach(e => {
+                    e.isIntersecting && (e.target.style.opacity = "1", e.target.style.transform = "translateY(0)")
+                })
+            }, {
+                threshold: .2
             });
-            plusBtn.addEventListener("click", () => {
-                let value = parseInt(quantityInput.value);
-                quantityInput.value = value + 1
-            })
-        }
-        const elements = document.querySelectorAll(".fade-up,.fade-in");
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = "1";
-                    entry.target.style.transform = "translateY(0)"
-                }
-            })
-        }, {
-            threshold: .2
-        });
-        elements.forEach(el => observer.observe(el))
+        a.forEach(e => s.observe(e))
     });
 </script>
 

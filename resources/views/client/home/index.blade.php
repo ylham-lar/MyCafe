@@ -1,7 +1,7 @@
 @extends('client.layouts.app')
 
 @section('title')
-{{ __('app.home') }}
+@lang('app.home')
 @endsection
 
 @section('content')
@@ -17,11 +17,11 @@ $nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
         {{-- Başlyk --}}
         <div class="text-center mb-5 fade-in">
             <h1 class="fw-bold display-5">
-                <span class="header-gold">{{ __('app.our') }}</span>
-                <span class="header-white">{{ __('app.menu') }}</span>
+                <span class="header-gold">@lang('app.our')</span>
+                <span class="header-white">@lang('app.menu')</span>
             </h1>
             <p class="header-subtitle fs-5">
-                {{ __('app.chooseCategorySubtitle') }}
+                @lang('app.chooseCategorySubtitle')
             </p>
         </div>
 
@@ -36,9 +36,8 @@ $nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
                                 {{ $category->{$nameField} ?? $category->name }}
                             </h5>
                             <p class="price-tag mb-1">
-                                {{ $category->products->count() }} {{ __('app.productsCount') }}
+                                {{ $category->products->count() }} @lang('app.productsCount')
                             </p>
-
                         </div>
                     </div>
                 </a>
@@ -49,9 +48,7 @@ $nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
     </div>
 </div>
 
-{{-- Stil we skriptler üýtgemeýär --}}
 <style>
-    /* ... Siziň berlen stil kody ... */
     .premium-card {
         background: linear-gradient(180deg, #1a1a1a, #222, #2a2a2a);
         color: #f8f9fa;
@@ -87,24 +84,6 @@ $nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
     .premium-card:hover .price-tag {
         color: #fff7c2;
         text-shadow: 0 0 8px rgba(255, 215, 90, 1);
-    }
-
-    .text-gold-fade {
-        color: rgba(255, 215, 90, 0.75) !important;
-        transition: color 0.3s ease, text-shadow 0.3s ease;
-    }
-
-    .premium-card:hover .text-gold-fade {
-        color: #fff7c2;
-        text-shadow: 0 0 6px rgba(255, 215, 90, 0.8);
-    }
-
-    .premium-card small {
-        font-size: 0.85rem;
-    }
-
-    .premium-card .card-body {
-        padding: 1.5rem 1rem;
     }
 
     .header-gold {

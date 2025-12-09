@@ -4,21 +4,21 @@
             <div class="col-md-4">
                 <div class="footer-section">
                     <h5 class="footer-title mb-3">
-                        <i class="fas fa-coffee me-2"></i>MyCafe
+                        <i class="fas fa-coffee me-2"></i>@lang('app.appName')
                     </h5>
-                    <p class="footer-text">{{ __('app.experienceText') }}</p>
+                    <p class="footer-text">@lang('app.experienceText')</p>
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="footer-section">
-                    <h5 class="footer-title mb-3">{{ __('app.quickLinks') }}</h5>
+                    <h5 class="footer-title mb-3">@lang('app.quickLinks')</h5>
                     <div class="d-flex flex-column gap-2">
                         <a href="{{ route('home') }}" class="footer-link">
-                            <i class="fas fa-chevron-right me-2"></i>{{ __('app.home') }}
+                            <i class="fas fa-chevron-right me-2"></i>@lang('app.home')
                         </a>
                         <a href="#contact" class="footer-link">
-                            <i class="fas fa-chevron-right me-2"></i>{{ __('app.contact') }}
+                            <i class="fas fa-chevron-right me-2"></i>@lang('app.contact')
                         </a>
                     </div>
                 </div>
@@ -26,13 +26,13 @@
 
             <div class="col-md-4">
                 <div class="footer-section">
-                    <h5 class="footer-title mb-3">{{ __('app.contactInfo') }}</h5>
+                    <h5 class="footer-title mb-3">@lang('app.contactInfo')</h5>
                     <div class="d-flex flex-column gap-2">
                         <p class="footer-text mb-0">
                             <i class="fas fa-map-marker-alt me-2"></i> 123 Café Street, City
                         </p>
                         <p class="footer-text mb-0">
-                            <i class="fas fa-envelope me-2"></i> info@mycafe.com
+                            <i class="fas fa-envelope me-2"></i>info@mycafe.com
                         </p>
                         <p class="footer-text mb-0">
                             <i class="fas fa-phone me-2"></i> +123 456 7890
@@ -47,7 +47,7 @@
         <div class="row align-items-center">
             <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                 <p class="footer-copy mb-0">
-                    <i class="fas fa-copyright me-1"></i> 2025 MyCafe. All Rights Reserved.
+                    <i class="fas fa-copyright me-1"></i> 2025 @lang('app.appName'). All Rights Reserved.
                 </p>
             </div>
             <div class="col-md-6 text-center text-md-end">
@@ -72,6 +72,7 @@
         </div>
     </div>
 </footer>
+
 
 <style>
     /* CSS kodunyň hemmesi üýtgedilmezden galdy */

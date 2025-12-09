@@ -1,6 +1,6 @@
 @extends('client.layouts.app')
 
-@section('title', 'Your Favorites')
+@section('title', __('app.yourFavorites'))
 
 @section('content')
 <div class="bg-dark text-light py-5">
@@ -8,10 +8,10 @@
 
         <div class="text-center mb-5 fade-in">
             <h1 class="fw-bold display-4">
-                <span class="header-gold">My Favorite</span> Products
+                <span class="header-gold">@lang('app.myFavorite')</span> @lang('app.products')
             </h1>
             <p class="header-subtitle fs-5">
-                Items you've saved for later
+                @lang('app.itemsSavedForLater')
             </p>
         </div>
 
@@ -25,17 +25,16 @@
                     <form action="{{ route('client.favorites.destroy', $favorite->id) }}" method="POST" class="delete-btn-wrapper">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="delete-btn" title="Remove from Favorites">&times;</button>
+                        <button type="submit" class="delete-btn" title="@lang('app.removeFromFavorites')">&times;</button>
                     </form>
 
-                    {{-- Ensure we check for the product before checking discount_percent --}}
                     @if(isset($favorite->product->discount_percent) && $favorite->product->discount_percent > 0)
                     <div class="discount-badge">-{{ $favorite->product->discount_percent }}%</div>
                     @endif
 
                     <div class="card-image-wrapper">
                         @if($favorite->product->image ?? false)
-                        <img src="{{ asset('storage/'.$favorite->product->image) }}" class="card-image" alt="{{ $favorite->product->name ?? 'Product' }}">
+                        <img src="{{ asset('storage/'.$favorite->product->image) }}" class="card-image" alt="{{ $favorite->product->name ?? __('app.product') }}">
                         @else
                         <div class="card-image-placeholder">
                             <i class="fas fa-heart"></i>
@@ -44,7 +43,7 @@
                     </div>
 
                     <div class="card-content">
-                        <h5 class="product-title text-center">{{ $favorite->product->name ?? 'Product Not Found' }}</h5>
+                        <h5 class="product-title text-center">{{ $favorite->product->name ?? __('app.productNotFound') }}</h5>
 
                         <div class="price-section mb-3">
                             @php
@@ -69,14 +68,13 @@
 
         <div class="cart-summary mt-5 fade-in">
             <div class="summary-box p-4" style="max-width: 400px;">
-                <h3 class="summary-title" style="font-size: 1.5rem;">Favorite Actions</h3>
+                <h3 class="summary-title">@lang('app.favoriteActions')</h3>
                 <div class="summary-actions justify-content-center">
                     <form action="{{ route('client.favorites.destroyAll') }}" method="POST" class="w-100">
                         @csrf
                         @method('DELETE')
-                        {{-- ALERT REMOVED: The 'onclick' attribute has been deleted as requested. --}}
                         <button type="submit" class="btn-clear w-100">
-                            <i class="fas fa-trash"></i> Clear All Favorites
+                            <i class="fas fa-trash"></i> @lang('app.clearAllFavorites')
                         </button>
                     </form>
                 </div>
@@ -88,16 +86,20 @@
             <div class="empty-icon">
                 <i class="fas fa-heart"></i>
             </div>
-            <h3 class="empty-title">Your favorites list is empty</h3>
-            <p class="empty-text">Looks like you haven't saved any items yet.</p>
+            <h3 class="empty-title">@lang('app.emptyFavorites')</h3>
+            <p class="empty-text">@lang('app.noFavoritesYet')</p>
             <a href="{{ route('home') }}" class="btn-start-shopping">
-                <i class="fas fa-store"></i> Start Shopping
+                <i class="fas fa-store"></i> @lang('app.startShopping')
             </a>
         </div>
         @endif
 
     </div>
 </div>
+
+{{-- CSS we JS şablonyny öňki ýaly goýsaňyz bolýar --}}
+
+
 
 <style>
     body {

@@ -1,7 +1,20 @@
 <?php
 return [
+    'yourFavorites' => 'Ваши Избранные',
+    'myFavorite' => 'Мои Избранные',
+    'products' => 'Товары',
+    'itemsSavedForLater' => 'Товары, сохраненные для позже',
+    'removeFromFavorites' => 'Удалить из Избранного',
+    'product' => 'Товар',
+    'productNotFound' => 'Товар не найден',
+    'favoriteActions' => 'Действия с Избранным',
+    'clearAllFavorites' => 'Очистить Все Избранное',
+    'emptyFavorites' => 'Ваш список избранного пуст',
+    'noFavoritesYet' => 'Похоже, вы еще не сохранили товары.',
+    'startShopping' => 'Начать покупки',
     'yourShoppingCart' => 'Ваша корзина',
     'reviewItems' => 'Просмотрите ваши товары и перейдите к оплате',
+    'remove' => 'Удалить',
     'total' => 'Итого',
     'cartSummary' => 'Сводка корзины',
     'totalAmount' => 'Общая сумма',
@@ -9,8 +22,6 @@ return [
     'proceedCheckout' => 'Перейти к оплате',
     'emptyCartTitle' => 'Ваша корзина пуста',
     'emptyCartText' => 'Похоже, вы еще ничего не добавили в корзину',
-    'startShopping' => 'Начать покупки',
-    'remove' => 'Удалить',
     'quantity' => 'Количество',
     'price' => 'Цена',
     'originalPrice' => 'Оригинальная цена',
@@ -25,7 +36,6 @@ return [
     'youSave' => 'Вы экономите',
     'description' => 'Описание',
     'addToCart' => 'В корзину',
-    'removeFromFavorites' => 'Удалить из избранного',
     'addToFavorites' => 'Добавить в избранное',
     'uncategorized' => 'Без категории',
 
@@ -53,8 +63,6 @@ return [
     'new' => 'Новый',
     'search' => 'Поиск',
 
-    'product' => 'Товар',
-    'products' => 'Товары',
     'favorite' => 'Избранное',
     'baskets' => 'Корзины',
     'user' => 'Пользователь',
@@ -97,6 +105,5 @@ return [
     'updatedSuccessfully' => ':name успешно обновлено',
     'deletedSuccessfully' => ':name успешно удалено',
 
-    'productNotFound' => 'Искомый товар не найден',
     'clearCategory' => 'Очистить категории',
 ];

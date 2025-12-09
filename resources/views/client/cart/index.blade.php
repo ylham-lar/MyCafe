@@ -1,6 +1,6 @@
 @extends('client.layouts.app')
 
-@section('title', __('cart.yourShoppingCart'))
+@section('title', __('app.yourShoppingCart'))
 
 @section('content')
 <div class="bg-dark text-light py-5">
@@ -8,9 +8,9 @@
 
         <div class="text-center mb-5 fade-in">
             <h1 class="fw-bold display-4">
-                <span class="header-gold">{{ __('cart.yourShoppingCart') }}</span>
+                <span class="header-gold">@lang('app.yourShoppingCart')</span>
             </h1>
-            <p class="header-subtitle fs-5">{{ __('cart.reviewItems') }}</p>
+            <p class="header-subtitle fs-5">@lang('app.reviewItems')</p>
         </div>
 
         @if($products->count() > 0)
@@ -27,7 +27,7 @@
                 <div class="premium-card shadow-lg">
                     <form action="{{ route('client.cart.delete', $product->id) }}" method="POST" class="delete-btn-wrapper">
                         @csrf
-                        <button type="submit" class="delete-btn">{{ __('cart.remove') }}</button>
+                        <button type="submit" class="delete-btn">@lang('app.remove')</button>
                     </form>
 
                     @if($product->discount_percent > 0)
@@ -69,7 +69,7 @@
                         </div>
 
                         <div class="line-total-wrapper">
-                            <span class="total-label">{{ __('cart.total') }}:</span>
+                            <span class="total-label">@lang('app.total'):</span>
                             <span class="line-total">${{ number_format($lineTotal, 2) }}</span>
                         </div>
                     </div>
@@ -80,20 +80,20 @@
 
         <div class="cart-summary mt-5 fade-in">
             <div class="summary-box">
-                <h3 class="summary-title">{{ __('cart.cartSummary') }}</h3>
+                <h3 class="summary-title">@lang('app.cartSummary')</h3>
                 <div class="summary-row">
-                    <span>{{ __('cart.totalAmount') }}:</span>
+                    <span>@lang('app.totalAmount'):</span>
                     <span class="summary-total">${{ number_format($total, 2) }}</span>
                 </div>
                 <div class="summary-actions">
                     <form action="{{ route('client.cart.clear') }}" method="POST" class="d-inline">
                         @csrf
                         <button type="submit" class="btn-clear">
-                            <i class="fas fa-trash"></i> {{ __('cart.clearCart') }}
+                            <i class="fas fa-trash"></i> @lang('app.clearCart')
                         </button>
                     </form>
                     <a href="" class="btn-checkout">
-                        {{ __('cart.proceedCheckout') }} <i class="fas fa-arrow-right"></i>
+                        @lang('app.proceedCheckout') <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
@@ -104,10 +104,10 @@
             <div class="empty-icon">
                 <i class="fas fa-shopping-cart"></i>
             </div>
-            <h3 class="empty-title">{{ __('cart.emptyCartTitle') }}</h3>
-            <p class="empty-text">{{ __('cart.emptyCartText') }}</p>
+            <h3 class="empty-title">@lang('app.emptyCartTitle')</h3>
+            <p class="empty-text">@lang('app.emptyCartText')</p>
             <a href="{{ route('home') }}" class="btn-start-shopping">
-                <i class="fas fa-store"></i> {{ __('cart.startShopping') }}
+                <i class="fas fa-store"></i> @lang('app.startShopping')
             </a>
         </div>
         @endif
