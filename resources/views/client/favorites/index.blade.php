@@ -101,10 +101,6 @@ $nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
     </div>
 </div>
 
-{{-- CSS we JS şablonyny öňki ýaly goýsaňyz bolýar --}}
-
-
-
 <style>
     body {
         background: #0a0a0a;
@@ -266,7 +262,6 @@ $nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
     .price-section {
         text-align: center;
         margin-top: auto;
-        /* Bahany aşakda goýmak üçin */
         padding-top: 1rem;
         border-top: 1px solid rgba(255, 215, 90, 0.2);
     }
@@ -438,7 +433,6 @@ $nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
         }
     }
 
-    /* Animation delays corrected for the grid items */
     .row.g-4 .fade-up:nth-child(4n + 1) {
         animation-delay: 0.1s;
     }

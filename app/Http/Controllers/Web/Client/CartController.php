@@ -21,7 +21,9 @@ class CartController extends Controller
             });
         }
 
-        return view('client.cart.index', compact('products'));
+        return view('client.cart.index')->with([
+            'products' => $products,
+        ]);
     }
 
     public function add(Request $request, Product $product)

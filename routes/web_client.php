@@ -8,38 +8,34 @@ use App\Http\Controllers\Web\Client\CategoryController;
 use App\Http\Controllers\Web\Client\FavoriteController;
 use App\Http\Controllers\Web\Client\MenuController;
 
-Route::get('locale/{locale}', [HomeController::class, 'locale'])->name('locale')->where('locale', '[a-z]+');
 
 
-Route::controller(HomeController::class)
-    ->group(function () {
-        Route::get('/', 'index')->name('home');
-        Route::get('/card', 'card')->name('card');
-    });
+Route::get('locale/{locale}', [HomeController::class, 'locale'])
+    ->name('locale')
+    ->where('locale', '[a-z]+');
 
-Route::controller(MenuController::class)
-    ->group(function () {
-        Route::get('/menu', 'index')->name('menu');
-    });
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'index')->name('home');
+    Route::get('/card', 'card')->name('card');
+});
 
+Route::get('/menu', [MenuController::class, 'index'])->name('menu');
 
-Route::controller(CategoryController::class)
-    ->prefix('categories')
+Route::prefix('categories')
     ->name('client.categories.')
+    ->controller(CategoryController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/{id}', 'products')->name('products');
+        Route::get('/{category}', 'products')->name('products');
     });
 
-
-Route::controller(ProductController::class)
-    ->prefix('products')
+Route::prefix('products')
     ->name('client.products.')
+    ->controller(ProductController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/{id}', 'show')->name('show');
+        Route::get('/{product}', 'show')->name('show');
     });
-
 
 Route::prefix('cart')
     ->name('client.cart.')
@@ -47,17 +43,16 @@ Route::prefix('cart')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/add/{product}', 'add')->name('add');
-        Route::post('/delete/{product}', 'remove')->name('delete');
-        Route::post('/clear', 'clearCart')->name('clear');
+        Route::delete('/delete/{product}', 'remove')->name('delete');
+        Route::delete('/clear', 'clearCart')->name('clear');
     });
 
-
-Route::controller(FavoriteController::class)
-    ->prefix('favorites')
+Route::prefix('favorites')
     ->name('client.favorites.')
+    ->controller(FavoriteController::class)
     ->group(function () {
         Route::get('', 'index')->name('index');
         Route::post('/toggle/{product}', 'toggle')->name('toggle');
-        Route::delete('/delete/{id}', 'destroy')->name('destroy');
+        Route::delete('/{favorite}', 'destroy')->name('destroy');
         Route::delete('/remove-all', 'destroyAll')->name('destroyAll');
     });

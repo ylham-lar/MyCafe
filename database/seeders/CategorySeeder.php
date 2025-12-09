@@ -7,14 +7,11 @@ use App\Models\Category;
 
 class CategorySeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $categories = [
             [
-                'en' => 'Fast Foods',//1
+                'en' => 'Fast Foods',
                 'ru' => 'Фастфуд',
                 'tm' => 'Çalt iýmitler',
             ],
@@ -34,7 +31,7 @@ class CategorySeeder extends Seeder
                 'tm' => 'Salatlar',
             ],
             [
-                'en' => 'Pizzas',//1
+                'en' => 'Pizzas',
                 'ru' => 'Пиццы',
                 'tm' => 'Pizzalar',
             ],
@@ -59,7 +56,7 @@ class CategorySeeder extends Seeder
                 'tm' => 'Gryllar',
             ],
             [
-                'en' => 'Burgers',//1
+                'en' => 'Burgers',
                 'ru' => 'Бургеры',
                 'tm' => 'Burgerler',
             ],

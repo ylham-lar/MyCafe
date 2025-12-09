@@ -112,15 +112,13 @@ $nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
         const canvas = document.getElementById('banner');
         const ctx = canvas.getContext('2d');
 
-        // Gradient fon
         const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-        gradient.addColorStop(0, '#1a1a1a'); // Dark start
-        gradient.addColorStop(0.5, '#2a2a2a'); // Middle
-        gradient.addColorStop(1, '#111111'); // Dark end
+        gradient.addColorStop(0, '#1a1a1a');
+        gradient.addColorStop(0.5, '#2a2a2a');
+        gradient.addColorStop(1, '#111111');
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // Uly hat "MyCafe"
         ctx.shadowColor = 'rgba(255, 217, 90, 0.5)';
         ctx.shadowBlur = 50;
         ctx.fillStyle = '#ffd95a';
@@ -129,7 +127,6 @@ $nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
         ctx.textBaseline = 'middle';
         ctx.fillText('MyCafe', canvas.width / 2, canvas.height / 2 - 40);
 
-        // Kiçijik subtitle
         ctx.shadowBlur = 0;
         ctx.fillStyle = '#f4a261';
         ctx.font = '32px "Georgia", serif';
@@ -142,7 +139,6 @@ $nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
         ctx.shadowBlur = 20;
         ctx.strokeRect(30, 30, canvas.width - 60, canvas.height - 60);
 
-        // Fade effektleri
         const elements = document.querySelectorAll(".fade-up, .fade-in");
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {

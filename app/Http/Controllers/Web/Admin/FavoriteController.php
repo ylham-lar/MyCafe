@@ -14,7 +14,9 @@ class FavoriteController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
-        return view('admin.favorites.index', compact('objs'));
+        return view('admin.favorites.index')->with([
+            'objs' => $objs,
+        ]);
     }
 
     public function destroy($id)

@@ -11,15 +11,15 @@ class FavoriteController extends Controller
 {
     public function index()
     {
-        // Hemme favoritler
         $favorites = Favorite::with('product')->get();
 
-        return view('client.favorites.index', compact('favorites'));
+        return view('client.favorites.index')->with([
+            'favorites' => $favorites,
+        ]);
     }
 
     public function toggle(Product $product)
-    {
-        // Fake user ID — sebäbi tablisa talap edýär!
+    {-
         $customerId = 1;
 
         $favorite = Favorite::where('customer_id', $customerId)

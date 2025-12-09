@@ -135,7 +135,6 @@ $isFavorite = in_array($product->id, $favorites);
 </div>
 
 <style>
-    /* Styl kodlary şol bir görnüşde, öňki bilen meňzeýär */
     body {
         background: #0a0a0a
     }
