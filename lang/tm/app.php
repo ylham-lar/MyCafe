@@ -1,5 +1,16 @@
 <?php
 return [
+    'enterCustomerInfo' => 'Müşderi Maglumatlary',
+    'deliveryInformation' => 'Eltip Berme Maglumatlary',
+    'enterDeliveryDetails' => 'Sargyt üçin maglumatyňyzy giriziň',
+    'pleaseFix' => 'Ýalňyşlyklar bar',
+    'address' => 'Salgy',
+    'enterAddress' => 'Salgyňyzy giriziň',
+    'phoneNumber' => 'Telefon Belgisi',
+    'enterPhone' => 'Telefon belgiňizi giriziň',
+    'backToCart' => 'Sebede Dolan',
+    'continue' => 'Dowam Et',
+    'secureCheckout' => 'Howpsuz töleg ulgamy',
     'yourFavorites' => 'Siziň Halanan Harytlaryňyz',
     'myFavorite' => 'Meniň Halanan',
     'products' => 'Harytlar',

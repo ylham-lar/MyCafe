@@ -1,5 +1,16 @@
 <?php
 return [
+    'enterCustomerInfo' => 'Информация о Клиенте',
+    'deliveryInformation' => 'Информация о Доставке',
+    'enterDeliveryDetails' => 'Введите информацию для заказа',
+    'pleaseFix' => 'Пожалуйста, исправьте следующие ошибки',
+    'address' => 'Адрес',
+    'enterAddress' => 'Введите ваш адрес',
+    'phoneNumber' => 'Номер Телефона',
+    'enterPhone' => 'Введите номер телефона',
+    'backToCart' => 'Вернуться в Корзину',
+    'continue' => 'Продолжить',
+    'secureCheckout' => 'Безопасная система оплаты',
     'yourFavorites' => 'Ваши Избранные',
     'myFavorite' => 'Мои Избранные',
     'products' => 'Товары',

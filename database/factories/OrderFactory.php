@@ -2,26 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\Order;
-use App\Models\Product;
 use App\Models\Customer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OrderFactory extends Factory
 {
-    protected $model = Order::class;
-
-    public function definition(): array
+    public function definition()
     {
-        $productIds = Product::inRandomOrder()
-            ->limit($this->faker->numberBetween(1, 5))
-            ->pluck('id')
-            ->toArray();
         return [
-            'customer_id' => Customer::inRandomOrder()->value('id') ?? 1,
-            'products'    => $productIds,
-            'price'       => $this->faker->numberBetween(50, 500),
-            'status'      => $this->faker->randomElement(['pending', 'paid', 'canceled']),
+            'customer_id'    => Customer::inRandomOrder()->value('id') ?? 1,
+            'products'       => json_encode([1, 2, 3]), 
+            'price'          => $this->faker->numberBetween(20, 500),
+            'payment_method' => $this->faker->boolean(),
+            'status'         => $this->faker->randomElement(['pending', 'paid', 'canceled']),
         ];
     }
 }

@@ -3,11 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Client\CartController;
 use App\Http\Controllers\Web\Client\HomeController;
+use App\Http\Controllers\Web\Client\MenuController;
+use App\Http\Controllers\Web\Client\OrderController;
 use App\Http\Controllers\Web\Client\ProductController;
 use App\Http\Controllers\Web\Client\CategoryController;
 use App\Http\Controllers\Web\Client\CustomerController;
 use App\Http\Controllers\Web\Client\FavoriteController;
-use App\Http\Controllers\Web\Client\MenuController;
 
 
 
@@ -59,4 +60,6 @@ Route::prefix('favorites')
         Route::delete('/{favorite}', 'destroy')->name('destroy');
     });
 
-
+// Customer create
+Route::get('/customer/create', [CustomerController::class, 'create'])->name('client.customer.create');
+Route::post('/customer/store', [CustomerController::class, 'store'])->name('client.customer.store');

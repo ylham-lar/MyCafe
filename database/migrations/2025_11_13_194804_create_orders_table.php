@@ -13,6 +13,7 @@ return new class extends Migration
             $table->foreignId('customer_id')->constrained()->onDelete('cascade');
             $table->json('products');
             $table->integer('price')->default(0);
+            $table->boolean('payment_method');
             $table->string('status')->default('pending');
             $table->timestamps();
         });

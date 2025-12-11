@@ -1,5 +1,16 @@
 <?php
 return [
+    'enterCustomerInfo' => 'Enter Customer Info',
+    'deliveryInformation' => 'Delivery Information',
+    'enterDeliveryDetails' => 'Enter your information for order',
+    'pleaseFix' => 'Please fix the following errors',
+    'address' => 'Address',
+    'enterAddress' => 'Enter your address',
+    'phoneNumber' => 'Phone Number',
+    'enterPhone' => 'Enter your phone number',
+    'backToCart' => 'Back to Cart',
+    'continue' => 'Continue',
+    'secureCheckout' => 'Secure checkout system',
     'yourFavorites' => 'Your Favorites',
     'myFavorite' => 'My Favorite',
     'products' => 'Products',
