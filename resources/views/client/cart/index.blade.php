@@ -98,7 +98,6 @@ $nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
                             <i class="fas fa-trash"></i> @lang('app.clearCart')
                         </button>
                     </form>
-
                     <a href="" class="btn-checkout">
                         @lang('app.proceedCheckout') <i class="fas fa-arrow-right"></i>
                     </a>

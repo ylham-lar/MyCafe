@@ -30,13 +30,6 @@ Route::prefix('categories')
         Route::get('/{category}', 'products')->name('products');
     });
 
-Route::prefix('customers')
-    ->name('client.customers.')
-    ->controller(CustomerController::class)
-    ->group(function () {
-        Route::get('register', 'create')->name('register');
-        Route::post('register', 'store');
-    });
 
 Route::prefix('products')
     ->name('client.products.')
@@ -65,3 +58,5 @@ Route::prefix('favorites')
         Route::delete('/remove-all', 'destroyAll')->name('destroyAll');
         Route::delete('/{favorite}', 'destroy')->name('destroy');
     });
+
+

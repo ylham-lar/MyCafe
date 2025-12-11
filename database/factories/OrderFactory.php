@@ -2,9 +2,10 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\Customer;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OrderFactory extends Factory
 {
@@ -12,9 +13,14 @@ class OrderFactory extends Factory
 
     public function definition(): array
     {
+        $productIds = Product::inRandomOrder()
+            ->limit($this->faker->numberBetween(1, 5))
+            ->pluck('id')
+            ->toArray();
         return [
             'customer_id' => Customer::inRandomOrder()->value('id') ?? 1,
-            'price'       => $this->faker->numberBetween(10, 300),
+            'products'    => $productIds,
+            'price'       => $this->faker->numberBetween(50, 500),
             'status'      => $this->faker->randomElement(['pending', 'paid', 'canceled']),
         ];
     }
