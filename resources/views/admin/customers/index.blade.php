@@ -17,7 +17,7 @@
         <thead class="table-dark text-light">
             <tr>
                 <th style="width:5%;">ID</th>
-                <th style="width:25%;">Address  </th>
+                <th style="width:25%;">Address</th>
                 <th style="width:25%;">Phone Number</th>
                 <th style="width:25%;">Created At</th>
                 <th style="width:20%;">Settings</th>
@@ -29,13 +29,14 @@
             <tr class="table-row-hover">
                 <td>{{ $obj->id }}</td>
                 <td>{{ $obj->address }}</td>
-                <td>+{{ $obj->phone_number }}</td>
+                <td>{{ $obj->phone_number }}</td>
                 <td>{{ $obj->created_at->format('H:i:s d.m.Y') }}</td>
                 <td>
                     <a href="{{ route('admin.customers.edit', $obj->id) }}"
                         class="btn btn-sm btn-outline-dark btn-warning">
                         <i class="bi bi-pencil"></i>
                     </a>
+
                     <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $obj->id }}">
                         <i class="bi bi-trash-fill"></i>
                     </button>
@@ -54,7 +55,8 @@
                                 <div class="modal-body p-4 text-center">
                                     <i class="bi bi-exclamation-triangle-fill text-warning fs-1 mb-3"></i>
                                     <p class="mb-0 fs-6 fw-bold text-dark">
-                                        Are you sure you want to delete <strong>{{ $obj->name }}</strong>?
+                                        Are you sure you want to delete customer with address:
+                                        <strong>{{ $obj->address }}</strong>?
                                     </p>
                                 </div>
 
@@ -74,12 +76,13 @@
                             </div>
                         </div>
                     </div>
+
                 </td>
             </tr>
             @empty
             <tr>
                 <td colspan="4" class="text-center text-muted py-4 fw-bold">
-                    No categories found
+                    No customers found
                 </td>
             </tr>
             @endforelse

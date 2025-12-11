@@ -32,23 +32,12 @@
                 @method('PUT')
 
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">First Name *</label>
+                    <label class="form-label fw-semibold">Address *</label>
                     <input type="text"
-                        name="first_name"
-                        value="{{ old('first_name', $obj->first_name) }}"
-                        class="form-control @error('first_name') is-invalid @enderror">
-                    @error('first_name')
-                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Last Name *</label>
-                    <input type="text"
-                        name="last_name"
-                        value="{{ old('last_name', $obj->last_name) }}"
-                        class="form-control @error('last_name') is-invalid @enderror">
-                    @error('last_name')
+                        name="address"
+                        value="{{ old('address', $obj->address) }}"
+                        class="form-control @error('address') is-invalid @enderror">
+                    @error('address')
                     <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>

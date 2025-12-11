@@ -19,7 +19,7 @@ class Customer extends Model
 
     protected $fillable = [
         'address',
-        'phone',
+        'phone_number',
     ];
 
     public function favorites(): BelongsToMany
