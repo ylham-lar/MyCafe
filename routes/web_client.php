@@ -11,7 +11,6 @@ use App\Http\Controllers\Web\Client\CustomerController;
 use App\Http\Controllers\Web\Client\FavoriteController;
 
 
-
 Route::get('locale/{locale}', [HomeController::class, 'locale'])
     ->name('locale')
     ->where('locale', '[a-z]+');
@@ -60,6 +59,16 @@ Route::prefix('favorites')
         Route::delete('/{favorite}', 'destroy')->name('destroy');
     });
 
-// Customer create
-Route::get('/customer/create', [CustomerController::class, 'create'])->name('client.customer.create');
-Route::post('/customer/store', [CustomerController::class, 'store'])->name('client.customer.store');
+Route::controller(CustomerController::class)->group(function () {
+    Route::get('/customer/create', 'create')->name('client.customer.create');
+    Route::post('/customer/store', 'store')->name('client.customer.store');
+});
+
+Route::prefix('order')
+    ->name('client.order.')
+    ->controller(OrderController::class)
+    ->group(function () {
+        Route::get('/payment-method', 'showPaymentMethod')->name('payment_method');
+        Route::post('/create', 'createOrder')->name('create');
+        Route::get('/success', 'success')->name('success');
+    });

@@ -14,8 +14,11 @@ class ProductController extends Controller
         $category_id = $request->query('category_id');
 
         $products = Product::when($category_id, function ($query, $category_id) {
-            return $query->where('category_id', $category_id);
-        })->orderBy('id', 'desc')->get();
+            return $query
+                ->where('category_id', $category_id);
+        })
+            ->orderBy('id', 'desc')
+            ->get();
 
         $categories = Category::orderBy('name')->get();
 
