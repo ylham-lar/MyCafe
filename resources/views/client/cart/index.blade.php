@@ -93,10 +93,12 @@ $nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
                 <div class="summary-actions">
                     <form action="{{ route('client.cart.clear') }}" method="POST" class="d-inline">
                         @csrf
+                        @method('DELETE')
                         <button type="submit" class="btn-clear">
                             <i class="fas fa-trash"></i> @lang('app.clearCart')
                         </button>
                     </form>
+
                     <a href="" class="btn-checkout">
                         @lang('app.proceedCheckout') <i class="fas fa-arrow-right"></i>
                     </a>

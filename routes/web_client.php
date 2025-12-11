@@ -5,6 +5,7 @@ use App\Http\Controllers\Web\Client\CartController;
 use App\Http\Controllers\Web\Client\HomeController;
 use App\Http\Controllers\Web\Client\ProductController;
 use App\Http\Controllers\Web\Client\CategoryController;
+use App\Http\Controllers\Web\Client\CustomerController;
 use App\Http\Controllers\Web\Client\FavoriteController;
 use App\Http\Controllers\Web\Client\MenuController;
 
@@ -27,6 +28,14 @@ Route::prefix('categories')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/{category}', 'products')->name('products');
+    });
+
+Route::prefix('customers')
+    ->name('client.customers.')
+    ->controller(CustomerController::class)
+    ->group(function () {
+        Route::get('register', 'create')->name('register');
+        Route::post('register', 'store');
     });
 
 Route::prefix('products')
@@ -53,6 +62,6 @@ Route::prefix('favorites')
     ->group(function () {
         Route::get('', 'index')->name('index');
         Route::post('/toggle/{product}', 'toggle')->name('toggle');
-        Route::delete('/{favorite}', 'destroy')->name('destroy');
         Route::delete('/remove-all', 'destroyAll')->name('destroyAll');
+        Route::delete('/{favorite}', 'destroy')->name('destroy');
     });
