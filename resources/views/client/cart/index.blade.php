@@ -557,28 +557,74 @@ $nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
 </style>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Plus button
         document.querySelectorAll('.plus-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
                 const productId = this.dataset.productId;
                 const input = document.querySelector(`.qty-input[data-product-id="${productId}"]`);
-                input.value = parseInt(input.value) + 1;
-                const form = this.closest('form');
-                form.submit();
+                const newQuantity = parseInt(input.value) + 1;
+                updateCartQuantity(productId, newQuantity);
             });
         });
 
+        // Minus button
         document.querySelectorAll('.minus-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
                 const productId = this.dataset.productId;
                 const input = document.querySelector(`.qty-input[data-product-id="${productId}"]`);
                 const currentValue = parseInt(input.value);
                 if (currentValue > 1) {
-                    input.value = currentValue - 1;
-                    const form = this.closest('form');
-                    form.submit();
+                    const newQuantity = currentValue - 1;
+                    updateCartQuantity(productId, newQuantity);
                 }
             });
         });
+
+        // Quantity input üýtgände
+        document.querySelectorAll('.qty-input').forEach(input => {
+            input.addEventListener('change', function() {
+                const productId = this.dataset.productId;
+                let newQuantity = parseInt(this.value);
+                if (newQuantity < 1) newQuantity = 1;
+                updateCartQuantity(productId, newQuantity);
+            });
+        });
+
+        function updateCartQuantity(productId, quantity) {
+            const form = document.querySelector(`.quantity-form[data-product-id="${productId}"]`);
+            const input = form.querySelector('input[name="quantity"]');
+            input.value = quantity;
+
+            // CSRF token al
+            const token = document.querySelector('meta[name="csrf-token"]').content;
+
+            // FormData döret
+            const formData = new FormData(form);
+
+            // Fetch bilen iber
+            fetch(form.action, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': token,
+                        'Accept': 'application/json',
+                    },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Sahypany täzele
+                        location.reload();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
+                });
+        }
     });
+</script>
 </script>
 @endsection

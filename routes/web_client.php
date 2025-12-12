@@ -42,9 +42,13 @@ Route::prefix('cart')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/add/{product}', 'add')->name('add');
+        Route::post('/update/{product}', 'update')->name('update');
         Route::delete('/delete/{product}', 'remove')->name('delete');
         Route::delete('/clear', 'clearCart')->name('clear');
     });
+Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('client.cart.add');
+Route::delete('/cart/delete/{product}', [CartController::class, 'remove'])->name('client.cart.delete');
+Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('client.cart.clear');
 
 Route::prefix('favorites')
     ->name('client.favorites.')

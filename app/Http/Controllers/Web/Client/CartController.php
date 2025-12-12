@@ -15,7 +15,7 @@ class CartController extends Controller
 
         if (!empty($cart)) {
             $products = Product::whereIn('id', array_keys($cart))->get()->map(function ($product) use ($cart) {
-                $product->quantity = intval($cart[$product->id]['quantity'] ?? 1);
+                $product->quantity = intval($cart[$product->id]);
                 $product->price = floatval($product->price);
                 return $product;
             });
@@ -26,7 +26,6 @@ class CartController extends Controller
         ]);
     }
 
-
     public function add(Request $request, Product $product)
     {
         $request->validate([
@@ -34,21 +33,24 @@ class CartController extends Controller
         ]);
 
         $cart = session('cart', []);
-        $quantity = $request->input('quantity', 1);
+        $quantity = intval($request->input('quantity', 1));
 
         if (isset($cart[$product->id])) {
-            $cart[$product->id] += $quantity;
+            $cart[$product->id] = $quantity; // Quantity-ny täzelä
         } else {
             $cart[$product->id] = $quantity;
         }
 
         session(['cart' => $cart]);
 
+        // Total quantity hasapla
+        $totalCount = array_sum($cart);
+
         if ($request->ajax() || $request->wantsJson()) {
             return response()->json([
                 'success' => true,
                 'message' => 'Cart updated successfully',
-                'cart_count' => array_sum($cart)
+                'cart_count' => $totalCount
             ]);
         }
 
@@ -63,11 +65,11 @@ class CartController extends Controller
 
         return back()->with('success', 'Product removed from cart');
     }
+
     public function clearCart()
     {
         session()->forget('cart');
-
-        return redirect()->route('client.cart.index')->with('success', 'Cart Clened');
+        return redirect()->route('client.cart.index')->with('success', 'Cart Cleared');
     }
 
     public function getCartCount()
