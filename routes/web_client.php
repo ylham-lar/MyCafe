@@ -72,3 +72,9 @@ Route::prefix('order')
         Route::post('/create', 'createOrder')->name('create');
         Route::get('/success', 'success')->name('success');
     });
+
+
+Route::get('/order/payment/{customer}', [OrderController::class, 'payment'])->name('client.order.payment');
+Route::post('/order/order', [OrderController::class, 'store'])->name('client.order.store');
+
+Route::get('/order/success', [OrderController::class, 'success'])->name('client.order.success');

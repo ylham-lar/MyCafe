@@ -12,6 +12,13 @@ class HomeController extends Controller
     {
         return view('client.home.index');
     }
+
+    public function card()
+    {
+        $cart = session('cart', []);
+        return view('client.cart.index', compact('cart'));
+    }
+
     public function locale($locale)
     {
         $locale = in_array($locale, ['tm', 'ru']) ? $locale : 'en';

@@ -16,16 +16,17 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'address'      => 'required|string|max:255',
-            'phone_number' => 'nullable|string|max:20',
+            'address' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:20',
         ]);
 
         $customer = Customer::create([
-            'address'      => $request->address,
+            'address' => $request->address,
             'phone_number' => $request->phone_number,
         ]);
 
-        return redirect()->route('home', $customer->id)
-            ->with('success', 'Customer created successfully');
+        session(['customer_id' => $customer->id]);
+
+        return redirect()->route('client.order.payment', $customer->id);
     }
 }

@@ -43,7 +43,7 @@
 
                 <td>{{ $obj->name }}</td>
 
-                <td>{{ number_format($obj->price) }} TMT</td>
+                <td>{{ number_format($obj->price) }} $</td>
 
                 <td>{{ $obj->discount_percent }}%</td>
 

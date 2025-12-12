@@ -74,10 +74,6 @@
                                 <i class="fas fa-arrow-left"></i>
                                 @lang('app.backToCart')
                             </a>
-                            <a href="{{ route('client.cart.index') }}" class="btn-secondary-premium">
-                                <i class="fas fa-arrow-left"></i>
-                                @lang('app.backToCart')
-                            </a>
                             <button type="submit" class="btn-primary-premium">
                                 @lang('app.continue')
                                 <i class="fas fa-arrow-right"></i>

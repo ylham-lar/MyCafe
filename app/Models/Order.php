@@ -10,20 +10,21 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Order extends Model
 {
     use HasFactory;
-    protected $casts = [
-        'products' => 'array',
-    ];
     protected $guarded = [
         'id',
     ];
-
     public $timestamps = true;
-
     protected $fillable = [
         'customer_id',
+        'products',  
         'price',
         'payment_method',
         'status',
+    ];
+
+    protected $casts = [
+        'products' => 'array',  
+        'payment_method' => 'boolean',
     ];
 
 

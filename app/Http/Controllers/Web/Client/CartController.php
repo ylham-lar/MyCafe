@@ -11,12 +11,13 @@ class CartController extends Controller
     public function index()
     {
         $cart = session('cart', []);
+        $products = collect();
 
-        if (empty($cart)) {
-            $products = collect();
-        } else {
+        if (!empty($cart)) {
             $products = Product::whereIn('id', array_keys($cart))->get()->map(function ($product) use ($cart) {
-                $product->quantity = $cart[$product->id];
+                // Quantity-ni integer edip alýarys
+                $product->quantity = intval($cart[$product->id]['quantity'] ?? 1);
+                $product->price = floatval($product->price);
                 return $product;
             });
         }
@@ -25,6 +26,7 @@ class CartController extends Controller
             'products' => $products,
         ]);
     }
+
 
     public function add(Request $request, Product $product)
     {
