@@ -36,14 +36,14 @@ class CartController extends Controller
         $quantity = intval($request->input('quantity', 1));
 
         if (isset($cart[$product->id])) {
-            $cart[$product->id] = $quantity; // Quantity-ny täzelä
+            $cart[$product->id] = $quantity; 
         } else {
             $cart[$product->id] = $quantity;
         }
 
         session(['cart' => $cart]);
 
-        // Total quantity hasapla
+      
         $totalCount = array_sum($cart);
 
         if ($request->ajax() || $request->wantsJson()) {

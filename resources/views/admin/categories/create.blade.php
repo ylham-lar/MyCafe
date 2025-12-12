@@ -33,14 +33,50 @@
             <form action="{{ route('admin.categories.store') }}" method="POST" class="bg-white p-4 rounded-4 shadow-sm">
                 @csrf
 
+                <!-- Name (EN) -->
                 <div class="mb-4">
-                    <label for="name" class="form-label fw-semibold">Category Name *</label>
-                    <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Enter category name" required>
+                    <label for="name" class="form-label fw-semibold">Category Name (EN) *</label>
+                    <input type="text"
+                        name="name"
+                        id="name"
+                        class="form-control @error('name') is-invalid @enderror"
+                        value="{{ old('name') }}"
+                        placeholder="Enter category name"
+                        required>
                     @error('name')
                     <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>
 
+                <!-- Name (RU) -->
+                <div class="mb-4">
+                    <label for="name_ru" class="form-label fw-semibold">Category Name (RU)</label>
+                    <input type="text"
+                        name="name_ru"
+                        id="name_ru"
+                        class="form-control @error('name_ru') is-invalid @enderror"
+                        value="{{ old('name_ru') }}"
+                        placeholder="Enter category name in Russian">
+                    @error('name_ru')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- Name (TM) -->
+                <div class="mb-4">
+                    <label for="name_tm" class="form-label fw-semibold">Category Name (TM)</label>
+                    <input type="text"
+                        name="name_tm"
+                        id="name_tm"
+                        class="form-control @error('name_tm') is-invalid @enderror"
+                        value="{{ old('name_tm') }}"
+                        placeholder="Enter category name in Turkmen">
+                    @error('name_tm')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- Buttons -->
                 <div class="text-center d-flex justify-content-center gap-3">
                     <a href="{{ route('admin.categories.index') }}" class="btn btn-outline-warning px-4 py-2">
                         <i class="bi bi-arrow-left-circle me-1"></i> Back
@@ -95,4 +131,5 @@
         font-weight: 600;
     }
 </style>
+
 @endsection

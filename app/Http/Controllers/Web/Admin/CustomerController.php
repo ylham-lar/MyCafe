@@ -41,7 +41,9 @@ class CustomerController extends Controller
     public function edit($id)
     {
         $obj = Customer::findOrFail($id);
-        return view('admin.customers.edit', compact('obj'));
+        return view('admin.customers.edit')->with([
+            'obj' => $obj
+        ]);;
     }
 
     public function update(Request $request, $id)

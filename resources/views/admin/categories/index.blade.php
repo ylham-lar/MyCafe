@@ -3,6 +3,7 @@
 @section('title', 'Categories')
 
 @section('content')
+
 <div class="row align-items-center mb-3">
     <div class="col-auto h3 ps-5 ms-5">Categories</div>
     <div class="col text-end p-3 me-5">
@@ -17,9 +18,9 @@
         <thead class="table-dark text-light">
             <tr>
                 <th style="width:5%;">ID</th>
-                <th style="width:25%;">Name</th>
-                <th style="width:25%;">Products Count</th>
-                <th style="width:25%;">Created At</th>
+                <th style="width:25%;">Name (EN)</th>
+                <th style="width:25%;">Name (RU)</th>
+                <th style="width:25%;">Name (TM)</th>
                 <th style="width:20%;">Settings</th>
             </tr>
         </thead>
@@ -29,21 +30,19 @@
             <tr class="table-row-hover">
                 <td>{{ $obj->id }}</td>
                 <td>{{ $obj->name }}</td>
-                <td>
-                    <a href="{{ route('admin.categories.products', $obj->id) }}" class="text-decoration-none">
-                        {{ $obj->products->count() }} Products
-                    </a>
-                </td>
+                <td>{{ $obj->name_ru ?? '-' }}</td>
+                <td>{{ $obj->name_tm ?? '-' }}</td>
 
-                <td>{{ $obj->created_at->format('H:i:s d.m.Y') }}</td>
                 <td>
+                    <!-- Edit -->
                     <a href="{{ route('admin.categories.edit', $obj->id) }}"
                         class="btn btn-sm btn-outline-dark btn-warning">
                         <i class="bi bi-pencil"></i>
                     </a>
 
                     <button type="button" class="btn btn-dark btn-sm"
-                        data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $obj->id }}">
+                        data-bs-toggle="modal"
+                        data-bs-target="#deleteModal-{{ $obj->id }}">
                         <i class="bi bi-trash-fill"></i>
                     </button>
 
@@ -60,8 +59,9 @@
 
                                 <div class="modal-body p-4 text-center">
                                     <i class="bi bi-exclamation-triangle-fill text-warning fs-1 mb-3"></i>
-                                    <p class="fw-bold text-dark">
-                                        Are you sure you want to delete <strong>{{ $obj->name }}</strong>?
+                                    <p class="fw-bold text-light">
+                                        Are you sure you want to delete
+                                        <strong>{{ $obj->name }}</strong>?
                                     </p>
                                 </div>
 
@@ -71,10 +71,13 @@
                                         class="d-flex gap-2">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" class="btn btn-outline-secondary px-4"
+
+                                        <button type="button"
+                                            class="btn btn-outline-secondary px-4"
                                             data-bs-dismiss="modal">
                                             Cancel
                                         </button>
+
                                         <button type="submit" class="btn btn-danger px-4">
                                             <i class="bi bi-trash-fill me-1"></i> Delete
                                         </button>
@@ -85,6 +88,7 @@
                         </div>
                     </div>
                 </td>
+
             </tr>
             @empty
             <tr>
@@ -94,7 +98,6 @@
             </tr>
             @endforelse
         </tbody>
-
     </table>
 </div>
 
@@ -138,23 +141,16 @@
         background: #e9ecef;
     }
 
+    .modal-content:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, .35);
+        transition: .3s;
+    }
+
     .btn-danger:hover {
         background: #b02a37;
         border-color: #b02a37;
     }
-
-    .btn-outline-secondary:hover {
-        background: #6c757d;
-        color: #fff;
-    }
-
-    .modal-content {
-        transition: .3s;
-    }
-
-    .modal-content:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, .35);
-    }
 </style>
+
 @endsection
