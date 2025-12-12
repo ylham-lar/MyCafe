@@ -37,7 +37,7 @@
                         <option value="">Choose customer</option>
                         @foreach($customers as $c)
                         <option value="{{ $c->id }}" {{ old('customer_id') == $c->id ? 'selected' : '' }}>
-                            {{ $c->address }} 
+                            {{ $c->address }}
                         </option>
                         @endforeach
                     </select>
@@ -56,22 +56,6 @@
                     <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>
-
-                <div class="mb-4">
-                    <label class="form-label fw-semibold">Status *</label>
-                    <select name="status"
-                        class="form-select @error('status') is-invalid @enderror">
-
-                        <option value="pending" {{ old('status') == 'pending' ? 'selected' : '' }}>Pending</option>
-                        <option value="paid" {{ old('status') == 'paid' ? 'selected' : '' }}>Paid</option>
-                        <option value="canceled" {{ old('status') == 'canceled' ? 'selected' : '' }}>Canceled</option>
-
-                    </select>
-                    @error('status')
-                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                    @enderror
-                </div>
-
 
                 <div class="text-center d-flex justify-content-center gap-3">
                     <a href="{{ route('admin.orders.index') }}" class="btn btn-outline-warning px-4 py-2">

@@ -56,7 +56,6 @@ class OrderController extends Controller
             'products' => $productsJson,
             'price' => $totalPrice,
             'payment_method' => $request->payment_method,
-            'status' => 'pending',
         ]);
 
         // Sebedi arassalamak

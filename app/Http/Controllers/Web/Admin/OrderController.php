@@ -22,7 +22,7 @@ class OrderController extends Controller
 
     public function create()
     {
-        $customers = Customer::orderBy('first_name')->get();
+        $customers = Customer::get();
 
         return view('admin.orders.create')->with([
             'customers' => $customers,
@@ -34,13 +34,11 @@ class OrderController extends Controller
         $request->validate([
             'customer_id' => ['required', 'exists:customers,id'],
             'price'       => ['required', 'numeric', 'min:1'],
-            'status'      => ['required', 'in:pending,paid,canceled'],
         ]);
 
         Order::create([
             'customer_id' => $request->customer_id,
             'price'       => $request->price,
-            'status'      => $request->status,
         ]);
 
         return to_route('admin.orders.index')
@@ -63,7 +61,6 @@ class OrderController extends Controller
         $request->validate([
             'customer_id' => ['required', 'exists:customers,id'],
             'price'       => ['required', 'numeric', 'min:1'],
-            'status'      => ['required', 'in:pending,paid,canceled'],
         ]);
 
         $obj = Order::findOrFail($id);
@@ -71,7 +68,6 @@ class OrderController extends Controller
         $obj->update([
             'customer_id' => $request->customer_id,
             'price'       => $request->price,
-            'status'      => $request->status,
         ]);
 
         return to_route('admin.orders.index')

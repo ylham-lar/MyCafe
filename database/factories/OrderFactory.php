@@ -14,7 +14,6 @@ class OrderFactory extends Factory
             'products'       => json_encode([1, 2, 3]), 
             'price'          => $this->faker->numberBetween(20, 500),
             'payment_method' => $this->faker->boolean(),
-            'status'         => $this->faker->randomElement(['pending', 'paid', 'canceled']),
         ];
     }
 }

@@ -20,7 +20,6 @@
                 <th style="width:5%;">ID</th>
                 <th style="width:25%;">Customers Address</th>
                 <th style="width:20%;">Price</th>
-                <th style="width:20%;">Status</th>
                 <th style="width:20%;">Created At</th>
                 <th style="width:10%;">Settings</th>
             </tr>
@@ -35,16 +34,6 @@
                 <td>{{ $obj->customer->address }}</td>
 
                 <td>{{ number_format($obj->price) }} $</td>
-
-                <td>
-                    @if($obj->status == 'pending')
-                    <span class="badge bg-warning text-dark px-3 py-2 rounded-3">Pending</span>
-                    @elseif($obj->status == 'paid')
-                    <span class="badge bg-success px-3 py-2 rounded-3">Paid</span>
-                    @else
-                    <span class="badge bg-secondary px-3 py-2 rounded-3">Canceled</span>
-                    @endif
-                </td>
 
                 <td>{{ $obj->created_at->format('H:i:s d.m.Y') }}</td>
 

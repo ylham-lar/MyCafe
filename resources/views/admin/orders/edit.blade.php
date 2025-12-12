@@ -38,7 +38,7 @@
                         @foreach($customers as $c)
                         <option value="{{ $c->id }}"
                             {{ $obj->customer_id == $c->id ? 'selected' : '' }}>
-                            {{ $c->address }} 
+                            {{ $c->address }}
                         </option>
                         @endforeach
                     </select>
@@ -54,19 +54,6 @@
                         value="{{ old('price', $obj->price) }}"
                         class="form-control @error('price') is-invalid @enderror">
                     @error('price')
-                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="mb-4">
-                    <label class="form-label fw-semibold">Status *</label>
-                    <select name="status"
-                        class="form-select @error('status') is-invalid @enderror">
-                        <option value="pending" {{ $obj->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                        <option value="paid" {{ $obj->status == 'paid' ? 'selected' : '' }}>Paid</option>
-                        <option value="canceled" {{ $obj->status == 'canceled' ? 'selected' : '' }}>Canceled</option>
-                    </select>
-                    @error('status')
                     <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>
