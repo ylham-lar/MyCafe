@@ -4,23 +4,19 @@ return [
     'backToCart' => 'Sebede gaýt',
     'total' => 'Jemi',
     'thankYou' => 'Sag boluň!',
-
     'paymentMethod' => 'Töleg Usuly',
     'selectPaymentMethod' => 'Halan töleg usulyňyzy saýlaň',
     'choosePayment' => 'Tölegi Saýlaň',
     'cashPayment' => 'Nağd Töleg',
     'cardPayment' => 'Karta Töleg',
-
     'customerInformation' => 'Müşderi Maglumatlary',
     'address' => 'Salgy',
     'phoneNumber' => 'Telefon Belgisi',
-
     'orderSummary' => 'Zakazyň Gysgaça',
     'secureTransaction' => 'Howpsuz Amallar',
     'yourOrderHasBeenCreated' => 'Siziň zakazyňyz üstünlikli döredildi!',
     'yourOrderIsBeingProcessed' => 'Siziň zakazyňyz işlemde. Tezlik bilen habar berler.',
     'orderSuccess' => 'Zakaz Üstünlikli',
-
     'appName' => 'MyCafe',
     'payOnDelivery' => 'Eltip bermede tölär',
     'payByCard' => 'Bank kartasy bilen tölär',
@@ -68,19 +64,16 @@ return [
     'addToCart' => 'Sebede goş',
     'addToFavorites' => 'Halanlara goş',
     'uncategorized' => 'Kategoriýasy ýok',
-
     'items' => 'Harytlar',
     'exploreItems' => 'Bu kategoriýadaky iň gowy harytlary gözden geçiriň',
     'home' => 'Baş sahypa',
     'quickLinks' => 'Çalt baglanyşyklar',
     'contactInfo' => 'Habarlaşma Maglumatlary',
     'experienceText' => 'Cozy we premium kafe atmosferasynda iň gowy tagam we içgilerden lezzet alyň.',
-
     'our' => 'Biziň',
     'menu' => 'Menýu',
     'chooseCategorySubtitle' => 'Halan kategoriýaňyzy saýlaň we kafe ýöriteliklerini gözden geçiriň.',
     'productsCount' => 'Harytlar',
-
     'login' => 'Girmek',
     'logout' => 'Çykyş',
     'username' => 'Ulanyjy ady',
@@ -88,11 +81,9 @@ return [
     'submit' => 'Ibermek',
     'delete' => 'Pozmak',
     'cancel' => 'Ýatyrmak',
-
     'dashboard' => 'Dashboard',
     'new' => 'Täze',
     'search' => 'Gözleg',
-
     'favorite' => 'Halan',
     'baskets' => 'Sebetler',
     'user' => 'Ulanyjy',
@@ -102,7 +93,6 @@ return [
     'image' => 'Surat',
     'images' => 'Suratlar',
     'path' => 'Ýol',
-
     'id' => 'ID',
     'name' => 'Ady',
     'sortBy' => 'Saýlamak',
@@ -112,11 +102,9 @@ return [
     'highToLow' => 'Ýokary → pes',
     'filter' => 'Filtrlemek',
     'clear' => 'Arassalamak',
-
     'similarProducts' => 'Oxşar harytlar',
     'inStock' => 'Stokda bar',
     'outOfStock' => 'Stokda ýok',
-
     'saleProducts' => 'Arzanladyşdaky harytlar',
     'topProducts' => 'Iň gowy harytlar',
     'allSale' => 'Ähli arzanladyş',
@@ -127,12 +115,10 @@ return [
     'create' => ':name döret',
     'createdAt' => 'Döredilen wagty',
     'updatedAt' => 'Täzelenen wagty',
-
     'successfullyLoggedIn' => 'Üstünlikli girildi',
     'successfullyLoggedOut' => 'Üstünlikli çykdy',
     'createdSuccessfully' => ':name üstünlikli döredildi',
     'updatedSuccessfully' => ':name üstünlikli täzelendi',
     'deletedSuccessfully' => ':name üstünlikli pozuldy',
-
     'clearCategory' => 'Kategoriýalary arassalaň',
 ];

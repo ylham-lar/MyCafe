@@ -15,7 +15,6 @@ class CartController extends Controller
 
         if (!empty($cart)) {
             $products = Product::whereIn('id', array_keys($cart))->get()->map(function ($product) use ($cart) {
-                // Quantity-ni integer edip alýarys
                 $product->quantity = intval($cart[$product->id]['quantity'] ?? 1);
                 $product->price = floatval($product->price);
                 return $product;

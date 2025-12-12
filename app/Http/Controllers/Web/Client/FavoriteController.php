@@ -19,8 +19,8 @@ class FavoriteController extends Controller
     }
 
     public function toggle(Product $product)
-    {-
-        $customerId = 1;
+    {
+        -$customerId = 1;
 
         $favorite = Favorite::where('customer_id', $customerId)
             ->where('product_id', $product->id)

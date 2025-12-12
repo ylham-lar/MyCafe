@@ -70,12 +70,10 @@ return [
     'quickLinks' => 'Quick Links',
     'contactInfo' => 'Contact Info',
     'experienceText' => 'Experience the best food and drinks in a cozy, premium café atmosphere.',
-
     'our' => 'Our',
     'menu' => 'Menu',
     'chooseCategorySubtitle' => 'Choose your favorite category and explore our café specialties.',
     'productsCount' => 'Products',
-
     'login' => 'Login',
     'logout' => 'Logout',
     'username' => 'Username',
@@ -83,11 +81,9 @@ return [
     'submit' => 'Submit',
     'delete' => 'Delete',
     'cancel' => 'Cancel',
-
     'dashboard' => 'Dashboard',
     'new' => 'New',
     'search' => 'Search',
-
     'favorite' => 'Favorite',
     'baskets' => 'Baskets',
     'user' => 'User',
@@ -97,10 +93,8 @@ return [
     'image' => 'Image',
     'images' => 'Images',
     'path' => 'Path',
-
     'id' => 'ID',
     'name' => 'Name',
-
     'sortBy' => 'Sort by',
     'random' => 'Random',
     'newToOld' => 'Newest to Oldest',
@@ -108,11 +102,9 @@ return [
     'highToLow' => 'High to Low',
     'filter' => 'Filter',
     'clear' => 'Clear',
-
     'similarProducts' => 'Similar Products',
     'inStock' => 'In Stock',
     'outOfStock' => 'Out of Stock',
-
     'saleProducts' => 'Products on Sale',
     'topProducts' => 'Top Products',
     'allSale' => 'All Sale',
@@ -123,12 +115,10 @@ return [
     'create' => 'Create :name',
     'createdAt' => 'Created At',
     'updatedAt' => 'Updated At',
-
     'successfullyLoggedIn' => 'Logged in successfully',
     'successfullyLoggedOut' => 'Logged out successfully',
     'createdSuccessfully' => ':name created successfully',
     'updatedSuccessfully' => ':name updated successfully',
     'deletedSuccessfully' => ':name deleted successfully',
-
     'clearCategory' => 'Clear categories',
 ];

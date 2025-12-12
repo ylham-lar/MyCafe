@@ -16,7 +16,6 @@
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10 col-xl-9">
 
-                <!-- Customer Info Card -->
                 <div class="info-card mb-4 fade-in">
                     <div class="info-header">
                         <i class="fas fa-user-circle"></i>
@@ -40,7 +39,6 @@
                     </div>
                 </div>
 
-                <!-- Cart Summary -->
                 @if(session('cart'))
                 <div class="cart-summary-card mb-4 fade-in">
                     <div class="cart-header">
@@ -78,7 +76,6 @@
                 </div>
                 @endif
 
-                <!-- Payment Form -->
                 <div class="premium-form-card fade-up">
                     <form action="{{ route('client.order.store') }}" method="POST" id="paymentForm">
                         @csrf
@@ -90,7 +87,6 @@
                         </div>
 
                         <div class="payment-methods">
-                            <!-- Cash Payment -->
                             <button type="submit" name="payment_method" value="0" class="payment-btn cash-btn">
                                 <div class="payment-icon-wrapper">
                                     <div class="payment-icon">
@@ -146,7 +142,6 @@
         background: #0a0a0a;
     }
 
-    /* Info Card */
     .info-card {
         background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
         border: 1px solid rgba(255, 215, 90, .2);
@@ -217,7 +212,6 @@
         font-weight: 600;
     }
 
-    /* Cart Summary */
     .cart-summary-card {
         background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
         border: 1px solid rgba(255, 215, 90, .2);
@@ -304,7 +298,6 @@
         text-shadow: 0 0 20px rgba(255, 215, 90, .5);
     }
 
-    /* Payment Form */
     .premium-form-card {
         background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
         border: 1px solid rgba(255, 215, 90, .2);

@@ -75,7 +75,6 @@
 
 
 <style>
-    /* CSS kodunyň hemmesi üýtgedilmezden galdy */
     .footer-premium {
         background: linear-gradient(180deg, rgba(17, 17, 17, 0.98), rgba(26, 26, 26, 0.98), rgba(34, 34, 34, 0.98));
         color: #ececec;

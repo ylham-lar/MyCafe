@@ -66,19 +66,16 @@ return [
     'addToCart' => 'В корзину',
     'addToFavorites' => 'Добавить в избранное',
     'uncategorized' => 'Без категории',
-
     'items' => 'Товары',
     'exploreItems' => 'Изучите лучшие товары в этой категории',
     'home' => 'Главная',
     'quickLinks' => 'Быстрые ссылки',
     'contactInfo' => 'Контактная информация',
     'experienceText' => 'Наслаждайтесь лучшей едой и напитками в уютной премиальной атмосфере кафе.',
-
     'our' => 'Наше',
     'menu' => 'Меню',
     'chooseCategorySubtitle' => 'Выберите любимую категорию и изучите наши кофейные специалитеты.',
     'productsCount' => 'Товары',
-
     'login' => 'Войти',
     'logout' => 'Выйти',
     'username' => 'Имя пользователя',
@@ -86,11 +83,9 @@ return [
     'submit' => 'Отправить',
     'delete' => 'Удалить',
     'cancel' => 'Отмена',
-
     'dashboard' => 'Панель управления',
     'new' => 'Новый',
     'search' => 'Поиск',
-
     'favorite' => 'Избранное',
     'baskets' => 'Корзины',
     'user' => 'Пользователь',
@@ -100,10 +95,8 @@ return [
     'image' => 'Изображение',
     'images' => 'Изображения',
     'path' => 'Путь',
-
     'id' => 'ID',
     'name' => 'Название',
-
     'sortBy' => 'Сортировать по',
     'random' => 'Случайно',
     'newToOld' => 'Сначала новые',
@@ -111,11 +104,9 @@ return [
     'highToLow' => 'Сначала дорогие',
     'filter' => 'Фильтр',
     'clear' => 'Очистить',
-
     'similarProducts' => 'Похожие товары',
     'inStock' => 'В наличии',
     'outOfStock' => 'Нет в наличии',
-
     'saleProducts' => 'Товары со скидкой',
     'topProducts' => 'Лучшие товары',
     'allSale' => 'Все скидки',
@@ -126,12 +117,10 @@ return [
     'create' => 'Создать :name',
     'createdAt' => 'Создано',
     'updatedAt' => 'Обновлено',
-
     'successfullyLoggedIn' => 'Успешный вход',
     'successfullyLoggedOut' => 'Успешный выход',
     'createdSuccessfully' => ':name успешно создано',
     'updatedSuccessfully' => ':name успешно обновлено',
     'deletedSuccessfully' => ':name успешно удалено',
-
     'clearCategory' => 'Очистить категории',
 ];

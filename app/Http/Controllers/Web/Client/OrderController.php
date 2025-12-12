@@ -47,10 +47,8 @@ class OrderController extends Controller
             $totalPrice += $product->price * $quantity;
         }
 
-        // Products-y JSON string hökmünde taýýarlamak
         $productsJson = json_encode($cartProducts, JSON_UNESCAPED_UNICODE);
 
-        // Order döretmek
         $order = Order::create([
             'customer_id' => $customer_id,
             'products' => $productsJson,
@@ -58,7 +56,6 @@ class OrderController extends Controller
             'payment_method' => $request->payment_method,
         ]);
 
-        // Sebedi arassalamak
         session()->forget('cart');
 
         return redirect()->route('client.order.success');
