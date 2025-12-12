@@ -16,14 +16,18 @@
     <table class="table table-hover table-bordered align-middle text-center shadow-sm">
         <thead class="table-dark text-light">
             <tr>
-                <th style="width:5%;">ID</th>
-                <th style="width:10%;">Image</th>
-                <th style="width:20%;">Name</th>
-                <th style="width:10%;">Price</th>
-                <th style="width:10%;">Discount</th>
-                <th style="width:10%;">Weight</th>
-                <th style="width:20%;">Category</th>
-                <th style="width:15%;">Settings</th>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Name RU</th>
+                <th>Name TM</th>
+                <th>Code</th>
+                <th>Price</th>
+                <th>Discount %</th>
+                <th>Price After Discount</th>
+                <th>Weight</th>
+                <th>Category</th>
+                <th>Settings</th>
             </tr>
         </thead>
 
@@ -42,10 +46,18 @@
                 </td>
 
                 <td>{{ $obj->name }}</td>
+                <td>{{ $obj->name_ru ?? '-' }}</td>
+                <td>{{ $obj->name_tm ?? '-'}}</td>
+
+                <td>{{ $obj->code }}</td>
 
                 <td>{{ number_format($obj->price) }} $</td>
 
                 <td>{{ $obj->discount_percent }}%</td>
+
+                <td class="fw-bold text-success">
+                    {{ number_format($obj->price - ($obj->price * $obj->discount_percent / 100), 2) }} $
+                </td>
 
                 <td>{{ $obj->weight }} g</td>
 
@@ -57,12 +69,14 @@
                         <i class="bi bi-pencil"></i>
                     </a>
 
+                    <!-- Delete Button -->
                     <button type="button" class="btn btn-dark btn-sm"
                         data-bs-toggle="modal"
                         data-bs-target="#deleteModal-{{ $obj->id }}">
                         <i class="bi bi-trash-fill"></i>
                     </button>
 
+                    <!-- Modal -->
                     <div class="modal fade" id="deleteModal-{{ $obj->id }}" tabindex="-1">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content border-0 shadow-lg rounded-4 bg-dark text-light">
@@ -108,7 +122,7 @@
 
             @empty
             <tr>
-                <td colspan="8" class="text-center text-muted py-4 fw-bold">
+                <td colspan="12" class="text-center text-muted py-4 fw-bold">
                     No products found
                 </td>
             </tr>
@@ -117,67 +131,5 @@
         </tbody>
     </table>
 </div>
-
-<style>
-    body {
-        background-color: #f8f9fa;
-        color: #212529;
-    }
-
-    .table {
-        border-radius: .35rem;
-        overflow: hidden;
-    }
-
-    .table th,
-    .table td {
-        border-color: #dee2e6;
-        vertical-align: middle;
-    }
-
-    .table-row-hover:hover {
-        background-color: #ffeeba;
-        transition: background-color .2s;
-    }
-
-    .table-responsive {
-        max-height: 70vh;
-        overflow-y: auto;
-    }
-
-    .table-responsive::-webkit-scrollbar {
-        width: 6px;
-    }
-
-    .table-responsive::-webkit-scrollbar-thumb {
-        background-color: #adb5bd;
-        border-radius: 3px;
-    }
-
-    .table-responsive::-webkit-scrollbar-track {
-        background: #e9ecef;
-    }
-
-    .btn-outline-secondary:hover {
-        background-color: #6c757d;
-        color: #fff;
-        border-color: #6c757d;
-    }
-
-    .btn-danger:hover {
-        background-color: #b02a37;
-        border-color: #b02a37;
-        color: #fff;
-    }
-
-    .modal-content {
-        transition: all .3s ease;
-    }
-
-    .modal-content:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .35);
-    }
-</style>
 
 @endsection

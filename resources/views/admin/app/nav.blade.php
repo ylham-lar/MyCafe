@@ -10,30 +10,34 @@
 
         <div class="collapse navbar-collapse" id="adminNavbar">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-1">
-                <li class="nav-item">
-                    <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.categories.index') }}">
-                        Categories
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.products.index') }}">
+                <li class="nav-item dropdown px-3">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Products
                     </a>
+                    <ul class="dropdown-menu">
+                        <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.categories.index') }}">
+                            Categories
+                        </a>
+                        <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.products.index') }}">
+                            Products
+                        </a>
+                    </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.customers.index') }}">
+                <li class="nav-item dropdown px-3">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Customers
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.orders.index') }}">
-                        Orders
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.favorites.index') }}">
-                        Favorites
-                    </a>
+                    <ul class="dropdown-menu">
+                        <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.customers.index') }}">
+                            Customers
+                        </a>
+                        <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.orders.index') }}">
+                            Orders
+                        </a>
+                        <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.favorites.index') }}">
+                            Favorites
+                        </a>
+                    </ul>
                 </li>
                 <li class="nav-item ms-lg-2">
                     <form action="{{ route('logout') }}" method="POST" class="d-inline">
@@ -49,6 +53,36 @@
 </nav>
 
 <style>
+    .navbar-dark {
+        background: #000000 !important;
+        border-bottom: 1px solid #ffc107;
+    }
+
+    .navbar-brand:hover {
+        color: #ffd95a !important;
+    }
+
+    .nav-link:hover {
+        color: #ffd95a !important;
+    }
+
+    .logout-btn:hover {
+        background-color: #dc3545 !important;
+        color: #ffffff !important;
+    }
+
+    @media (max-width: 991px) {
+        .nav-link {
+            margin: 0.25rem 0;
+            padding: 0.75rem 1rem !important;
+        }
+
+        .logout-btn {
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+    }
+
     .navbar-dark {
         background: #000000 !important;
         border-bottom: 2px solid #ffc107;

@@ -34,9 +34,17 @@ class ProductController extends Controller
         $request->validate([
             'category_id'      => ['nullable', 'exists:categories,id'],
             'name'             => ['required', 'string', 'max:255'],
+
+            'name_ru'          => ['nullable', 'string', 'max:255'],
+            'name_tm'          => ['nullable', 'string', 'max:255'],
+
             'price'            => ['required', 'numeric', 'min:0'],
             'code'             => ['required', 'string', 'max:255', 'unique:products,code'],
+
             'description'      => ['nullable', 'string'],
+            'description_ru'   => ['nullable', 'string'],
+            'description_tm'   => ['nullable', 'string'],
+
             'image'            => ['nullable', 'image', 'max:2048'],
             'discount_percent' => ['nullable', 'integer', 'min:0', 'max:100'],
             'weight'           => ['nullable', 'numeric', 'min:0'],
@@ -50,9 +58,16 @@ class ProductController extends Controller
         Product::create([
             'category_id'      => $request->category_id,
             'name'             => $request->name,
+            'name_ru'          => $request->name_ru,
+            'name_tm'          => $request->name_tm,
+
             'price'            => $request->price,
             'code'             => $request->code,
+
             'description'      => $request->description,
+            'description_ru'   => $request->description_ru,
+            'description_tm'   => $request->description_tm,
+
             'image'            => $imagePath,
             'discount_percent' => $request->discount_percent ?? 0,
             'weight'           => $request->weight ?? 0,
@@ -81,9 +96,17 @@ class ProductController extends Controller
         $request->validate([
             'category_id'      => ['nullable', 'exists:categories,id'],
             'name'             => ['required', 'string', 'max:255'],
+
+            'name_ru'          => ['nullable', 'string', 'max:255'],
+            'name_tm'          => ['nullable', 'string', 'max:255'],
+
             'price'            => ['required', 'numeric', 'min:0'],
             'code'             => ['required', 'string', 'max:255', 'unique:products,code,' . $obj->id],
+
             'description'      => ['nullable', 'string'],
+            'description_ru'   => ['nullable', 'string'],
+            'description_tm'   => ['nullable', 'string'],
+
             'image'            => ['nullable', 'image', 'max:2048'],
             'discount_percent' => ['nullable', 'integer', 'min:0', 'max:100'],
             'weight'           => ['nullable', 'numeric', 'min:0'],
@@ -97,9 +120,16 @@ class ProductController extends Controller
         $obj->update([
             'category_id'      => $request->category_id,
             'name'             => $request->name,
+            'name_ru'          => $request->name_ru,
+            'name_tm'          => $request->name_tm,
+
             'price'            => $request->price,
             'code'             => $request->code,
+
             'description'      => $request->description,
+            'description_ru'   => $request->description_ru,
+            'description_tm'   => $request->description_tm,
+
             'image'            => $imagePath,
             'discount_percent' => $request->discount_percent ?? 0,
             'weight'           => $request->weight ?? 0,

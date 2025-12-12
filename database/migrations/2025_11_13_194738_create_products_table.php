@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('code');
             $table->text('description')->nullable();
             $table->text('description_ru')->nullable();
-            $table->text('description_tm');
+            $table->text('description_tm')->nullable();
             $table->string('image')->nullable();
             $table->integer('discount_percent')->default(0);
             $table->float('weight')->default(0);
