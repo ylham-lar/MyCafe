@@ -34,7 +34,6 @@
                 <td>{{ $obj->name_tm ?? '-' }}</td>
 
                 <td>
-                    <!-- Edit -->
                     <a href="{{ route('admin.categories.edit', $obj->id) }}"
                         class="btn btn-sm btn-outline-dark btn-warning">
                         <i class="bi bi-pencil"></i>
@@ -59,10 +58,7 @@
 
                                 <div class="modal-body p-4 text-center">
                                     <i class="bi bi-exclamation-triangle-fill text-warning fs-1 mb-3"></i>
-                                    <p class="fw-bold text-light">
-                                        Are you sure you want to delete
-                                        <strong>{{ $obj->name }}</strong>?
-                                    </p>
+
                                 </div>
 
                                 <div class="modal-footer justify-content-center border-0 mb-3">

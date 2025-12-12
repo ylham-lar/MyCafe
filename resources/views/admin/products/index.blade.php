@@ -69,14 +69,12 @@
                         <i class="bi bi-pencil"></i>
                     </a>
 
-                    <!-- Delete Button -->
                     <button type="button" class="btn btn-dark btn-sm"
                         data-bs-toggle="modal"
                         data-bs-target="#deleteModal-{{ $obj->id }}">
                         <i class="bi bi-trash-fill"></i>
                     </button>
 
-                    <!-- Modal -->
                     <div class="modal fade" id="deleteModal-{{ $obj->id }}" tabindex="-1">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content border-0 shadow-lg rounded-4 bg-dark text-light">

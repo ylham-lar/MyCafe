@@ -13,7 +13,7 @@ class CustomerController extends Controller
         $objs = Customer::orderBy('id', 'desc')->get();
 
         return view('admin.customers.index')->with([
-            'objs' => $objs
+            'objs' => $objs,
         ]);
     }
 
@@ -25,43 +25,46 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'address'       => 'required|string|max:255',
-            'phone_number'  => 'required|string|max:30',
+            'address'       => ['required', 'string', 'max:255'],
+            'phone_number'  => ['nullable', 'string', 'max:255'],
         ]);
 
         Customer::create([
-            'address'      => $request->address,
-            'phone_number' => $request->phone_number,
+            'address'       => $request->address,
+            'phone_number'  => $request->phone_number,
         ]);
 
-        return redirect()->route('admin.customers.index')
-            ->with('success', 'Customer Created Successfully');
+        return to_route('admin.customers.index')->with([
+            'success' => 'Saved successfully.',
+        ]);
     }
 
     public function edit($id)
     {
         $obj = Customer::findOrFail($id);
+
         return view('admin.customers.edit')->with([
-            'obj' => $obj
-        ]);;
+            'obj' => $obj,
+        ]);
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'address'      => 'required|string|max:255',
-            'phone_number' => 'required|string|max:30',
-        ]);
-
         $obj = Customer::findOrFail($id);
 
-        $obj->update([
-            'address'      => $request->address,
-            'phone_number' => $request->phone_number,
+        $request->validate([
+            'address'       => ['required', 'string', 'max:255'],
+            'phone_number'  => ['nullable', 'string', 'max:255'],
         ]);
 
-        return redirect()->route('admin.customers.index')
-            ->with('success', 'Customer updated successfully!');
+        $obj->update([
+            'address'       => $request->address,
+            'phone_number'  => $request->phone_number,
+        ]);
+
+        return to_route('admin.customers.index')->with([
+            'success' => 'Updated successfully.',
+        ]);
     }
 
     public function destroy($id)
@@ -69,7 +72,8 @@ class CustomerController extends Controller
         $obj = Customer::findOrFail($id);
         $obj->delete();
 
-        return redirect()->route('admin.customers.index')
-            ->with('success', 'Customer Deleted Successfully');
+        return to_route('admin.customers.index')->with([
+            'success' => 'Deleted successfully.',
+        ]);
     }
 }
