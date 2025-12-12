@@ -32,6 +32,7 @@ $nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
                 <div class="premium-card shadow-lg">
                     <form action="{{ route('client.cart.delete', $product->id) }}" method="POST" class="delete-btn-wrapper">
                         @csrf
+                        @method('DELETE')
                         <button type="submit" class="delete-btn"><i class="bi bi-x-circle"></i></button>
                     </form>
 

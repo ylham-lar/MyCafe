@@ -10,13 +10,24 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $objs = Category::orderBy('id', 'desc')
+        $objs = Category::withCount('products')
+            ->orderBy('id', 'desc')
             ->get();
+
         return view('admin.categories.index')->with([
             'objs' => $objs,
         ]);
     }
+    public function products($id)
+    {
+        $category = Category::with('products')
+            ->findOrFail($id);
 
+        return view('admin.categories.products')->with([
+            'category' => $category,
+            'products' => $category->products,
+        ]);
+    }
     public function create()
     {
         return view('admin.categories.create');

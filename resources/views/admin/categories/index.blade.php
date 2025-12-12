@@ -17,7 +17,8 @@
         <thead class="table-dark text-light">
             <tr>
                 <th style="width:5%;">ID</th>
-                <th style="width:50%;">Name</th>
+                <th style="width:25%;">Name</th>
+                <th style="width:25%;">Products Count</th>
                 <th style="width:25%;">Created At</th>
                 <th style="width:20%;">Settings</th>
             </tr>
@@ -28,6 +29,12 @@
             <tr class="table-row-hover">
                 <td>{{ $obj->id }}</td>
                 <td>{{ $obj->name }}</td>
+                <td>
+                    <a href="{{ route('admin.categories.products', $obj->id) }}" class="text-decoration-none">
+                        {{ $obj->products->count() }} Products
+                    </a>
+                </td>
+
                 <td>{{ $obj->created_at->format('H:i:s d.m.Y') }}</td>
                 <td>
                     <a href="{{ route('admin.categories.edit', $obj->id) }}"
@@ -81,12 +88,13 @@
             </tr>
             @empty
             <tr>
-                <td colspan="4" class="text-center text-muted py-4 fw-bold">
+                <td colspan="5" class="text-center text-muted py-4 fw-bold">
                     No categories found
                 </td>
             </tr>
             @endforelse
         </tbody>
+
     </table>
 </div>
 

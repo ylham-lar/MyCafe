@@ -36,7 +36,11 @@ class CartController extends Controller
         $cart = session('cart', []);
         $quantity = $request->input('quantity', 1);
 
-        $cart[$product->id] = $quantity;
+        if (isset($cart[$product->id])) {
+            $cart[$product->id] += $quantity;
+        } else {
+            $cart[$product->id] = $quantity;
+        }
 
         session(['cart' => $cart]);
 
