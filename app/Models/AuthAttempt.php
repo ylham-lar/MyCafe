@@ -20,6 +20,7 @@ class AuthAttempt extends Model
     }
 
     const UPDATED_AT = null;
+
     public function ipAddress(): BelongsTo
     {
         return $this->belongsTo(IpAddress::class);

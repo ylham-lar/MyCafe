@@ -7,10 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class IpAddress extends Model
 {
-
-    protected $guarded = [
-        'id'
-    ];
+    protected $guarded = ['id'];
 
     public $timestamps = false;
 
@@ -23,6 +20,8 @@ class IpAddress extends Model
     {
         return $this->hasMany(Visitor::class);
     }
+
+    //
 
     public function getIp()
     {

@@ -15,8 +15,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class WebMiddleware
 {
+    /**
+     * Handle an incoming request.
+     *
+     * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
+     */
     public function handle(Request $request, Closure $next): Response
     {
+        // IP ADDRESS
         $reader = new Reader(storage_path('app/GeoLite2-City.mmdb'));
         $ip = $request->ip();
         try {
@@ -36,6 +42,7 @@ class WebMiddleware
             abort(404);
         }
 
+        // USER AGENT
         $ua = $request->userAgent();
         $agent = new Agent();
         $agent->setUserAgent($ua);

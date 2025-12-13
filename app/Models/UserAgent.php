@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class UserAgent extends Model
 {
-
     protected $guarded = ['id'];
 
     public $timestamps = false;
@@ -21,6 +20,7 @@ class UserAgent extends Model
     {
         return $this->hasMany(Visitor::class);
     }
+
 
     public function getUa()
     {

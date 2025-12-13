@@ -2,12 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Admin\LoginController;
-use App\Http\Controllers\Web\Admin\DashboardController;
+use App\Http\Controllers\Web\Admin\OrderController;
+use App\Http\Controllers\Web\Admin\ProductController;
 use App\Http\Controllers\Web\Admin\CategoryController;
 use App\Http\Controllers\Web\Admin\CustomerController;
 use App\Http\Controllers\Web\Admin\FavoriteController;
-use App\Http\Controllers\Web\Admin\OrderController;
-use App\Http\Controllers\Web\Admin\ProductController;
+use App\Http\Controllers\Web\Admin\IpAddresController;
+use App\Http\Controllers\Web\Admin\DashboardController;
+use App\Http\Controllers\Web\Admin\AuthAttemptController;
 
 Route::middleware('guest')
     ->group(function () {
@@ -20,6 +22,20 @@ Route::middleware('auth')
     ->name('admin.')
     ->group(function () {
         Route::get('', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::controller(IpAddresController::class)
+            ->prefix('ipaddresses')
+            ->name('ipaddresses.')
+            ->group(function () {
+                Route::get('', 'index')->name('index');
+            });
+
+        Route::controller(AuthAttemptController::class)
+            ->prefix('authattempts')
+            ->name('authattempts.')
+            ->group(function () {
+                Route::get('', 'index')->name('index');
+            });
 
         Route::controller(CategoryController::class)
             ->prefix('categories')

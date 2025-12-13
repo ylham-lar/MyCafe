@@ -36,6 +36,25 @@
                         </a>
                     </ul>
                 </li>
+                <li class="nav-item dropdown px-3">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Security
+                    </a>
+                    <ul class="dropdown-menu">
+                        <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.ipaddresses.index') }}">
+                            Ip Addresses
+                        </a>
+                        <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="#">
+                            User Agents
+                        </a>
+                        <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.authattempts.index') }}">
+                            Auth Attempts
+                        </a>
+                        <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="#">
+                            Visitors
+                        </a>
+                    </ul>
+                </li>
                 <li class="nav-item ms-lg-2">
                     <form action="{{ route('logout') }}" method="POST" class="d-inline">
                         @csrf
