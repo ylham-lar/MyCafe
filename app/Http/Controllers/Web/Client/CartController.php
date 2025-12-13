@@ -36,14 +36,13 @@ class CartController extends Controller
         $quantity = intval($request->input('quantity', 1));
 
         if (isset($cart[$product->id])) {
-            $cart[$product->id] = $quantity; 
+            $cart[$product->id] += $quantity; 
         } else {
             $cart[$product->id] = $quantity;
         }
 
         session(['cart' => $cart]);
 
-      
         $totalCount = array_sum($cart);
 
         if ($request->ajax() || $request->wantsJson()) {
@@ -56,6 +55,8 @@ class CartController extends Controller
 
         return back()->with('success', 'Cart updated successfully');
     }
+
+
 
     public function remove(Product $product)
     {

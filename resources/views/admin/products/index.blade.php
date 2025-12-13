@@ -64,14 +64,11 @@
                 <td>{{ $obj->category->name ?? '-' }}</td>
 
                 <td>
-                    <a href="{{ route('admin.products.edit', $obj->id) }}"
-                        class="btn btn-sm btn-outline-dark btn-warning">
+                    <a href="{{ route('admin.products.edit', $obj->id) }}" class="btn btn-sm btn-outline-dark btn-warning">
                         <i class="bi bi-pencil"></i>
                     </a>
 
-                    <button type="button" class="btn btn-dark btn-sm"
-                        data-bs-toggle="modal"
-                        data-bs-target="#deleteModal-{{ $obj->id }}">
+                    <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $obj->id }}">
                         <i class="bi bi-trash-fill"></i>
                     </button>
 
@@ -79,11 +76,9 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content border-0 shadow-lg rounded-4 bg-dark text-light">
 
-                                <div class="modal-header border-0 p-3"
-                                    style="background: linear-gradient(90deg, #dc3545, #b02a37);">
+                                <div class="modal-header border-0 p-3" style="background: linear-gradient(90deg, #dc3545, #b02a37);">
                                     <h5 class="modal-title fw-bold">Confirm Deletion</h5>
-                                    <button type="button" class="btn-close btn-close-white"
-                                        data-bs-dismiss="modal"></button>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                                 </div>
 
                                 <div class="modal-body p-4 text-center">
@@ -94,18 +89,13 @@
                                 </div>
 
                                 <div class="modal-footer justify-content-center border-0 mb-3">
-                                    <form method="POST"
-                                        action="{{ route('admin.products.destroy', $obj->id) }}"
-                                        class="d-flex gap-2">
+                                    <form method="POST" action="{{ route('admin.products.destroy', $obj->id) }}" class="d-flex gap-2">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button"
-                                            class="btn btn-outline-secondary px-4 fw-bold"
-                                            data-bs-dismiss="modal">
+                                        <button type="button" class="btn btn-outline-secondary px-4 fw-bold" data-bs-dismiss="modal">
                                             Cancel
                                         </button>
-                                        <button type="submit"
-                                            class="btn btn-danger px-4 fw-bold">
+                                        <button type="submit" class="btn btn-danger px-4 fw-bold">
                                             <i class="bi bi-trash-fill me-1"></i> Delete
                                         </button>
                                     </form>

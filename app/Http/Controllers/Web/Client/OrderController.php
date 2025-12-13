@@ -32,8 +32,7 @@ class OrderController extends Controller
         $cartProducts = [];
         $totalPrice = 0;
 
-        foreach ($cart as $productId => $item) {
-            $quantity = $item['quantity'] ?? 1;
+        foreach ($cart as $productId => $quantity) {
             $product = Product::find($productId);
             if (!$product) continue;
 
@@ -60,6 +59,7 @@ class OrderController extends Controller
 
         return redirect()->route('client.order.success');
     }
+
 
     public function success()
     {

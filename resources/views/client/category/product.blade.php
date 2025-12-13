@@ -27,12 +27,25 @@ $descField = ($locale === 'en') ? 'description' : 'description_' . $locale;
 
         <div class="row g-4">
             @foreach($categories->products as $product)
+            @php
+            $hasDiscount = $product->discount_percent && $product->discount_percent > 0;
+            $discountedPrice = $hasDiscount ? $product->price * (1 - $product->discount_percent / 100) : $product->price;
+            @endphp
             <div class="col-12 col-sm-6 col-md-3 fade-up">
                 <a href="{{ route('client.products.show', $product->id) }}" class="text-decoration-none">
                     <div class="card premium-card shadow-lg border-0 h-100">
                         <div class="card-body text-center">
                             <h5 class="card-title fw-bold">{{ $product->{$nameField} ?? $product->name }}</h5>
+
+                            @if($hasDiscount)
+                            <div class="price-wrapper mb-1">
+                                <p class="original-price mb-0">${{ number_format($product->price, 2) }}</p>
+                                <p class="discount-price mb-0">${{ number_format($discountedPrice, 2) }}</p>
+                            </div>
+                            @else
                             <p class="price-tag mb-1">${{ number_format($product->price, 2) }}</p>
+                            @endif
+
                             <small class="text-gold-fade">{{ $product->{$descField} ?? $product->description }}</small>
                         </div>
                     </div>
@@ -68,6 +81,32 @@ $descField = ($locale === 'en') ? 'description' : 'description_' . $locale;
     .premium-card:hover .card-title {
         color: #fff7c2;
         text-shadow: 0 0 12px rgba(255, 215, 90, 1)
+    }
+
+    .price-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    .original-price {
+        color: #999;
+        font-size: 0.9rem;
+        text-decoration: line-through;
+        font-weight: 500;
+    }
+
+    .discount-price {
+        color: #ff6b6b;
+        font-weight: 700;
+        font-size: 1.25rem;
+        transition: .3s ease, text-shadow .3s ease;
+    }
+
+    .premium-card:hover .discount-price {
+        color: #ff8787;
+        text-shadow: 0 0 10px rgba(255, 107, 107, .8);
     }
 
     .price-tag {
