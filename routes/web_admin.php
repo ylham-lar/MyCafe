@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Admin\LoginController;
 use App\Http\Controllers\Web\Admin\OrderController;
 use App\Http\Controllers\Web\Admin\ProductController;
+use App\Http\Controllers\Web\admin\VisitorController;
 use App\Http\Controllers\Web\Admin\CategoryController;
 use App\Http\Controllers\Web\Admin\CustomerController;
 use App\Http\Controllers\Web\Admin\FavoriteController;
@@ -41,6 +42,13 @@ Route::middleware('auth')
         Route::controller(AuthAttemptController::class)
             ->prefix('authattempts')
             ->name('authattempts.')
+            ->group(function () {
+                Route::get('', 'index')->name('index');
+            });
+
+        Route::controller(VisitorController::class)
+            ->prefix('visitors')
+            ->name('visitors.')
             ->group(function () {
                 Route::get('', 'index')->name('index');
             });

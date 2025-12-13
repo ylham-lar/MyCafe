@@ -25,7 +25,7 @@ class VisitorController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
-        return view('admin.visitor.index')->with([
+        return view('admin.visitors.index')->with([
             'objs' => $objs,
         ]);
     }

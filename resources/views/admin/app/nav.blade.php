@@ -50,7 +50,7 @@
                         <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.authattempts.index') }}">
                             Auth Attempts
                         </a>
-                        <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="#">
+                        <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.visitors.index') }}">
                             Visitors
                         </a>
                     </ul>

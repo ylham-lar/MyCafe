@@ -23,20 +23,33 @@
         <tbody class="bg-light text-dark">
             @forelse($objs as $obj)
             <tr class="table-row-hover">
-                <td>{{ $obj->id }}</td>
+                <td class="text-muted fw-medium">
+                    <i class="bi bi-hash me-1"></i>{{ $obj->id }}
+                </td>
 
-                <td class="text-break fw-semibold">
+                <td class="text-break fw-semibold text-center">
                     <i class="bi bi-terminal me-1 text-secondary"></i>
                     {{ $obj->user_agent }}
                 </td>
 
-                <td>{{ $obj->device ?? 'Unknown' }}</td>
-                <td>{{ $obj->platform ?? 'Unknown' }}</td>
-                <td>{{ $obj->browser ?? 'Unknown' }}</td>
+                <td>
+                    <i class="bi bi-phone me-1 text-secondary"></i>
+                    {{ $obj->device ?? 'Unknown' }}
+                </td>
 
                 <td>
-                    <span class="badge px-3 py-2
-                        {{ $obj->disabled ? 'bg-danger text-white' : 'bg-success text-white' }}">
+                    <i class="bi bi-cpu me-1 text-secondary"></i>
+                    {{ $obj->platform ?? 'Unknown' }}
+                </td>
+
+                <td>
+                    <i class="bi bi-browser-chrome me-1 text-secondary"></i>
+                    {{ $obj->browser ?? 'Unknown' }}
+                </td>
+
+                <td>
+                    <span class="badge px-3 py-2 {{ $obj->disabled ? 'bg-danger text-white' : 'bg-success text-white' }}">
+                        <i class="bi {{ $obj->disabled ? 'bi-x-circle' : 'bi-check-circle' }} me-1"></i>
                         {{ $obj->disabled ? 'Disabled' : 'Active' }}
                     </span>
                 </td>
@@ -44,7 +57,7 @@
             @empty
             <tr>
                 <td colspan="6" class="text-center text-muted py-4 fw-bold">
-                    No user agents found
+                    <i class="bi bi-exclamation-circle me-1"></i>No user agents found
                 </td>
             </tr>
             @endforelse
