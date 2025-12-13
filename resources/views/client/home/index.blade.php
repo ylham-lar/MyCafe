@@ -19,7 +19,10 @@ $descField = ($locale === 'en') ? 'description' : 'description_' . $locale;
         </div>
 
         <div class="text-center my-5 fade-in pt-5">
-            <h2 class="header-gold mb-4 display-4 fw-bold">Welcome to MyCafe</h2>
+            <h2 class="header-gold header-subtitl welcome-title mb-4 fw-bold">
+                Welcome to MyCafe
+            </h2>
+
             <p class="header-subtitle fs-5 px-md-5 mx-md-5 lh-lg">
                 MyCafe delivers an exceptional dining experience with premium coffee and carefully crafted meals.
                 Our commitment to quality ingredients, expert preparation, and outstanding service sets us apart
@@ -61,17 +64,17 @@ $descField = ($locale === 'en') ? 'description' : 'description_' . $locale;
             <div class="row align-items-center">
                 <div class="col-md-6 mb-4">
                     <h3 class="header-gold fw-bold display-5 mb-4">Our Heritage</h3>
-                    <p class="text-light fs-6 mb-4 lh-lg">
+                    <p class="text-gold-fade fs-6 mb-4 lh-lg">
                         Established in 2020, MyCafe has built a reputation for culinary excellence and exceptional service.
                         What began as a vision to create a distinguished dining establishment has evolved into a recognized
                         leader in the food and beverage industry.
                     </p>
-                    <p class="text-muted lh-lg mb-4">
+                    <p class="text-gold-fade lh-lg mb-4">
                         Our philosophy centers on three core principles: sourcing premium ingredients, employing skilled
                         culinary professionals, and maintaining unwavering commitment to customer satisfaction. Each team
                         member is dedicated to upholding these standards in every interaction.
                     </p>
-                    <p class="text-muted lh-lg">
+                    <p class="text-gold-fade lh-lg">
                         Today, MyCafe serves a diverse clientele, from business professionals to families, each receiving
                         the same level of attention and quality that has become our hallmark.
                     </p>
@@ -374,6 +377,17 @@ $descField = ($locale === 'en') ? 'description' : 'description_' . $locale;
 </div>
 
 <style>
+    .header-subtitle {
+        font-family: "Georgia", serif;
+    }
+
+    .welcome-title {
+        font-family: "Georgia", "Times New Roman", serif;
+        font-size: clamp(2.8rem, 5vw, 3.5rem);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
     .banner-wrapper {
         margin: 2rem 0;
     }
