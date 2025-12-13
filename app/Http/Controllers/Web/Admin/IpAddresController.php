@@ -11,11 +11,11 @@ class IpAddresController extends Controller
 {
     public function index()
     {
-        $ip_Addresses = IpAddress::orderBy('id')
+        $objs = IpAddress::orderBy('id')
             ->get();
 
         return view('admin.ipAddresses.index')->with([
-            'ip_Addresses' => $ip_Addresses,
+            'objs' => $objs,
         ]);
     }
 }
