@@ -3,78 +3,54 @@
 @section('title', 'Auth Attempts')
 
 @section('content')
-<div class="h2 p-3 mb-3">
-    Auth Attempts
+<div class="row align-items-center mb-3 py-3">
+    <div class="col-auto h3 ps-5 ms-5">Auth Attempts</div>
 </div>
 
-<div class="table-responsive text-dark text-center">
-    <table class="table table-bordered table-striped table-hover align-middle shadow-sm small">
-        <thead class="table-light text-center align-middle">
+<div class="table-responsive">
+    <table class="table table-hover table-bordered align-middle text-center shadow-sm">
+        <thead class="table-dark text-light">
             <tr>
-                <th>ID</th>
-                <th><i class="bi bi-wifi text-primary me-1"></i>IP Address</th>
-                <th><i class="bi bi-browser-chrome text-primary me-1"></i>User Agent</th>
-                <th><i class="bi bi-person-fill text-primary me-1"></i>Username</th>
-                <th><i class="bi bi-activity text-primary me-1"></i>Event</th>
-                <th><i class="bi bi-clock-history text-secondary me-1"></i>Created At</th>
-                <th><i class="bi bi-clock-history text-secondary me-1"></i>Updated At</th>
+                <th style="width:5%;">ID</th>
+                <th style="width:10%;">IP Address</th>
+                <th style="width:50%;">User Agent</th>
+                <th style="width:10%;">Username</th>
+                <th style="width:10%;">Event</th>
+                <th style="width:15%;">Created At</th>
             </tr>
         </thead>
 
-        <tbody>
-            @forelse($authAttempts as $authAttempt)
-            <tr>
-                <td class="fw-medium text-muted">
-                    {{ $authAttempt->id }}
-                </td>
+        <tbody class="bg-light text-dark">
+            @forelse($authAttempts as $auth)
+            <tr class="table-row-hover">
+                <td>{{ $auth->id }}</td>
 
-                <td class="fw-semibold">
-                    @if($authAttempt->ipAddress)
+                <td class="fw-bold">
                     <i class="bi bi-wifi me-1 text-primary"></i>
-                    {{ $authAttempt->ipAddress->ip_address }}
-                    @else
-                    <span class="text-muted">N/A</span>
-                    @endif
+                    {{ $auth->ipAddress?->ip_address ?? '—' }}
                 </td>
+
+                <td class="text-break">
+                    <i class="bi bi-terminal me-1 text-secondary"></i>
+                    {{ $auth->userAgent?->user_agent ?? '—' }}
+                </td>
+
+                <td>{{ $auth->username }}</td>
 
                 <td>
-                    @if($authAttempt->userAgent)
-                    <span class="fw-semibold">
-                        {{ Str::limit($authAttempt->userAgent->getUa(), 40) }}
-                    </span>
-                    <div class="small text-secondary">
-                        {{ Str::limit($authAttempt->userAgent->user_agent, 70) }}
-                    </div>
-                    @else
-                    <span class="text-muted">Unknown</span>
-                    @endif
-                </td>
-
-                <td class="fw-semibold">
-                    <i class="bi bi-person me-1 text-secondary"></i>
-                    {{ $authAttempt->username ?? '—' }}
-                </td>
-
-                <td>
-                    <span class="badge bg-info-subtle text-info px-3 py-2 text-uppercase">
-                        {{ $authAttempt->event }}
+                    <span class="badge bg-info text-white px-3 py-2">
+                        {{ strtoupper($auth->event) }}
                     </span>
                 </td>
 
-                <td class="text-nowrap text-secondary">
+                <td class="text-nowrap">
                     <i class="bi bi-clock me-1"></i>
-                    {{ $authAttempt->created_at?->format('H:i d.m.Y') ?? '—' }}
-                </td>
-
-                <td class="text-nowrap text-secondary">
-                    <i class="bi bi-clock-history me-1"></i>
-                    {{ $authAttempt->updated_at?->format('H:i d.m.Y') ?? '—' }}
+                    {{ $auth->created_at->format('H:i:s d.m.Y') }}
                 </td>
             </tr>
             @empty
             <tr>
-                <td colspan="7" class="text-center text-muted py-4">
-                    <i class="bi bi-exclamation-circle text-warning me-2"></i>
+                <td colspan="6" class="text-center text-muted py-4 fw-bold">
                     No auth attempts found
                 </td>
             </tr>

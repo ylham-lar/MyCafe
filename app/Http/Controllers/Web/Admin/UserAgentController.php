@@ -13,7 +13,7 @@ class UserAgentController extends Controller
         $objs = UserAgent::orderBy('id')
             ->get();
 
-        return view('admin.useragent.index')->with([
+        return view('admin.useragents.index')->with([
             'objs' => $objs,
         ]);
     }

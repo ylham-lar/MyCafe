@@ -44,7 +44,7 @@
                         <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.ipaddresses.index') }}">
                             Ip Addresses
                         </a>
-                        <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="#">
+                        <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.useragents.index') }}">
                             User Agents
                         </a>
                         <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.authattempts.index') }}">

@@ -9,6 +9,7 @@ use App\Http\Controllers\Web\Admin\CustomerController;
 use App\Http\Controllers\Web\Admin\FavoriteController;
 use App\Http\Controllers\Web\Admin\IpAddresController;
 use App\Http\Controllers\Web\Admin\DashboardController;
+use App\Http\Controllers\Web\Admin\UserAgentController;
 use App\Http\Controllers\Web\Admin\AuthAttemptController;
 
 Route::middleware('guest')
@@ -26,6 +27,13 @@ Route::middleware('auth')
         Route::controller(IpAddresController::class)
             ->prefix('ipaddresses')
             ->name('ipaddresses.')
+            ->group(function () {
+                Route::get('', 'index')->name('index');
+            });
+
+        Route::controller(UserAgentController::class)
+            ->prefix('useragents')
+            ->name('useragents.')
             ->group(function () {
                 Route::get('', 'index')->name('index');
             });
