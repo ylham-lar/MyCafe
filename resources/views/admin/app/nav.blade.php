@@ -12,6 +12,19 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-1">
                 <li class="nav-item dropdown px-3">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Users
+                    </a>
+                    <ul class="dropdown-menu">
+                        <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.users.index') }}">
+                            Users
+                        </a>
+                        <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.customers.index') }}">
+                            Customers
+                        </a>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown px-3">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Products
                     </a>
                     <ul class="dropdown-menu">
@@ -25,12 +38,9 @@
                 </li>
                 <li class="nav-item dropdown px-3">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Customers
+                        Orders
                     </a>
                     <ul class="dropdown-menu">
-                        <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.customers.index') }}">
-                            Customers
-                        </a>
                         <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.orders.index') }}">
                             Orders
                         </a>

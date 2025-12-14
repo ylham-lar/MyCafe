@@ -28,12 +28,12 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
         ]);
 
-        Customer::factory()
-            ->count(50)
-            ->create();
+        // Customer::factory()
+        //     ->count(50)
+        //     ->create();
 
-        Order::factory()
-            ->count(20)
-            ->create();
+        // Order::factory()
+        //     ->count(20)
+        //     ->create();
     }
 }

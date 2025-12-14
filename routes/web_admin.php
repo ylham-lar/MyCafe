@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Web\Admin\UserController;
 use App\Http\Controllers\Web\Admin\LoginController;
 use App\Http\Controllers\Web\Admin\OrderController;
 use App\Http\Controllers\Web\Admin\ProductController;
-use App\Http\Controllers\Web\admin\VisitorController;
+use App\Http\Controllers\Web\Admin\VisitorController;
 use App\Http\Controllers\Web\Admin\CategoryController;
 use App\Http\Controllers\Web\Admin\CustomerController;
 use App\Http\Controllers\Web\Admin\FavoriteController;
@@ -69,6 +70,18 @@ Route::middleware('auth')
         Route::controller(ProductController::class)
             ->prefix('products')
             ->name('products.')
+            ->group(function () {
+                Route::get('', 'index')->name('index');
+                Route::get('create', 'create')->name('create');
+                Route::post('', 'store')->name('store');
+                Route::get('{id}/edit', 'edit')->name('edit')->where(['id' => '[0-9]+']);
+                Route::put('{id}', 'update')->name('update')->where('id', '[0-9]+');
+                Route::delete('{id}', 'destroy')->name('destroy')->where('id', '[0-9]+');
+            });
+
+        Route::controller(UserController::class)
+            ->prefix('users')
+            ->name('users.')
             ->group(function () {
                 Route::get('', 'index')->name('index');
                 Route::get('create', 'create')->name('create');
