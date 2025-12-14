@@ -3,7 +3,7 @@
 @section('title', 'Favorites')
 
 @section('content')
-<div class="row align-items-center mb-3">
+<div class="row align-items-center mb-3 pt-3">
     <div class="col-auto h3 ps-5 ms-5">Favorites</div>
 </div>
 

@@ -10,48 +10,59 @@ use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
-    public function payment(Customer $customer)
+    public function payment()
     {
-        return view('client.order.payment', ['customer' => $customer]);
+        if (!session()->has('customer_id')) {
+            return redirect()->route('client.customer.create');
+        }
+
+        $customer = Customer::find(session('customer_id'));
+
+        if (!$customer) {
+            session()->forget('customer_id');
+            return redirect()->route('client.customer.create');
+        }
+
+        return view('client.order.payment', compact('customer'));
     }
 
     public function store(Request $request)
     {
+        if (!session()->has('customer_id')) {
+            return redirect()->route('client.customer.create');
+        }
+
         $request->validate([
-            'customer_id' => 'required|exists:customers,id',
             'payment_method' => 'required|boolean',
         ]);
 
-        $customer_id = $request->customer_id;
         $cart = session('cart', []);
-
         if (empty($cart)) {
-            return redirect()->route('client.cart.index')->with('error', 'Your cart is empty!');
+            return redirect()->route('client.cart.index')
+                ->with('error', 'Your cart is empty!');
         }
 
-        $cartProducts = [];
         $totalPrice = 0;
+        $cartProducts = [];
 
         foreach ($cart as $productId => $quantity) {
             $product = Product::find($productId);
             if (!$product) continue;
 
             $cartProducts[] = [
-                'id' => $product->id,
-                'name' => $product->name,
-                'price' => $product->price,
+                'id'       => $product->id,
+                'name'     => $product->name,
+                'price'    => $product->price,
                 'quantity' => $quantity,
             ];
 
             $totalPrice += $product->price * $quantity;
         }
 
-        $productsJson = json_encode($cartProducts, JSON_UNESCAPED_UNICODE);
-
-        $order = Order::create([
-            'customer_id' => $customer_id,
-            'products' => $productsJson,
-            'price' => $totalPrice,
+        Order::create([
+            'customer_id'    => session('customer_id'),
+            'products'       => json_encode($cartProducts),
+            'price'          => $totalPrice,
             'payment_method' => $request->payment_method,
         ]);
 
@@ -59,6 +70,7 @@ class OrderController extends Controller
 
         return redirect()->route('client.order.success');
     }
+
 
 
     public function success()

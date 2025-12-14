@@ -16,6 +16,7 @@
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10 col-xl-9">
 
+                <!-- CUSTOMER INFO -->
                 <div class="info-card mb-4 fade-in">
                     <div class="info-header">
                         <i class="fas fa-user-circle"></i>
@@ -39,45 +40,74 @@
                     </div>
                 </div>
 
+                <!-- CART SUMMARY -->
                 @if(session('cart'))
                 <div class="cart-summary-card mb-4 fade-in">
                     <div class="cart-header">
                         <i class="fas fa-shopping-bag"></i>
                         <h5>@lang('app.orderSummary')</h5>
                     </div>
+
                     <div class="cart-body">
                         @php
                         $total = 0;
                         @endphp
-                        @foreach(session('cart') as $id => $item)
+
+                        @foreach(session('cart') as $productId => $quantity)
                         @php
-                        $product = App\Models\Product::find($id);
-                        if($product) {
-                        $quantity = $item['quantity'] ?? 1;
-                        $subtotal = $product->price * $quantity;
-                        $total += $subtotal;
-                        }
+                        $product = \App\Models\Product::find($productId);
                         @endphp
+
                         @if($product)
+                        @php
+                        $price = $product->price;
+                        $discount = $product->discount_percent ?? 0;
+
+                        if ($discount > 0) {
+                        $price = $price - ($price * $discount / 100);
+                        }
+
+                        $subtotal = $price * $quantity;
+                        $total += $subtotal;
+                        @endphp
+
                         <div class="cart-item">
                             <div class="cart-item-info">
-                                <span class="cart-item-name">{{ $product->name }}</span>
-                                <span class="cart-item-qty">{{ $quantity }} x {{ number_format($product->price, 2) }} $</span>
+                                <span class="cart-item-name">
+                                    {{ $product->name }}
+                                </span>
+
+                                <span class="cart-item-qty">
+                                    {{ $quantity }} x {{ number_format($price, 2) }} $
+                                    @if($discount > 0)
+                                    <small class="text-success ms-2">
+                                        (-{{ $discount }}%)
+                                    </small>
+                                    @endif
+                                </span>
                             </div>
-                            <span class="cart-item-price">{{ number_format($subtotal, 2) }} $</span>
+
+                            <span class="cart-item-price">
+                                {{ number_format($subtotal, 2) }} $
+                            </span>
                         </div>
                         @endif
                         @endforeach
+
                         <div class="cart-total">
                             <span>@lang('app.total')</span>
-                            <span class="total-amount">{{ number_format($total, 2) }} $</span>
+                            <span class="total-amount">
+                                {{ number_format($total, 2) }} $
+                            </span>
                         </div>
                     </div>
                 </div>
                 @endif
 
+
+                <!-- PAYMENT FORM -->
                 <div class="premium-form-card fade-up">
-                    <form action="{{ route('client.order.store') }}" method="POST" id="paymentForm">
+                    <form action="{{ route('client.order.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="customer_id" value="{{ $customer->id }}">
 
@@ -87,6 +117,7 @@
                         </div>
 
                         <div class="payment-methods">
+
                             <button type="submit" name="payment_method" value="0" class="payment-btn cash-btn">
                                 <div class="payment-icon-wrapper">
                                     <div class="payment-icon">
@@ -116,6 +147,7 @@
                                     <i class="fas fa-arrow-right"></i>
                                 </div>
                             </button>
+
                         </div>
 
                         <div class="form-actions mt-4">
@@ -131,12 +163,11 @@
                     <i class="fas fa-shield-alt"></i>
                     <span>@lang('app.secureTransaction')</span>
                 </div>
+
             </div>
         </div>
-
     </div>
 </div>
-
 <style>
     body {
         background: #0a0a0a;

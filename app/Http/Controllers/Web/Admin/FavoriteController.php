@@ -10,14 +10,15 @@ class FavoriteController extends Controller
 {
     public function index()
     {
-        $objs = Favorite::with(['customer', 'product.category'])
+        $objs = Favorite::with(['customer', 'product'])
             ->orderBy('id', 'desc')
             ->get();
 
         return view('admin.favorites.index')->with([
-            'objs' => $objs,
+            'objs' => $objs
         ]);
     }
+
 
     public function destroy($id)
     {

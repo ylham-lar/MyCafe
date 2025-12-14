@@ -20,7 +20,11 @@ class FavoriteController extends Controller
 
     public function toggle(Product $product)
     {
-        -$customerId = 1;
+        $customerId = session('customer_id');
+
+        if (!$customerId) {
+            return redirect()->route('client.customer.create');
+        }
 
         $favorite = Favorite::where('customer_id', $customerId)
             ->where('product_id', $product->id)
@@ -28,7 +32,7 @@ class FavoriteController extends Controller
 
         if ($favorite) {
             $favorite->delete();
-            return back()->with('success', 'Removed');
+            return back();
         }
 
         Favorite::create([
@@ -36,8 +40,9 @@ class FavoriteController extends Controller
             'product_id' => $product->id,
         ]);
 
-        return back()->with('success', 'Added');
+        return back();
     }
+
 
 
 

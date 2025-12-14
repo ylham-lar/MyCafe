@@ -10,8 +10,13 @@ class HomeController extends Controller
 {
     public function index()
     {
+        if (!session()->has('customer_id')) {
+            return redirect()->route('client.customer.create');
+        }
+
         return view('client.home.index');
     }
+
 
     public function card()
     {

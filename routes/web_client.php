@@ -1,27 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Web\Client\HomeController;
-use App\Http\Controllers\Web\Client\MenuController;
-use App\Http\Controllers\Web\Client\CategoryController;
-use App\Http\Controllers\Web\Client\ProductController;
-use App\Http\Controllers\Web\Client\CartController;
-use App\Http\Controllers\Web\Client\FavoriteController;
-use App\Http\Controllers\Web\Client\CustomerController;
-use App\Http\Controllers\Web\Client\OrderController;
+use App\Http\Controllers\Web\Client\{
+    HomeController,
+    MenuController,
+    CategoryController,
+    ProductController,
+    CartController,
+    FavoriteController,
+    CustomerController,
+    OrderController
+};
+
 
 
 Route::get('locale/{locale}', [HomeController::class, 'locale'])
     ->name('locale')
     ->where('locale', '[a-z]+');
-
-Route::prefix('customer')
-    ->name('client.customer.')
-    ->controller(CustomerController::class)
-    ->group(function () {
-        Route::get('create', 'create')->name('create');
-        Route::post('store', 'store')->name('store');
-    });
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -59,7 +54,6 @@ Route::prefix('cart')
         Route::delete('clear', 'clearCart')->name('clear');
     });
 
-
 Route::prefix('favorites')
     ->name('client.favorites.')
     ->controller(FavoriteController::class)
@@ -71,11 +65,20 @@ Route::prefix('favorites')
     });
 
 
+Route::prefix('customer')
+    ->name('client.customer.')
+    ->controller(CustomerController::class)
+    ->group(function () {
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'store')->name('store');
+    });
+
+
 Route::prefix('order')
     ->name('client.order.')
     ->controller(OrderController::class)
     ->group(function () {
-        Route::get('payment-method/{customer}', 'payment')->name('payment');
-        Route::post('create', 'store')->name('store');
+        Route::get('payment', 'payment')->name('payment');
+        Route::post('store', 'store')->name('store');
         Route::get('success', 'success')->name('success');
     });

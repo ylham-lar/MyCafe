@@ -99,7 +99,7 @@ $nameField = ($locale === 'en') ? 'name' : 'name_' . $locale;
                             <i class="fas fa-trash"></i> @lang('app.clearCart')
                         </button>
                     </form>
-                    <a href="{{ route('client.customer.create') }}" class="btn-checkout">
+                    <a href="{{ route('client.order.payment') }}" class="btn-checkout">
                         @lang('app.proceedCheckout') <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>

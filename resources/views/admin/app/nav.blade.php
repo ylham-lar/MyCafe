@@ -34,6 +34,9 @@
                         <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.orders.index') }}">
                             Orders
                         </a>
+                        <a class="nav-link text-warning px-3 py-2 rounded transition-all" href="{{ route('admin.favorites.index') }}">
+                            Favorites
+                        </a>
                     </ul>
                 </li>
                 <li class="nav-item dropdown px-3">

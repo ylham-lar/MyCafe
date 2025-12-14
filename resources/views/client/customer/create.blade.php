@@ -70,11 +70,7 @@
                         </div>
 
                         <div class="form-actions">
-                            <a href="{{ route('client.cart.index') }}" class="btn-secondary-premium">
-                                <i class="fas fa-arrow-left"></i>
-                                @lang('app.backToCart')
-                            </a>
-                            <button type="submit" class="btn-primary-premium">
+                            <button type="submit" class="btn-primary-premium px-5">
                                 @lang('app.continue')
                                 <i class="fas fa-arrow-right"></i>
                             </button>
