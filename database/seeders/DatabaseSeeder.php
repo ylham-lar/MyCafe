@@ -23,10 +23,10 @@ class DatabaseSeeder extends Seeder
         //     ->count(10)
         //     ->create();
 
-        $this->call([
-            CategorySeeder::class,
-            ProductSeeder::class,
-        ]);
+        // $this->call([
+        //     CategorySeeder::class,
+        //     ProductSeeder::class,
+        // ]);
 
         // Customer::factory()
         //     ->count(50)
