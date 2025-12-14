@@ -1,7 +1,7 @@
 @extends('client.layouts.app')
 
 @section('title')
-{{ __('app.home') }}
+{{ __('app.menu') }}
 @endsection
 
 @section('content')
