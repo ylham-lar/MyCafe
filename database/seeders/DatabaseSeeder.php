@@ -19,9 +19,9 @@ class DatabaseSeeder extends Seeder
             'password' => '11022008',
         ]);
 
-        User::factory()
-            ->count(10)
-            ->create();
+        // User::factory()
+        //     ->count(10)
+        //     ->create();
 
         $this->call([
             CategorySeeder::class,

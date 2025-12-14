@@ -478,31 +478,139 @@ $isFavorite = in_array($product->id, $favorites);
         .final-price {
             font-size: 1.6rem
         }
+
+        /* ===== Fade Up Animation (bottom -> top) ===== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(60px);
+            animation: fadeUpSmooth .9s cubic-bezier(.22, .61, .36, 1) forwards;
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInSmooth .8s ease forwards;
+        }
+
+        @keyframes fadeUpSmooth {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInSmooth {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* stagger effect */
+        .fade-up:nth-child(1) {
+            animation-delay: .1s;
+        }
+
+        .fade-up:nth-child(2) {
+            animation-delay: .25s;
+        }
+
+        .fade-up:nth-child(3) {
+            animation-delay: .4s;
+        }
+
+        .fade-up:nth-child(4) {
+            animation-delay: .55s;
+        }
+
+        /* ===== Smaller buttons ===== */
+        .btn-add-to-cart {
+            padding: .9rem 1.6rem;
+            font-size: 1rem;
+            border-radius: 10px;
+        }
+
+        .qty-btn {
+            width: 34px;
+            height: 34px;
+            font-size: .85rem;
+        }
+
+        .qty-input {
+            width: 60px;
+            height: 34px;
+            font-size: 1rem;
+        }
+
+        /* ===== Smaller product image ===== */
+        .product-image-wrapper {
+            min-height: 320px;
+            padding: 1.5rem;
+        }
+
+        .product-image {
+            max-height: 300px;
+            max-width: 90%;
+        }
+
+        @media(max-width: 768px) {
+            .product-image-wrapper {
+                min-height: 260px;
+            }
+
+            .product-image {
+                max-height: 240px;
+            }
+
+            .btn-add-to-cart {
+                font-size: .95rem;
+                padding: .8rem 1.4rem;
+            }
+        }
+
+
     }
 </style>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const e = document.querySelector(".minus-btn"),
-            t = document.querySelector(".plus-btn"),
-            n = document.querySelector(".qty-input");
-        e && t && n && (e.addEventListener("click", () => {
-            let e = parseInt(n.value);
-            e > 1 && (n.value = e - 1)
-        }), t.addEventListener("click", () => {
-            let e = parseInt(n.value);
-            n.value = e + 1
-        }));
-        const a = document.querySelectorAll(".fade-up,.fade-in"),
-            s = new IntersectionObserver(e => {
-                e.forEach(e => {
-                    e.isIntersecting && (e.target.style.opacity = "1", e.target.style.transform = "translateY(0)")
-                })
-            }, {
-                threshold: .2
+
+        /* quantity buttons */
+        const minus = document.querySelector(".minus-btn");
+        const plus = document.querySelector(".plus-btn");
+        const input = document.querySelector(".qty-input");
+
+        if (minus && plus && input) {
+            minus.addEventListener("click", () => {
+                let val = parseInt(input.value);
+                if (val > 1) input.value = val - 1;
             });
-        a.forEach(e => s.observe(e))
+
+            plus.addEventListener("click", () => {
+                let val = parseInt(input.value);
+                input.value = val + 1;
+            });
+        }
+
+        /* fade-up on scroll */
+        const elements = document.querySelectorAll(".fade-up, .fade-in");
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = "running";
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15
+        });
+
+        elements.forEach(el => {
+            el.style.animationPlayState = "paused";
+            observer.observe(el);
+        });
+
     });
 </script>
+
 
 @endsection

@@ -3,10 +3,9 @@
 @section('title', 'Visitors')
 
 @section('content')
-<div class="row align-items-center mb-3">
+<div class="row align-items-center mb-3 py-3">
     <div class="col-auto h3 ps-5 ms-5">Visitors</div>
 </div>
-
 <div class="table-responsive">
     <table class="table table-hover table-bordered align-middle text-center shadow-sm">
         <thead class="table-dark text-light">
