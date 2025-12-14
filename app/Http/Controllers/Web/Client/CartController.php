@@ -36,7 +36,7 @@ class CartController extends Controller
         $quantity = intval($request->input('quantity', 1));
 
         if (isset($cart[$product->id])) {
-            $cart[$product->id] += $quantity; 
+            $cart[$product->id] += $quantity;
         } else {
             $cart[$product->id] = $quantity;
         }
