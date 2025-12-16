@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers\Web\Client;
 
-use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
     public function index()
     {
+        if (!session()->has('customer_id')) {
+            return redirect()->route('client.customer.create');
+        }
+
         $cart = session('cart', []);
         $products = collect();
 

@@ -6,11 +6,16 @@ use App\Models\Product;
 use App\Models\Favorite;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class FavoriteController extends Controller
 {
     public function index()
     {
+        if (!session()->has('customer_id')) {
+            return redirect()->route('client.customer.create');
+        }
+
         $favorites = Favorite::with('product')->get();
 
         return view('client.favorites.index')->with([
